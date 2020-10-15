@@ -28,28 +28,8 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hx hello [FILE]`](#hx-hello-file)
 * [`hx help [COMMAND]`](#hx-help-command)
-
-## `hx hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ hx hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ hx hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/hello.ts)_
+* [`hx init [FILE]`](#hx-init-file)
 
 ## `hx help [COMMAND]`
 
@@ -67,4 +47,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `hx init [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx init [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init/index.ts)_
 <!-- commandsstop -->
