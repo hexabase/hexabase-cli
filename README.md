@@ -29,7 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`hx help [COMMAND]`](#hx-help-command)
-* [`hx init [FILE]`](#hx-init-file)
+* [`hx init`](#hx-init)
 
 ## `hx help [COMMAND]`
 
@@ -48,18 +48,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `hx init [FILE]`
+## `hx init`
 
-describe the command here
+initialize a new app
 
 ```
 USAGE
-  $ hx init [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ hx init
 ```
 
 _See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init/index.ts)_
