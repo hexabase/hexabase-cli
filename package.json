@@ -11,11 +11,9 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
-    "@octokit/rest": "^18.0.6",
-    "@octokit/types": "^5.5.0",
-    "@types/decompress": "^4.2.3",
+    "@types/download": "^6.2.4",
     "conf": "^7.1.2",
-    "decompress": "^4.2.1",
+    "download": "^8.0.0",
     "enquirer": "^2.3.6",
     "tslib": "^1.14.1"
   },
