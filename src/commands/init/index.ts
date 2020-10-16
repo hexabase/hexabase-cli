@@ -45,7 +45,12 @@ export default class Init extends Command {
       renameSync(directories[0], 'vue-app')
     } catch (error) {
       if (error) {
-        this.error(error)
+        switch (error.status) {
+        case 401:
+          throw new Error('Forbidden')
+        default:
+          throw error
+        }
       }
     }
   }
