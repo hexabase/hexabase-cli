@@ -1,7 +1,9 @@
 import {Command, flags} from '@oclif/command'
 import {readdirSync} from 'fs'
 import {prompt}  from 'enquirer'
+import {spawn} from 'yarn-or-npm'
 import cli from 'cli-ux'
+import * as path from 'path'
 import * as download from 'download'
 import * as chalk from 'chalk'
 
@@ -72,10 +74,18 @@ export default class Init extends Command {
         },
       }
       await download(url, flags.name, downloadOptions)
+      cli.action.stop()
+
+      // install npm packages of app
+      const name = flags.name as string
+      const outDir = path.join(process.cwd(), name)
+      process.chdir(outDir)
+      cli.action.start('installing dependencies')
+      const child = await spawn(['install'])
+      child.on('close', () => cli.action.stop())
     } catch (error) {
       this.error(error)
     } finally {
-      cli.action.stop()
       if (noNameFlag) {
         this.log('You can specify the name of your app with the \'--name\' flag in the future')
       }
