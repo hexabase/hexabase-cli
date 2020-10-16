@@ -1,10 +1,10 @@
 import {Command} from '@oclif/command'
-import github from '../../api/github/github'
 import * as decompress from 'decompress'
 import {readdirSync, renameSync} from 'fs'
+import github from '../../api/github/github'
 
 const getGithubToken = async () => {
-  let token = github.getStoredToken()
+  let token: string | undefined = github.getStoredToken()
   if (token) {
     return token
   }
@@ -17,8 +17,14 @@ export default class Init extends Command {
   static description = 'initialize a new app'
 
   async run() {
-    const token = await getGithubToken()
-    const gh = github.setClient(token)
+    let gh = github.getClient()
+    if (!gh) {
+      const token = await getGithubToken()
+      if (!token) {
+        this.error('Could not get auth token for github')
+      }
+      gh = github.setClient(token)
+    }
     const param = {
       owner: 'b-eee',
       repo: 'hexa-vue-example1',
@@ -39,7 +45,7 @@ export default class Init extends Command {
       renameSync(directories[0], 'vue-app')
     } catch (error) {
       if (error) {
-        this.log(error)
+        this.error(error)
       }
     }
   }
