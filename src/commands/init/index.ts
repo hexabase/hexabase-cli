@@ -1,4 +1,4 @@
-import {Command} from '@oclif/command'
+import {Command, flags} from '@oclif/command'
 import {readdirSync} from 'fs'
 import {prompt}  from 'enquirer'
 import cli from 'cli-ux'
@@ -15,12 +15,6 @@ const urlMap: UrlMap = {
 
 const questions = [
   {
-    type: 'select',
-    name: 'template',
-    message: 'Select a template',
-    choices: ['vue'],
-  },
-  {
     type: 'input',
     name: 'name',
     message: `Specify the ${chalk.cyan('name')} of your app`,
@@ -31,23 +25,43 @@ const questions = [
       return input.length !== 0
     },
   },
+  {
+    type: 'select',
+    name: 'template',
+    message: 'Select a template',
+    choices: ['vue'],
+  },
 ]
 
 export default class Init extends Command {
   static description = 'initialize a new app'
 
-  async run() {
-    try {
-      const answers: Answer = await prompt(questions)
-      const {template, name} = answers
+  static flags = {
+    help: flags.help({char: 'h'}),
+    name: flags.string({char: 'n', description: 'name of your app'}),
+  }
 
+  async run() {
+    const {flags} = this.parse(Init)
+    const noNameFlag = typeof flags.name === 'undefined'
+    try {
+      // prompt: name (if not specified as flag --name)
+      if (noNameFlag) {
+        flags.name = await prompt(questions[0])
+        .then(({name}: any) => name)
+      }
+      // check if folder already exists
       const isExistsDir = readdirSync('.', {withFileTypes: true})
-      .some(dirent => dirent.isDirectory() && dirent.name === name)
+      .some(dirent => dirent.isDirectory() && dirent.name === flags.name)
       if (isExistsDir) {
         throw new Error('Folder with same name already exists')
       }
 
-      cli.action.start(`initializing app with name ${chalk.cyan(name)}`)
+      // prompt: template
+      const {template}: GenericPromptAnswer = await prompt(questions[1])
+
+      // download from github
+      cli.action.start(`initializing app with name ${chalk.cyan(flags.name)}`)
       const url = urlMap[template]
       const downloadOptions = {
         extract: true,
@@ -57,11 +71,14 @@ export default class Init extends Command {
           accept: 'application/zip',
         },
       }
-      await download(url, name, downloadOptions)
+      await download(url, flags.name, downloadOptions)
     } catch (error) {
       this.error(error)
     } finally {
       cli.action.stop()
+      if (noNameFlag) {
+        this.log('You can specify the name of your app with the \'--name\' flag in the future')
+      }
     }
   }
 }

@@ -55,6 +55,10 @@ initialize a new app
 ```
 USAGE
   $ hx init
+
+OPTIONS
+  -h, --help       show CLI help
+  -n, --name=name  name of your app
 ```
 
 _See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init/index.ts)_

@@ -1,3 +1,3 @@
-interface Answer {
+interface GenericPromptAnswer {
   [key: string]: string;
 }
