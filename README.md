@@ -31,6 +31,7 @@ USAGE
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
 * [`hx login`](#hx-login)
+* [`hx select:workspace WORKSPACEID`](#hx-selectworkspace-workspaceid)
 
 ## `hx help [COMMAND]`
 
@@ -74,4 +75,18 @@ USAGE
 ```
 
 _See code: [src/commands/login/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login/index.ts)_
+
+## `hx select:workspace WORKSPACEID`
+
+set current workspace
+
+```
+USAGE
+  $ hx select:workspace WORKSPACEID
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/select/workspace.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/select/workspace.ts)_
 <!-- commandsstop -->
