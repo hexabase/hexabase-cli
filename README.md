@@ -66,7 +66,7 @@ _See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/bl
 
 ## `hx login`
 
-login into hexabase
+log in to hexabase
 
 ```
 USAGE
