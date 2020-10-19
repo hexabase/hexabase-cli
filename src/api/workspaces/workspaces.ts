@@ -18,3 +18,21 @@ export const select = async (wID: string): Promise<boolean> => {
     throw error
   }
 }
+
+export const get = async (): Promise<any> => {
+  try {
+    const url = 'https://az-api.hexabase.com/api/v0/workspaces'
+    const token = config.get('hexabase.token')
+    const requestConfig: AxiosRequestConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    const {status, data} = await axios.get(url, requestConfig)
+    if (status >= 200 && status < 300) {
+      return data.workspaces
+    }
+  } catch (error) {
+    throw error
+  }
+}

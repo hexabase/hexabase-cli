@@ -28,10 +28,25 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx get RESOURCE`](#hx-get-resource)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
 * [`hx login`](#hx-login)
 * [`hx select RESOURCE WORKSPACEID`](#hx-select-resource-workspaceid)
+
+## `hx get RESOURCE`
+
+get resources from hexabase
+
+```
+USAGE
+  $ hx get RESOURCE
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/get.ts)_
 
 ## `hx help [COMMAND]`
 
