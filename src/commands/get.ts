@@ -1,4 +1,5 @@
 import {Command, flags} from '@oclif/command'
+import {cli} from 'cli-ux'
 import * as ws from '../api/workspaces/workspaces'
 
 export default class Get extends Command {
@@ -18,11 +19,27 @@ export default class Get extends Command {
 
   async run() {
     const {args} = this.parse(Get)
-    let data
-    switch (args.resource) {
-    case 'workspaces':
-      data = await ws.get()
+    let data = []
+    let columns = {}
+    try {
+      switch (args.resource) {
+      case 'workspaces':
+        data = await ws.get()
+        columns = {
+          workspace_id: {
+            header: 'ID',
+            minWidth: 30,
+          },
+          workspace_name: {
+            header: 'NAME',
+          },
+        }
+      }
+    } catch (error) {
+      this.error(error)
     }
-    this.log(data)
+    cli.table(data, columns, {
+      printLine: this.log,
+    })
   }
 }
