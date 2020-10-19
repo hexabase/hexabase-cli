@@ -63,7 +63,7 @@ OPTIONS
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init/index.ts)_
+_See code: [src/commands/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init.ts)_
 
 ## `hx login`
 
@@ -77,7 +77,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/login/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login/index.ts)_
+_See code: [src/commands/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login.ts)_
 
 ## `hx select RESOURCE WORKSPACEID`
 
@@ -91,5 +91,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/select/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/select/index.ts)_
+_See code: [src/commands/select.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/select.ts)_
 <!-- commandsstop -->

@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 import {prompt}  from 'enquirer'
 import Conf from 'conf'
 import * as chalk from 'chalk'
-import * as auth from '../../api/auth/auth'
+import * as auth from '../api/auth/auth'
 
 const config = new Conf()
 
