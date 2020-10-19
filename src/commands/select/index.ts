@@ -11,6 +11,11 @@ export default class Select extends Command {
 
   static args = [
     {
+      name: 'resource',
+      options: ['workspaces'],
+      required: true,
+    },
+    {
       name: 'workspaceId',
       required: true,
     },
