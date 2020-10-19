@@ -1,6 +1,15 @@
 import axios, {AxiosRequestConfig} from 'axios'
 import Conf from 'conf'
 
+interface GetWorkspacesElemResponse{
+  workspace_id: string;
+  workspace_name: string;
+}
+
+interface GetWorkspacesResponse {
+  workspaces: GetWorkspacesElemResponse[];
+}
+
 const config = new Conf()
 
 export const select = async (wID: string): Promise<boolean> => {
@@ -19,7 +28,7 @@ export const select = async (wID: string): Promise<boolean> => {
   }
 }
 
-export const get = async (): Promise<any> => {
+export const get = async (): Promise<GetWorkspacesElemResponse[]> => {
   try {
     const url = 'https://az-api.hexabase.com/api/v0/workspaces'
     const token = config.get('hexabase.token')
@@ -28,10 +37,8 @@ export const get = async (): Promise<any> => {
         authorization: `Bearer ${token}`,
       },
     }
-    const {status, data} = await axios.get(url, requestConfig)
-    if (status >= 200 && status < 300) {
-      return data.workspaces
-    }
+    const {data}: {data: GetWorkspacesResponse} = await axios.get(url, requestConfig)
+    return data.workspaces
   } catch (error) {
     throw error
   }

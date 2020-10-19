@@ -7,6 +7,7 @@ export default class Get extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...cli.table.flags(),
   }
 
   static args = [
@@ -18,8 +19,8 @@ export default class Get extends Command {
   ]
 
   async run() {
-    const {args} = this.parse(Get)
-    let data = []
+    const {args, flags} = this.parse(Get)
+    let data: any[] = []
     let columns = {}
     try {
       switch (args.resource) {
@@ -40,6 +41,7 @@ export default class Get extends Command {
     }
     cli.table(data, columns, {
       printLine: this.log,
+      ...flags,
     })
   }
 }
