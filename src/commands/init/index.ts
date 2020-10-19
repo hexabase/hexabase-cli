@@ -81,8 +81,8 @@ export default class Init extends Command {
       const outDir = path.join(process.cwd(), name)
       process.chdir(outDir)
       cli.action.start('installing dependencies')
-      const child = await spawn(['install'])
-      child.on('close', () => cli.action.stop())
+      spawn.sync(['install'], {stdio: 'inherit'})
+      cli.action.stop()
     } catch (error) {
       this.error(error)
     } finally {
