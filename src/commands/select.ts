@@ -1,6 +1,6 @@
 import {Command, flags} from '@oclif/command'
-import * as ws from '../api/workspaces/workspaces'
 import * as chalk from 'chalk'
+import * as ws from '../api/workspaces/workspaces'
 
 export default class Select extends Command {
   static description = 'set current workspace'
