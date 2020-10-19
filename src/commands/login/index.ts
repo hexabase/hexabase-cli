@@ -1,4 +1,4 @@
-import {Command} from '@oclif/command'
+import {Command, flags} from '@oclif/command'
 import {prompt}  from 'enquirer'
 import Conf from 'conf'
 import * as chalk from 'chalk'
@@ -22,7 +22,13 @@ const questions = [
 export default class Login extends Command {
   static description = 'log in to hexabase'
 
+  static flags = {
+    help: flags.help({char: 'h'}),
+  }
+
   async run() {
+    this.parse(Login)
+
     try {
       const {email}: {email: string} = await prompt(questions[0])
       const {password}: {password: string} = await prompt(questions[1])
