@@ -60,7 +60,7 @@ export default class Init extends Command {
       }
 
       // prompt: template
-      const {template}: GenericPromptAnswer = await prompt(questions[1])
+      const {template}: {template: string} = await prompt(questions[1])
 
       // download from github
       cli.action.start(`initializing app with name ${chalk.cyan(flags.name)}`)
