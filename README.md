@@ -30,6 +30,7 @@ USAGE
 <!-- commands -->
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
+* [`hx login`](#hx-login)
 
 ## `hx help [COMMAND]`
 
@@ -62,4 +63,15 @@ OPTIONS
 ```
 
 _See code: [src/commands/init/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init/index.ts)_
+
+## `hx login`
+
+login into hexabase
+
+```
+USAGE
+  $ hx login
+```
+
+_See code: [src/commands/login/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login/index.ts)_
 <!-- commandsstop -->
