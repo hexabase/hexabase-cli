@@ -1,5 +1,4 @@
 import {Command, flags} from '@oclif/command'
-import {AnySoaRecord} from 'dns'
 import EventSource from 'eventsource'
 
 export default class Logs extends Command {
@@ -15,9 +14,9 @@ export default class Logs extends Command {
     const {args} = this.parse(Logs)
     const {channel} = args
 
-    const eventSourceInitDict = {}
     const url = `http://localhost:5002/sse?channel=${channel}`
-    const source = new EventSource(url, eventSourceInitDict)
+    const source = new EventSource(url)
+    this.log('Listening for logs...')
     source.addEventListener('log_actionscript', (event: Event) => {
       this.log(JSON.parse((event as MessageEvent).data).message)
     })
