@@ -28,12 +28,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx context:set NAME`](#hx-contextset-name)
 * [`hx get RESOURCE`](#hx-get-resource)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
 * [`hx login`](#hx-login)
 * [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
 * [`hx select RESOURCE WORKSPACEID`](#hx-select-resource-workspaceid)
+
+## `hx context:set NAME`
+
+describe the command here
+
+```
+USAGE
+  $ hx context:set NAME
+
+OPTIONS
+  -h, --help       show CLI help
+  --server=server  API server address, e.g. http://localhost
+  --sse=sse        SSE server address, e.g. http://localhost
+```
+
+_See code: [src/commands/context/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/set.ts)_
 
 ## `hx get RESOURCE`
 
