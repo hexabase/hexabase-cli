@@ -32,6 +32,7 @@ USAGE
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
 * [`hx login`](#hx-login)
+* [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
 * [`hx select RESOURCE WORKSPACEID`](#hx-select-resource-workspaceid)
 
 ## `hx get RESOURCE`
@@ -101,6 +102,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login.ts)_
+
+## `hx logs:actionscript [CHANNEL]`
+
+get logs from actionscript
+
+```
+USAGE
+  $ hx logs:actionscript [CHANNEL]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
 
 ## `hx select RESOURCE WORKSPACEID`
 

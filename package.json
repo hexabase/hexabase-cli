@@ -12,11 +12,13 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
     "@types/download": "^6.2.4",
+    "@types/eventsource": "^1.1.4",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "download": "^8.0.0",
     "enquirer": "^2.3.6",
+    "eventsource": "^1.0.7",
     "tslib": "^1.14.1",
     "yarn-or-npm": "^3.0.1"
   },
