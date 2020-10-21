@@ -3,9 +3,9 @@ import {readdirSync} from 'fs'
 import {prompt}  from 'enquirer'
 import {spawn} from 'yarn-or-npm'
 import cli from 'cli-ux'
-import * as path from 'path'
-import * as download from 'download'
-import * as chalk from 'chalk'
+import download from 'download'
+import path from 'path'
+import chalk from 'chalk'
 
 interface UrlMap {
   [key: string]: string;

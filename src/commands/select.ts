@@ -1,5 +1,5 @@
 import {Command, flags} from '@oclif/command'
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 import * as ws from '../api/workspaces/workspaces'
 
 export default class Select extends Command {
