@@ -36,7 +36,7 @@ USAGE
 * [`hx init`](#hx-init)
 * [`hx login`](#hx-login)
 * [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
-* [`hx select RESOURCE WORKSPACEID`](#hx-select-resource-workspaceid)
+* [`hx use RESOURCE WORKSPACEID`](#hx-use-resource-workspaceid)
 
 ## `hx context:get`
 
@@ -47,8 +47,9 @@ USAGE
   $ hx context:get
 
 OPTIONS
-  -h, --help  show CLI help
-  -j, --json  output in json format
+  -c, --current  get current context
+  -h, --help     show CLI help
+  -j, --json     output in json format
 ```
 
 _See code: [src/commands/context/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/get.ts)_
@@ -165,17 +166,17 @@ OPTIONS
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
 
-## `hx select RESOURCE WORKSPACEID`
+## `hx use RESOURCE WORKSPACEID`
 
 set current workspace
 
 ```
 USAGE
-  $ hx select RESOURCE WORKSPACEID
+  $ hx use RESOURCE WORKSPACEID
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/select.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/select.ts)_
+_See code: [src/commands/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/use.ts)_
 <!-- commandsstop -->
