@@ -28,7 +28,9 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx context:get`](#hx-contextget)
 * [`hx context:set NAME`](#hx-contextset-name)
+* [`hx context:use [CONTEXT]`](#hx-contextuse-context)
 * [`hx get RESOURCE`](#hx-get-resource)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx init`](#hx-init)
@@ -36,9 +38,24 @@ USAGE
 * [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
 * [`hx select RESOURCE WORKSPACEID`](#hx-select-resource-workspaceid)
 
+## `hx context:get`
+
+get contexts
+
+```
+USAGE
+  $ hx context:get
+
+OPTIONS
+  -h, --help  show CLI help
+  -j, --json  output in json format
+```
+
+_See code: [src/commands/context/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/get.ts)_
+
 ## `hx context:set NAME`
 
-describe the command here
+set context
 
 ```
 USAGE
@@ -51,6 +68,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/context/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/set.ts)_
+
+## `hx context:use [CONTEXT]`
+
+set current context
+
+```
+USAGE
+  $ hx context:use [CONTEXT]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/context/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/use.ts)_
 
 ## `hx get RESOURCE`
 
