@@ -1,10 +1,11 @@
 import {Command, flags} from '@oclif/command'
+import chalk from 'chalk'
 import Conf from 'conf'
 
 const config = new Conf()
 
 export default class ContextSet extends Command {
-  static description = 'set context'
+  static description = 'set context entries (server, sse, etc)'
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -27,5 +28,9 @@ export default class ContextSet extends Command {
     Object.entries(flags).forEach(entry => {
       config.set(`contexts.${args.name}.${entry[0]}`, entry[1])
     })
+    if (!config.get('current-context')) {
+      config.set('current-context', args.name)
+      this.log(`Current-context set to: ${chalk.cyan(args.name)}`)
+    }
   }
 }

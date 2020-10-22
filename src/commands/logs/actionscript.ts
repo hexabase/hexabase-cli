@@ -1,6 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import EventSource from 'eventsource'
 import Conf from 'conf'
+import chalk from 'chalk'
 
 const config = new Conf()
 
@@ -11,7 +12,9 @@ export default class Logs extends Command {
     help: flags.help({char: 'h'}),
   }
 
-  static args = [{name: 'channel'}]
+  static args = [
+    {name: 'channel', required: true},
+  ]
 
   async run() {
     const {args} = this.parse(Logs)
@@ -20,7 +23,12 @@ export default class Logs extends Command {
     const currentContext = config.get('current-context')
     const sseUrl = config.get(`contexts.${currentContext}.sse`)
 
-    // TODO: empty currentContext, sseUrl
+    if (!currentContext || !sseUrl) {
+      const output = []
+      if (!currentContext) output.push(chalk.red('current-context'))
+      if (!sseUrl) output.push(chalk.red('sse-url'))
+      throw new Error(`Missing config settings: ${output.join(', ')}`)
+    }
 
     const url = `${sseUrl}/sse?channel=${channel}`
     const source = new EventSource(url)

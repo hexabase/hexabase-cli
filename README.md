@@ -34,7 +34,7 @@ USAGE
 * [`hx context:set NAME`](#hx-contextset-name)
 * [`hx context:use [CONTEXT]`](#hx-contextuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
-* [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
+* [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx workspaces:get RESOURCE`](#hx-workspacesget-resource)
 * [`hx workspaces:use RESOURCE WORKSPACEID`](#hx-workspacesuse-resource-workspaceid)
 
@@ -62,9 +62,7 @@ USAGE
   $ hx context:get
 
 OPTIONS
-  -c, --current  get current context
-  -h, --help     show CLI help
-  -j, --json     output in json format
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/context/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/get.ts)_
@@ -85,7 +83,7 @@ _See code: [src/commands/context/login.ts](https://github.com/b-eee/hexabase-cli
 
 ## `hx context:set NAME`
 
-set context
+set context entries (server, sse, etc)
 
 ```
 USAGE
@@ -130,13 +128,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `hx logs:actionscript [CHANNEL]`
+## `hx logs:actionscript CHANNEL`
 
 get logs from actionscript
 
 ```
 USAGE
-  $ hx logs:actionscript [CHANNEL]
+  $ hx logs:actionscript CHANNEL
 
 OPTIONS
   -h, --help  show CLI help
