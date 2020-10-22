@@ -9,8 +9,8 @@ export default class ContextSet extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    server: flags.string({description: 'API server address, e.g. http://localhost'}),
-    sse: flags.string({description: 'SSE server address, e.g. http://localhost'}),
+    server: flags.string({description: 'API server address, e.g. https://api.hexabase.com'}),
+    sse: flags.string({description: 'SSE server address, e.g. https://sse.hexabase.com'}),
   }
 
   static args = [
