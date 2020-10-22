@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 import {prompt}  from 'enquirer'
 import Conf from 'conf'
 import chalk from 'chalk'
-import * as auth from '../api/auth/auth'
+import * as auth from '../../api/auth/auth'
 
 const config = new Conf()
 
@@ -20,7 +20,7 @@ const questions = [
 ]
 
 export default class Login extends Command {
-  static description = 'log in to hexabase'
+  static description = 'log in to hexabase within current context'
 
   static flags = {
     help: flags.help({char: 'h'}),

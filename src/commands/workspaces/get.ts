@@ -1,9 +1,9 @@
 import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import * as ws from '../api/workspaces/workspaces'
+import * as ws from '../../api/workspaces/workspaces'
 
 export default class Get extends Command {
-  static description = 'get resources from hexabase'
+  static description = 'get workspaces from hexabase'
 
   static flags = {
     help: flags.help({char: 'h'}),

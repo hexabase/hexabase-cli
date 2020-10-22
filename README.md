@@ -28,15 +28,30 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx app:init`](#hx-appinit)
 * [`hx context:get`](#hx-contextget)
+* [`hx context:login`](#hx-contextlogin)
 * [`hx context:set NAME`](#hx-contextset-name)
 * [`hx context:use [CONTEXT]`](#hx-contextuse-context)
-* [`hx get RESOURCE`](#hx-get-resource)
 * [`hx help [COMMAND]`](#hx-help-command)
-* [`hx init`](#hx-init)
-* [`hx login`](#hx-login)
 * [`hx logs:actionscript [CHANNEL]`](#hx-logsactionscript-channel)
-* [`hx use RESOURCE WORKSPACEID`](#hx-use-resource-workspaceid)
+* [`hx workspaces:get RESOURCE`](#hx-workspacesget-resource)
+* [`hx workspaces:use RESOURCE WORKSPACEID`](#hx-workspacesuse-resource-workspaceid)
+
+## `hx app:init`
+
+initialize a new app
+
+```
+USAGE
+  $ hx app:init
+
+OPTIONS
+  -h, --help       show CLI help
+  -n, --name=name  name of your app
+```
+
+_See code: [src/commands/app/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/app/init.ts)_
 
 ## `hx context:get`
 
@@ -53,6 +68,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/context/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/get.ts)_
+
+## `hx context:login`
+
+log in to hexabase within current context
+
+```
+USAGE
+  $ hx context:login
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/context/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/login.ts)_
 
 ## `hx context:set NAME`
 
@@ -84,28 +113,6 @@ OPTIONS
 
 _See code: [src/commands/context/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/use.ts)_
 
-## `hx get RESOURCE`
-
-get resources from hexabase
-
-```
-USAGE
-  $ hx get RESOURCE
-
-OPTIONS
-  -h, --help              show CLI help
-  -x, --extended          show extra columns
-  --columns=columns       only show provided columns (comma-separated)
-  --csv                   output is csv format [alias: --output=csv]
-  --filter=filter         filter property by partial string matching, ex: name=foo
-  --no-header             hide table header from output
-  --no-truncate           do not truncate output to fit screen
-  --output=csv|json|yaml  output in a more machine friendly format
-  --sort=sort             property to sort by (prepend '-' for descending)
-```
-
-_See code: [src/commands/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/get.ts)_
-
 ## `hx help [COMMAND]`
 
 display help for hx
@@ -123,35 +130,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `hx init`
-
-initialize a new app
-
-```
-USAGE
-  $ hx init
-
-OPTIONS
-  -h, --help       show CLI help
-  -n, --name=name  name of your app
-```
-
-_See code: [src/commands/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/init.ts)_
-
-## `hx login`
-
-log in to hexabase
-
-```
-USAGE
-  $ hx login
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/login.ts)_
-
 ## `hx logs:actionscript [CHANNEL]`
 
 get logs from actionscript
@@ -166,17 +144,39 @@ OPTIONS
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
 
-## `hx use RESOURCE WORKSPACEID`
+## `hx workspaces:get RESOURCE`
 
-set current workspace
+get workspaces from hexabase
 
 ```
 USAGE
-  $ hx use RESOURCE WORKSPACEID
+  $ hx workspaces:get RESOURCE
+
+OPTIONS
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/get.ts)_
+
+## `hx workspaces:use RESOURCE WORKSPACEID`
+
+set current workspace in hexabase
+
+```
+USAGE
+  $ hx workspaces:use RESOURCE WORKSPACEID
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/use.ts)_
+_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/use.ts)_
 <!-- commandsstop -->

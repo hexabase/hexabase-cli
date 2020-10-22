@@ -1,9 +1,9 @@
 import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
-import * as ws from '../api/workspaces/workspaces'
+import * as ws from '../../api/workspaces/workspaces'
 
 export default class WorkspaceUse extends Command {
-  static description = 'set current workspace'
+  static description = 'set current workspace in hexabase'
 
   static flags = {
     help: flags.help({char: 'h'}),
