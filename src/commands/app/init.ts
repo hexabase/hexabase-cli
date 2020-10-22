@@ -35,7 +35,7 @@ const questions = [
   },
 ]
 
-export default class Init extends Command {
+export default class AppInit extends Command {
   static description = 'initialize a new app'
 
   static flags = {
@@ -44,7 +44,7 @@ export default class Init extends Command {
   }
 
   async run() {
-    const {flags} = this.parse(Init)
+    const {flags} = this.parse(AppInit)
     const noNameFlag = typeof flags.name === 'undefined'
     try {
       // prompt: name (if not specified as flag --name)

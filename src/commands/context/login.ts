@@ -19,7 +19,7 @@ const questions = [
   },
 ]
 
-export default class Login extends Command {
+export default class ContextLogin extends Command {
   static description = 'log in to hexabase within current context'
 
   static flags = {
@@ -27,7 +27,7 @@ export default class Login extends Command {
   }
 
   async run() {
-    this.parse(Login)
+    this.parse(ContextLogin)
 
     const {email}: {email: string} = await prompt(questions[0])
     const {password}: {password: string} = await prompt(questions[1])

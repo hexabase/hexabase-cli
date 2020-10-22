@@ -5,7 +5,7 @@ import chalk from 'chalk'
 
 const config = new Conf()
 
-export default class Logs extends Command {
+export default class LogsActionscript extends Command {
   static description = 'get logs from actionscript'
 
   static flags = {
@@ -17,7 +17,7 @@ export default class Logs extends Command {
   ]
 
   async run() {
-    const {args} = this.parse(Logs)
+    const {args} = this.parse(LogsActionscript)
     const {channel} = args
 
     const currentContext = config.get('current-context')

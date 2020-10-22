@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
 import * as ws from '../../api/workspaces/workspaces'
 
-export default class WorkspaceUse extends Command {
+export default class WorkspacesUse extends Command {
   static description = 'set current workspace in hexabase'
 
   static flags = {
@@ -22,7 +22,7 @@ export default class WorkspaceUse extends Command {
   ]
 
   async run() {
-    const {args} = this.parse(WorkspaceUse)
+    const {args} = this.parse(WorkspacesUse)
     const result = await ws.select(args.workspaceId)
     if (result) {
       this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)

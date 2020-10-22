@@ -28,15 +28,35 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx app [FILE]`](#hx-app-file)
 * [`hx app:init`](#hx-appinit)
+* [`hx context [FILE]`](#hx-context-file)
 * [`hx context:get`](#hx-contextget)
 * [`hx context:login`](#hx-contextlogin)
 * [`hx context:set NAME`](#hx-contextset-name)
 * [`hx context:use [CONTEXT]`](#hx-contextuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
+* [`hx logs [FILE]`](#hx-logs-file)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
+* [`hx workspaces [FILE]`](#hx-workspaces-file)
 * [`hx workspaces:get RESOURCE`](#hx-workspacesget-resource)
 * [`hx workspaces:use RESOURCE WORKSPACEID`](#hx-workspacesuse-resource-workspaceid)
+
+## `hx app [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx app [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/app/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/app/index.ts)_
 
 ## `hx app:init`
 
@@ -52,6 +72,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/app/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/app/init.ts)_
+
+## `hx context [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx context [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/context/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/index.ts)_
 
 ## `hx context:get`
 
@@ -128,6 +164,22 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
+## `hx logs [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx logs [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/logs/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/index.ts)_
+
 ## `hx logs:actionscript CHANNEL`
 
 get logs from actionscript
@@ -141,6 +193,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
+
+## `hx workspaces [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx workspaces [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/workspaces/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/index.ts)_
 
 ## `hx workspaces:get RESOURCE`
 

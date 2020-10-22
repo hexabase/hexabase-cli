@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import * as ws from '../../api/workspaces/workspaces'
 
-export default class Get extends Command {
+export default class WorkspacesGet extends Command {
   static description = 'get workspaces from hexabase'
 
   static flags = {
@@ -19,7 +19,7 @@ export default class Get extends Command {
   ]
 
   async run() {
-    const {args, flags} = this.parse(Get)
+    const {args, flags} = this.parse(WorkspacesGet)
     let data: any[] = []
     let columns = {}
 
