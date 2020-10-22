@@ -22,23 +22,21 @@ export default class Get extends Command {
     const {args, flags} = this.parse(Get)
     let data: any[] = []
     let columns = {}
-    try {
-      switch (args.resource) {
-      case 'workspaces':
-        data = await ws.get()
-        columns = {
-          workspace_id: {
-            header: 'ID',
-            minWidth: 30,
-          },
-          workspace_name: {
-            header: 'NAME',
-          },
-        }
+
+    switch (args.resource) {
+    case 'workspaces':
+      data = await ws.get()
+      columns = {
+        workspace_id: {
+          header: 'ID',
+          minWidth: 30,
+        },
+        workspace_name: {
+          header: 'NAME',
+        },
       }
-    } catch (error) {
-      this.error(error)
     }
+
     cli.table(data, columns, {
       printLine: this.log,
       ...flags,

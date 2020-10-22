@@ -23,13 +23,9 @@ export default class WorkspaceUse extends Command {
 
   async run() {
     const {args} = this.parse(WorkspaceUse)
-    try {
-      const result = await ws.select(args.workspaceId)
-      if (result) {
-        this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
-      }
-    } catch (error) {
-      this.error(error)
+    const result = await ws.select(args.workspaceId)
+    if (result) {
+      this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
     }
   }
 }

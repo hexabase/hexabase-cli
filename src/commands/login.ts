@@ -29,14 +29,10 @@ export default class Login extends Command {
   async run() {
     this.parse(Login)
 
-    try {
-      const {email}: {email: string} = await prompt(questions[0])
-      const {password}: {password: string} = await prompt(questions[1])
-      const token = await auth.login(email, password)
-      config.set('hexabase.email', email)
-      config.set('hexabase.token', token)
-    } catch (error) {
-      this.error(error)
-    }
+    const {email}: {email: string} = await prompt(questions[0])
+    const {password}: {password: string} = await prompt(questions[1])
+    const token = await auth.login(email, password)
+    config.set('hexabase.email', email)
+    config.set('hexabase.token', token)
   }
 }

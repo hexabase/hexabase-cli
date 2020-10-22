@@ -21,15 +21,11 @@ export default class ContextSet extends Command {
 
   async run() {
     const {args, flags} = this.parse(ContextSet)
-    try {
-      if (Object.keys(flags).length === 0 && typeof flags === 'object') {
-        throw new Error('at least one flag needed')
-      }
-      Object.entries(flags).forEach(entry => {
-        config.set(`contexts.${args.name}.${entry[0]}`, entry[1])
-      })
-    } catch (error) {
-      this.error(error)
+    if (Object.keys(flags).length === 0 && typeof flags === 'object') {
+      throw new Error('at least one flag needed')
     }
+    Object.entries(flags).forEach(entry => {
+      config.set(`contexts.${args.name}.${entry[0]}`, entry[1])
+    })
   }
 }
