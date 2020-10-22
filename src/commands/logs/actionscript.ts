@@ -13,7 +13,11 @@ export default class LogsActionscript extends Command {
   }
 
   static args = [
-    {name: 'channel', required: true},
+    {
+      name: 'channel',
+      description: `input format: ${chalk.cyan('logs_<userId>_<projectId>')}`,
+      required: true,
+    },
   ]
 
   async run() {
