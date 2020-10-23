@@ -56,6 +56,12 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
+    "topics": {
+      "apps": { "description": "APPS topic" },
+      "contexts": { "description": "CONTEXTS topic" },
+      "logs": { "description": "LOGS topic" },
+      "workspaces": { "description": "WORKSPACES topic" }
+    },
     "bin": "hx",
     "plugins": [
       "@oclif/plugin-help",

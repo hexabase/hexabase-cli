@@ -28,34 +28,16 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hx apps`](#hx-apps)
 * [`hx apps:init`](#hx-appsinit)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
-* [`hx contexts`](#hx-contexts)
 * [`hx contexts:get`](#hx-contextsget)
 * [`hx contexts:login`](#hx-contextslogin)
 * [`hx contexts:set NAME`](#hx-contextsset-name)
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
-* [`hx logs`](#hx-logs)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
-* [`hx workspaces`](#hx-workspaces)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use WORKSPACEID`](#hx-workspacesuse-workspaceid)
-
-## `hx apps`
-
-display help for [36mapp[39m topic
-
-```
-USAGE
-  $ hx apps
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/apps/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/apps/index.ts)_
 
 ## `hx apps:init`
 
@@ -94,20 +76,6 @@ EXAMPLES
 ```
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
-
-## `hx contexts`
-
-display help for [36mcontext[39m topic
-
-```
-USAGE
-  $ hx contexts
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/contexts/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/index.ts)_
 
 ## `hx contexts:get`
 
@@ -184,20 +152,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `hx logs`
-
-display help for [36mlogs[39m topic
-
-```
-USAGE
-  $ hx logs
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/logs/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/index.ts)_
-
 ## `hx logs:actionscript CHANNEL`
 
 get logs from actionscript
@@ -214,20 +168,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
-
-## `hx workspaces`
-
-display help for [36mworkspaces[39m topic
-
-```
-USAGE
-  $ hx workspaces
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/workspaces/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/index.ts)_
 
 ## `hx workspaces:get`
 
