@@ -1,9 +1,19 @@
 import {Command, flags} from '@oclif/command'
+import {prompt}  from 'enquirer'
 import Conf from 'conf'
 import chalk from 'chalk'
 import * as ws from '../../api/workspaces/workspaces'
 
 const config = new Conf()
+
+const questions = [
+  {
+    type: 'select',
+    name: 'workspace',
+    message: 'Select your workspace',
+    choices: [],
+  },
+]
 
 // TODO: Create class for Commands with currentContext checking
 export default class WorkspacesUse extends Command {
@@ -17,7 +27,6 @@ export default class WorkspacesUse extends Command {
     {
       name: 'workspaceId',
       description: 'workspaceId from hexabase',
-      required: true,
     },
   ]
 
@@ -34,7 +43,20 @@ export default class WorkspacesUse extends Command {
       throw new Error(`Missing context settings: ${output.join(', ')}`)
     }
 
-    // TODO: make arg optional (like contexts:use)
+    if (!args.workspaceId) {
+      const workspaces = await ws.get(apiServer as string)
+      questions[0].choices = workspaces.map(ws => {
+        return {
+          name: ws.workspace_id,
+          message: `${ws.workspace_name}`,
+          value: ws.workspace_id,
+          hint: `${ws.workspace_id}`,
+        }
+      }) as never[]
+      const {workspace: workspace_id}: {workspace: string} = await prompt(questions[0])
+      args.workspaceId = workspace_id
+    }
+
     const result = await ws.select(apiServer as string, args.workspaceId)
     if (result) {
       this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)

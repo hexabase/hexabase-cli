@@ -37,7 +37,7 @@ USAGE
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx workspaces:get`](#hx-workspacesget)
-* [`hx workspaces:use WORKSPACEID`](#hx-workspacesuse-workspaceid)
+* [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
 
 ## `hx apps:init`
 
@@ -197,13 +197,13 @@ OPTIONS
 
 _See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/get.ts)_
 
-## `hx workspaces:use WORKSPACEID`
+## `hx workspaces:use [WORKSPACEID]`
 
 set current workspace in hexabase
 
 ```
 USAGE
-  $ hx workspaces:use WORKSPACEID
+  $ hx workspaces:use [WORKSPACEID]
 
 ARGUMENTS
   WORKSPACEID  workspaceId from hexabase
