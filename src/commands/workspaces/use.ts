@@ -16,6 +16,7 @@ export default class WorkspacesUse extends Command {
   static args = [
     {
       name: 'workspaceId',
+      description: 'workspaceId from hexabase',
       required: true,
     },
   ]

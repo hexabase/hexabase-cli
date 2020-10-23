@@ -20,7 +20,12 @@ export default class ContextsUse extends Command {
     help: flags.help({char: 'h'}),
   }
 
-  static args = [{name: 'context'}]
+  static args = [
+    {
+      name: 'context',
+      description: 'context name',
+    },
+  ]
 
   async run() {
     const {args} = this.parse(ContextsUse)

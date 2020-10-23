@@ -32,7 +32,7 @@ USAGE
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
 * [`hx contexts:get`](#hx-contextsget)
 * [`hx contexts:login`](#hx-contextslogin)
-* [`hx contexts:set NAME`](#hx-contextsset-name)
+* [`hx contexts:set CONTEXT`](#hx-contextsset-context)
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
@@ -105,13 +105,16 @@ OPTIONS
 
 _See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/login.ts)_
 
-## `hx contexts:set NAME`
+## `hx contexts:set CONTEXT`
 
 set context entries (server, sse, etc)
 
 ```
 USAGE
-  $ hx contexts:set NAME
+  $ hx contexts:set CONTEXT
+
+ARGUMENTS
+  CONTEXT  context name
 
 OPTIONS
   -h, --help       show CLI help
@@ -123,11 +126,14 @@ _See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/
 
 ## `hx contexts:use [CONTEXT]`
 
-set current context
+set current-context
 
 ```
 USAGE
   $ hx contexts:use [CONTEXT]
+
+ARGUMENTS
+  CONTEXT  context name
 
 OPTIONS
   -h, --help  show CLI help
@@ -198,6 +204,9 @@ set current workspace in hexabase
 ```
 USAGE
   $ hx workspaces:use WORKSPACEID
+
+ARGUMENTS
+  WORKSPACEID  workspaceId from hexabase
 
 OPTIONS
   -h, --help  show CLI help

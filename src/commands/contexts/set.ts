@@ -15,7 +15,8 @@ export default class ContextsSet extends Command {
 
   static args = [
     {
-      name: 'name',
+      name: 'context',
+      description: 'context name',
       required: true,
     },
   ]
@@ -26,11 +27,11 @@ export default class ContextsSet extends Command {
       throw new Error('at least one flag needed')
     }
     Object.entries(flags).forEach(entry => {
-      config.set(`contexts.${args.name}.${entry[0]}`, entry[1])
+      config.set(`contexts.${args.context}.${entry[0]}`, entry[1])
     })
     if (!config.get('current-context')) {
-      config.set('current-context', args.name)
-      this.log(`Current-context set to: ${chalk.cyan(args.name)}`)
+      config.set('current-context', args.context)
+      this.log(`Current-context set to: ${chalk.cyan(args.context)}`)
     }
   }
 }
