@@ -17,8 +17,6 @@ export default class WorkspacesGet extends Command {
 
   async run() {
     const {flags} = this.parse(WorkspacesGet)
-    let data: any[] = []
-    let columns = {}
 
     const currentContext = config.get('current-context')
     const apiServer = config.get(`contexts.${currentContext}.server`)
@@ -30,8 +28,8 @@ export default class WorkspacesGet extends Command {
       throw new Error(`Missing context settings: ${output.join(', ')}`)
     }
 
-    data = await ws.get(apiServer as string)
-    columns = {
+    const workspaces = await ws.get(apiServer as string)
+    const columns = {
       workspace_id: {
         header: 'ID',
         minWidth: 30,
@@ -41,7 +39,7 @@ export default class WorkspacesGet extends Command {
       },
     }
 
-    cli.table(data, columns, {
+    cli.table(workspaces, columns, {
       printLine: this.log,
       ...flags,
     })

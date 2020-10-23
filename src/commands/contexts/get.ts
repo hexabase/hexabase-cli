@@ -1,7 +1,7 @@
 import {Command, flags} from '@oclif/command'
+import {cli} from 'cli-ux'
 import chalk from 'chalk'
 import Conf from 'conf'
-import ux from 'cli-ux'
 
 const config = new Conf()
 
@@ -10,19 +10,45 @@ export default class ContextsGet extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
+    ...cli.table.flags(),
   }
 
   async run() {
-    this.parse(ContextsGet)
+    const {flags} = this.parse(ContextsGet)
 
     const currentContext = config.get('current-context')
-    const contexts = config.get('contexts')
+    const contexts = config.get('contexts') as {[key: string]: any}
 
     if (!contexts) {
       return this.log('No context found')
     }
 
-    ux.styledJSON(contexts)
+    const contextsArray = Object.entries(contexts).map(item => {
+      return {
+        name: item[0],
+        server: item[1].server,
+        sse: item[1].sse,
+      }
+    })
+    const columns = {
+      name: {
+        header: 'NAME',
+        minWidth: 15,
+      },
+      server: {
+        header: 'SERVER',
+        minWidth: 30,
+      },
+      sse: {
+        header: 'SSE',
+        minWidth: 30,
+      },
+    }
+
+    cli.table(contextsArray, columns, {
+      printLine: this.log,
+      ...flags,
+    })
     this.log(`Current-context set to: ${currentContext ?
       chalk.cyan(currentContext) :
       chalk.red(currentContext)}`)

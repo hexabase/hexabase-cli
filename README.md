@@ -86,7 +86,15 @@ USAGE
   $ hx contexts:get
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
 _See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/get.ts)_
