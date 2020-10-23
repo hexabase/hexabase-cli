@@ -19,6 +19,7 @@ const questions = [
   },
 ]
 
+// TODO: Create class for Commands with currentContext checking
 export default class ContextsLogin extends Command {
   static description = 'log in to hexabase within current context'
 

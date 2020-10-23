@@ -8,13 +8,13 @@ const questions = [
   {
     type: 'select',
     name: 'context',
-    message: 'Select your current context',
+    message: 'Select your current-context',
     choices: [],
   },
 ]
 
 export default class ContextsUse extends Command {
-  static description = 'set current context'
+  static description = 'set current-context'
 
   static flags = {
     help: flags.help({char: 'h'}),

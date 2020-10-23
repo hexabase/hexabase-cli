@@ -5,6 +5,7 @@ import * as ws from '../../api/workspaces/workspaces'
 
 const config = new Conf()
 
+// TODO: Create class for Commands with currentContext checking
 export default class WorkspacesUse extends Command {
   static description = 'set current workspace in hexabase'
 

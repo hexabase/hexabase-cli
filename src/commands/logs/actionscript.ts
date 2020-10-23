@@ -5,6 +5,7 @@ import chalk from 'chalk'
 
 const config = new Conf()
 
+// TODO: Create class for Commands with currentContext checking
 export default class LogsActionscript extends Command {
   static description = 'get logs from actionscript'
 
