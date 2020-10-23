@@ -34,6 +34,7 @@ export default class WorkspacesUse extends Command {
       throw new Error(`Missing context settings: ${output.join(', ')}`)
     }
 
+    // TODO: make arg optional (like contexts:use)
     const result = await ws.select(apiServer as string, args.workspaceId)
     if (result) {
       this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
