@@ -40,8 +40,8 @@ USAGE
 * [`hx logs`](#hx-logs)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx workspaces`](#hx-workspaces)
-* [`hx workspaces:get RESOURCE`](#hx-workspacesget-resource)
-* [`hx workspaces:use RESOURCE WORKSPACEID`](#hx-workspacesuse-resource-workspaceid)
+* [`hx workspaces:get`](#hx-workspacesget)
+* [`hx workspaces:use WORKSPACEID`](#hx-workspacesuse-workspaceid)
 
 ## `hx apps`
 
@@ -147,8 +147,8 @@ USAGE
 
 OPTIONS
   -h, --help       show CLI help
-  --server=server  API server address, e.g. https://api.hexabase.com
-  --sse=sse        SSE server address, e.g. https://sse.hexabase.com
+  --server=server  API server, e.g. https://api.hexabase.com
+  --sse=sse        SSE server, e.g. https://sse.hexabase.com
 ```
 
 _See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/set.ts)_
@@ -229,13 +229,13 @@ OPTIONS
 
 _See code: [src/commands/workspaces/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/index.ts)_
 
-## `hx workspaces:get RESOURCE`
+## `hx workspaces:get`
 
 get workspaces from hexabase
 
 ```
 USAGE
-  $ hx workspaces:get RESOURCE
+  $ hx workspaces:get
 
 OPTIONS
   -h, --help              show CLI help
@@ -251,13 +251,13 @@ OPTIONS
 
 _See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/get.ts)_
 
-## `hx workspaces:use RESOURCE WORKSPACEID`
+## `hx workspaces:use WORKSPACEID`
 
 set current workspace in hexabase
 
 ```
 USAGE
-  $ hx workspaces:use RESOURCE WORKSPACEID
+  $ hx workspaces:use WORKSPACEID
 
 OPTIONS
   -h, --help  show CLI help

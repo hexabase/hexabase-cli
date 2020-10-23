@@ -12,10 +12,11 @@ interface GetWorkspacesResponse {
 
 const config = new Conf()
 
-export const select = async (wID: string): Promise<boolean> => {
+export const select = async (server: string, workspaceId: string): Promise<boolean> => {
+  const url = `${server}/api/v0/workspaces/${workspaceId}/select`
   try {
-    const url = `https://az-api.hexabase.com/api/v0/workspaces/${wID}/select`
-    const token = config.get('hexabase.token')
+    const currentContext = config.get('current-context')
+    const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig: AxiosRequestConfig = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -28,10 +29,11 @@ export const select = async (wID: string): Promise<boolean> => {
   }
 }
 
-export const get = async (): Promise<GetWorkspacesElemResponse[]> => {
+export const get = async (server: string): Promise<GetWorkspacesElemResponse[]> => {
+  const url = `${server}/api/v0/workspaces`
   try {
-    const url = 'https://az-api.hexabase.com/api/v0/workspaces'
-    const token = config.get('hexabase.token')
+    const currentContext = config.get('current-context')
+    const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig: AxiosRequestConfig = {
       headers: {
         authorization: `Bearer ${token}`,

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const login = async (email: string, password: string): Promise<string> => {
-  const url = 'https://az-api.hexabase.com/api/v0/login'
+export const login = async (server: string, email: string, password: string): Promise<string> => {
+  const url = `${server}/api/v0/login`
   try {
     const {data: {token}} = await axios.post(url, {email, password})
     return token

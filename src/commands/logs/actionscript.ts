@@ -25,16 +25,16 @@ export default class LogsActionscript extends Command {
     const {channel} = args
 
     const currentContext = config.get('current-context')
-    const sseUrl = config.get(`contexts.${currentContext}.sse`)
+    const sseServer = config.get(`contexts.${currentContext}.sse`)
 
-    if (!currentContext || !sseUrl) {
+    if (!currentContext || !sseServer) {
       const output = []
       if (!currentContext) output.push(chalk.red('current-context'))
-      if (!sseUrl) output.push(chalk.red('sse-url'))
-      throw new Error(`Missing config settings: ${output.join(', ')}`)
+      if (!sseServer) output.push(chalk.red('sse'))
+      throw new Error(`Missing context settings: ${output.join(', ')}`)
     }
 
-    const url = `${sseUrl}/sse?channel=${channel}`
+    const url = `${sseServer}/sse?channel=${channel}`
     const source = new EventSource(url)
     this.log('Listening for logs...')
     source.addEventListener('log_actionscript', (event: Event) => {

@@ -29,10 +29,21 @@ export default class ContextsLogin extends Command {
   async run() {
     this.parse(ContextsLogin)
 
+    const currentContext = config.get('current-context')
+    const apiServer = config.get(`contexts.${currentContext}.server`)
+
+    if (!currentContext || !apiServer) {
+      const output = []
+      if (!currentContext) output.push(chalk.red('current-context'))
+      if (!apiServer) output.push(chalk.red('server'))
+      throw new Error(`Missing context settings: ${output.join(', ')}`)
+    }
+
     const {email}: {email: string} = await prompt(questions[0])
     const {password}: {password: string} = await prompt(questions[1])
-    const token = await auth.login(email, password)
-    config.set('hexabase.email', email)
-    config.set('hexabase.token', token)
+    const token = await auth.login(apiServer as string, email, password)
+    config.set(`hexabase.${currentContext}.email`, email)
+    config.set(`hexabase.${currentContext}.token`, token)
+    this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
   }
 }
