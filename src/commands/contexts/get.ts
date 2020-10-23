@@ -5,7 +5,7 @@ import ux from 'cli-ux'
 
 const config = new Conf()
 
-export default class ContextGet extends Command {
+export default class ContextsGet extends Command {
   static description = 'get contexts'
 
   static flags = {
@@ -13,7 +13,7 @@ export default class ContextGet extends Command {
   }
 
   async run() {
-    this.parse(ContextGet)
+    this.parse(ContextsGet)
 
     const currentContext = config.get('current-context')
     const contexts = config.get('contexts')

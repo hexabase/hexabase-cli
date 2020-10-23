@@ -13,7 +13,7 @@ const questions = [
   },
 ]
 
-export default class ContextUse extends Command {
+export default class ContextsUse extends Command {
   static description = 'set current context'
 
   static flags = {
@@ -23,7 +23,7 @@ export default class ContextUse extends Command {
   static args = [{name: 'context'}]
 
   async run() {
-    const {args} = this.parse(ContextUse)
+    const {args} = this.parse(ContextsUse)
 
     const contexts = config.get('contexts')
     if (!contexts) {

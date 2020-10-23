@@ -4,7 +4,7 @@ import Conf from 'conf'
 
 const config = new Conf()
 
-export default class ContextSet extends Command {
+export default class ContextsSet extends Command {
   static description = 'set context entries (server, sse, etc)'
 
   static flags = {
@@ -21,7 +21,7 @@ export default class ContextSet extends Command {
   ]
 
   async run() {
-    const {args, flags} = this.parse(ContextSet)
+    const {args, flags} = this.parse(ContextsSet)
     if (Object.keys(flags).length === 0 && typeof flags === 'object') {
       throw new Error('at least one flag needed')
     }

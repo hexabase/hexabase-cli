@@ -28,124 +28,144 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hx app [FILE]`](#hx-app-file)
-* [`hx app:init`](#hx-appinit)
-* [`hx context [FILE]`](#hx-context-file)
-* [`hx context:get`](#hx-contextget)
-* [`hx context:login`](#hx-contextlogin)
-* [`hx context:set NAME`](#hx-contextset-name)
-* [`hx context:use [CONTEXT]`](#hx-contextuse-context)
+* [`hx apps`](#hx-apps)
+* [`hx apps:init`](#hx-appsinit)
+* [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
+* [`hx contexts`](#hx-contexts)
+* [`hx contexts:get`](#hx-contextsget)
+* [`hx contexts:login`](#hx-contextslogin)
+* [`hx contexts:set NAME`](#hx-contextsset-name)
+* [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
-* [`hx logs [FILE]`](#hx-logs-file)
+* [`hx logs`](#hx-logs)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
-* [`hx workspaces [FILE]`](#hx-workspaces-file)
+* [`hx workspaces`](#hx-workspaces)
 * [`hx workspaces:get RESOURCE`](#hx-workspacesget-resource)
 * [`hx workspaces:use RESOURCE WORKSPACEID`](#hx-workspacesuse-resource-workspaceid)
 
-## `hx app [FILE]`
+## `hx apps`
 
-describe the command here
+display help for [36mapp[39m topic
 
 ```
 USAGE
-  $ hx app [FILE]
+  $ hx apps
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
-_See code: [src/commands/app/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/app/index.ts)_
+_See code: [src/commands/apps/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/apps/index.ts)_
 
-## `hx app:init`
+## `hx apps:init`
 
 initialize a new app
 
 ```
 USAGE
-  $ hx app:init
+  $ hx apps:init
 
 OPTIONS
   -h, --help       show CLI help
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/app/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/app/init.ts)_
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/apps/init.ts)_
 
-## `hx context [FILE]`
+## `hx autocomplete [SHELL]`
 
-describe the command here
+display autocomplete installation instructions
 
 ```
 USAGE
-  $ hx context [FILE]
+  $ hx autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ hx autocomplete
+  $ hx autocomplete bash
+  $ hx autocomplete zsh
+  $ hx autocomplete --refresh-cache
 ```
 
-_See code: [src/commands/context/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
 
-## `hx context:get`
+## `hx contexts`
+
+display help for [36mcontext[39m topic
+
+```
+USAGE
+  $ hx contexts
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/contexts/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/index.ts)_
+
+## `hx contexts:get`
 
 get contexts
 
 ```
 USAGE
-  $ hx context:get
+  $ hx contexts:get
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/context/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/get.ts)_
+_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/get.ts)_
 
-## `hx context:login`
+## `hx contexts:login`
 
 log in to hexabase within current context
 
 ```
 USAGE
-  $ hx context:login
+  $ hx contexts:login
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/context/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/login.ts)_
+_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/login.ts)_
 
-## `hx context:set NAME`
+## `hx contexts:set NAME`
 
 set context entries (server, sse, etc)
 
 ```
 USAGE
-  $ hx context:set NAME
+  $ hx contexts:set NAME
 
 OPTIONS
   -h, --help       show CLI help
-  --server=server  API server address, e.g. http://localhost
-  --sse=sse        SSE server address, e.g. http://localhost
+  --server=server  API server address, e.g. https://api.hexabase.com
+  --sse=sse        SSE server address, e.g. https://sse.hexabase.com
 ```
 
-_See code: [src/commands/context/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/set.ts)_
+_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/set.ts)_
 
-## `hx context:use [CONTEXT]`
+## `hx contexts:use [CONTEXT]`
 
 set current context
 
 ```
 USAGE
-  $ hx context:use [CONTEXT]
+  $ hx contexts:use [CONTEXT]
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/context/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/context/use.ts)_
+_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/contexts/use.ts)_
 
 ## `hx help [COMMAND]`
 
@@ -164,18 +184,16 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `hx logs [FILE]`
+## `hx logs`
 
-describe the command here
+display help for [36mlogs[39m topic
 
 ```
 USAGE
-  $ hx logs [FILE]
+  $ hx logs
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/logs/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/index.ts)_
@@ -188,24 +206,25 @@ get logs from actionscript
 USAGE
   $ hx logs:actionscript CHANNEL
 
+ARGUMENTS
+  CHANNEL  input format: logs_<userId>_<projectId>
+
 OPTIONS
   -h, --help  show CLI help
 ```
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/logs/actionscript.ts)_
 
-## `hx workspaces [FILE]`
+## `hx workspaces`
 
-describe the command here
+display help for [36mworkspaces[39m topic
 
 ```
 USAGE
-  $ hx workspaces [FILE]
+  $ hx workspaces
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/workspaces/index.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.0/src/commands/workspaces/index.ts)_
