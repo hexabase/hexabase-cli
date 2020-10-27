@@ -37,7 +37,7 @@ export default class LogsActionscript extends Command {
 
     const url = `${sseServer}/sse?channel=${channel}`
     const source = new EventSource(url)
-    this.log('Listening for logs...')
+    this.log(`Listening for logs on ${chalk.cyan(sseServer)}...`)
     source.addEventListener('log_actionscript', (event: Event) => {
       this.log(JSON.parse((event as MessageEvent).data).message)
     })
