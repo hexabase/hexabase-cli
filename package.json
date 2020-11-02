@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "devops@b-eee.com",
   "bin": {
     "hx": "./bin/run"
@@ -57,10 +57,18 @@
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
-      "apps": { "description": "APPS topic" },
-      "contexts": { "description": "CONTEXTS topic" },
-      "logs": { "description": "LOGS topic" },
-      "workspaces": { "description": "WORKSPACES topic" }
+      "apps": {
+        "description": "APPS topic"
+      },
+      "contexts": {
+        "description": "CONTEXTS topic"
+      },
+      "logs": {
+        "description": "LOGS topic"
+      },
+      "workspaces": {
+        "description": "WORKSPACES topic"
+      }
     },
     "bin": "hx",
     "plugins": [
