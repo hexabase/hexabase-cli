@@ -28,7 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hx apps:init`](#hx-appsinit)
+* [`hx apps:create`](#hx-appscreate)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
 * [`hx contexts:get`](#hx-contextsget)
 * [`hx contexts:login`](#hx-contextslogin)
@@ -39,20 +39,20 @@ USAGE
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
 
-## `hx apps:init`
+## `hx apps:create`
 
-initialize a new app
+create new app from a template
 
 ```
 USAGE
-  $ hx apps:init
+  $ hx apps:create
 
 OPTIONS
   -h, --help       show CLI help
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/init.ts)_
+_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/create.ts)_
 
 ## `hx autocomplete [SHELL]`
 
