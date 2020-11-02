@@ -66,6 +66,9 @@
       "logs": {
         "description": "LOGS topic"
       },
+      "projects": {
+        "description": "PROJECTS topic"
+      },
       "workspaces": {
         "description": "WORKSPACES topic"
       }

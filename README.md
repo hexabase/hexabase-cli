@@ -36,6 +36,7 @@ USAGE
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
+* [`hx projects:create`](#hx-projectscreate)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
 
@@ -182,6 +183,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/logs/actionscript.ts)_
+
+## `hx projects:create`
+
+create new project within current workspace
+
+```
+USAGE
+  $ hx projects:create
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/projects/create.ts)_
 
 ## `hx workspaces:get`
 
