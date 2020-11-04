@@ -1,16 +1,16 @@
 import {expect, test} from '@oclif/test'
 
-describe('ConfigContextSet', () => {
+describe('contextSet', () => {
   test
   .stdout()
-  .command(['ConfigContextSet'])
+  .command(['contextSet'])
   .it('runs hello', ctx => {
     expect(ctx.stdout).to.contain('hello world')
   })
 
   test
   .stdout()
-  .command(['ConfigContextSet', '--name', 'jeff'])
+  .command(['contextSet', '--name', 'jeff'])
   .it('runs hello --name jeff', ctx => {
     expect(ctx.stdout).to.contain('hello jeff')
   })
