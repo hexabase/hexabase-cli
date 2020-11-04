@@ -34,7 +34,7 @@ export default class WorkspacesUse extends Command {
     const {args} = this.parse(WorkspacesUse)
 
     const currentContext = config.get('current-context')
-    const apiServer = config.get(`contexts.${currentContext}.server`)
+    const apiServer = config.get(`contexts.${currentContext}.server`) as string
 
     if (!currentContext || !apiServer) {
       const output = []
@@ -44,7 +44,7 @@ export default class WorkspacesUse extends Command {
     }
 
     if (!args.workspaceId) {
-      const workspaces = await ws.get(apiServer as string)
+      const workspaces = await ws.get(apiServer)
       questions[0].choices = workspaces.map(ws => {
         return {
           name: ws.workspace_id,
