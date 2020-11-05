@@ -1,25 +1,31 @@
 import {Command, flags} from '@oclif/command'
 import {readFileSync, existsSync} from 'fs'
 import {Validator} from 'jsonschema'
+import {prompt}  from 'enquirer'
 import chalk from 'chalk'
 import Conf from 'conf'
 import * as pj from '../../api/projects/projects'
+import {ProjectName} from '../../api/projects/projects'
 
 const config = new Conf()
+const v = new Validator()
 
 const settingsSchema = {
   type: 'object',
   properties: {
     name: {
       type: 'object',
+      required: true,
       properties: {
         en: {
           type: 'string',
           minLength: 1,
+          required: true,
         },
         ja: {
           type: 'string',
           minLength: 1,
+          required: true,
         },
       },
     },
@@ -30,7 +36,24 @@ const settingsSchema = {
     },
   },
 }
-const v = new Validator()
+const questions = [
+  {
+    type: 'form',
+    name: 'pj_name',
+    message: 'Please provide a name for your project',
+    choices: [
+      {name: 'en', message: 'Project Name (en)', validate(value: string) {
+        return value.length > 0
+      }},
+      {name: 'ja', message: 'Project Name (ja)', validate(value: string) {
+        return value.length > 0
+      }},
+    ],
+    validate(value: any) {
+      return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
+    },
+  },
+]
 
 // TODO: Create class for Commands with currentContext checking
 export default class AppsInit extends Command {
@@ -63,6 +86,15 @@ export default class AppsInit extends Command {
 
     const hxSettings = JSON.parse(readFileSync(hxSettingsFile, 'utf8'))
 
+    // no 'name' field in hxSettings
+    if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
+      const {pj_name}: {pj_name: ProjectName} = await prompt(questions[0])
+      this.log(`Project Name (en): ${chalk.cyan(pj_name.en)}`)
+      this.log(`Project Name (ja): ${chalk.cyan(pj_name.ja)}`)
+      Object.assign(hxSettings, {name: pj_name})
+    }
+
+    // json schema validation
     const validatorResult = v.validate(hxSettings, settingsSchema)
     if (validatorResult.errors.length > 0) {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
