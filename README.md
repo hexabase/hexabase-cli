@@ -43,7 +43,7 @@ USAGE
 
 ## `hx apps:create`
 
-create new app from a template
+download & create new app from a template
 
 ```
 USAGE

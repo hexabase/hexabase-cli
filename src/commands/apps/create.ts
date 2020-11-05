@@ -36,7 +36,7 @@ const questions = [
 ]
 
 export default class AppsCreate extends Command {
-  static description = 'create new app from a template';
+  static description = 'download & create new app from a template';
 
   static flags = {
     help: flags.help({char: 'h'}),
