@@ -7,23 +7,19 @@ import * as pj from '../../api/projects/projects'
 
 const config = new Conf()
 
-let hxSettingsFile = 'hx-settings.json'
 const settingsSchema = {
   type: 'object',
   properties: {
     name: {
       type: 'object',
-      required: true,
       properties: {
         en: {
           type: 'string',
           minLength: 1,
-          required: true,
         },
         ja: {
           type: 'string',
           minLength: 1,
-          required: true,
         },
       },
     },
@@ -44,16 +40,12 @@ export default class AppsInit extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    file: flags.string({char: 'f', description: 'hexabase settings file', default: hxSettingsFile}),
+    file: flags.string({char: 'f', description: 'hexabase settings file', default: 'hx-settings.json'}),
   }
 
   async run() {
     const {flags} = this.parse(AppsInit)
-
-    const hasFileFlag = typeof flags.file !== 'undefined'
-    if (hasFileFlag) {
-      hxSettingsFile = flags.file
-    }
+    const hxSettingsFile = flags.file
 
     const currentContext = config.get('current-context')
     const apiServer = config.get(`contexts.${currentContext}.server`) as string
