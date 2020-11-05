@@ -86,7 +86,7 @@ export default class AppsInit extends BaseWithContext {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
     }
 
-    const {p_id} = await pj.create(this.apiServer as string, hxSettings)
+    const {p_id} = await pj.create(this.getApiServer(), hxSettings)
     if (p_id) {
       this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
     }
