@@ -29,6 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`hx apps:create`](#hx-appscreate)
+* [`hx apps:init`](#hx-appsinit)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
 * [`hx contexts:get`](#hx-contextsget)
 * [`hx contexts:login`](#hx-contextslogin)
@@ -54,6 +55,24 @@ OPTIONS
 ```
 
 _See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/create.ts)_
+
+## `hx apps:init`
+
+initialize app with hexabase settings
+
+```
+USAGE
+  $ hx apps:init
+
+OPTIONS
+  -f, --file=file  [default: hx-settings.json] hexabase settings file
+  -h, --help       show CLI help
+
+ALIASES
+  $ hx init
+```
+
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/init.ts)_
 
 ## `hx autocomplete [SHELL]`
 
