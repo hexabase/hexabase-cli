@@ -1,12 +1,10 @@
-import {Command, flags} from '@oclif/command'
+import {flags} from '@oclif/command'
 import {prompt}  from 'enquirer'
 import chalk from 'chalk'
-import Conf from 'conf'
 import * as tmp from '../../api/projects/templates'
 import * as pj from '../../api/projects/projects'
 import {CreateProjectData, ProjectName} from '../../api/projects/projects'
-
-const config = new Conf()
+import BaseWithContext from '../../base-with-context'
 
 const questions = [
   {
@@ -33,8 +31,7 @@ const questions = [
   },
 ]
 
-// TODO: Create class for Commands with currentContext checking
-export default class ProjectsCreate extends Command {
+export default class ProjectsCreate extends BaseWithContext {
   static description = 'create new project within current workspace'
 
   static flags = {
@@ -44,17 +41,7 @@ export default class ProjectsCreate extends Command {
   async run() {
     this.parse(ProjectsCreate)
 
-    const currentContext = config.get('current-context')
-    const apiServer = config.get(`contexts.${currentContext}.server`) as string
-
-    if (!currentContext || !apiServer) {
-      const output = []
-      if (!currentContext) output.push(chalk.red('current-context'))
-      if (!apiServer) output.push(chalk.red('server'))
-      throw new Error(`Missing context settings: ${output.join(', ')}`)
-    }
-
-    const templateCategories = await tmp.get(apiServer)
+    const templateCategories = await tmp.get(this.apiServer as string)
     const initalChoice = [{
       name: 'none',
       message: 'none',
@@ -88,7 +75,7 @@ export default class ProjectsCreate extends Command {
     if (template_id && template_id !== 'none') {
       data.tp_id = template_id
     }
-    const {p_id} = await pj.create(apiServer, data)
+    const {p_id} = await pj.create(this.apiServer as string, data)
     if (p_id) {
       this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
     }

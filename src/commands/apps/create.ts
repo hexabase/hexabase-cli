@@ -83,8 +83,6 @@ export default class AppsCreate extends Command {
       cli.action.start('installing dependencies')
       spawn.sync(['install'], {stdio: 'inherit'})
       cli.action.stop()
-    } catch (error) {
-      this.error(error)
     } finally {
       if (noNameFlag) {
         this.log(

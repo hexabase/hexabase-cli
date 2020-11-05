@@ -1,8 +1,9 @@
-import {Command, flags} from '@oclif/command'
+import {flags} from '@oclif/command'
 import {prompt}  from 'enquirer'
 import Conf from 'conf'
 import chalk from 'chalk'
 import * as auth from '../../api/auth/auth'
+import BaseWithContext from '../../base-with-context'
 
 const config = new Conf()
 
@@ -19,8 +20,7 @@ const questions = [
   },
 ]
 
-// TODO: Create class for Commands with currentContext checking
-export default class ContextsLogin extends Command {
+export default class ContextsLogin extends BaseWithContext {
   static description = 'log in to hexabase within current context'
 
   static flags = {
@@ -30,21 +30,11 @@ export default class ContextsLogin extends Command {
   async run() {
     this.parse(ContextsLogin)
 
-    const currentContext = config.get('current-context')
-    const apiServer = config.get(`contexts.${currentContext}.server`)
-
-    if (!currentContext || !apiServer) {
-      const output = []
-      if (!currentContext) output.push(chalk.red('current-context'))
-      if (!apiServer) output.push(chalk.red('server'))
-      throw new Error(`Missing context settings: ${output.join(', ')}`)
-    }
-
     const {email}: {email: string} = await prompt(questions[0])
     const {password}: {password: string} = await prompt(questions[1])
-    const token = await auth.login(apiServer as string, email, password)
-    config.set(`hexabase.${currentContext}.email`, email)
-    config.set(`hexabase.${currentContext}.token`, token)
+    const token = await auth.login(this.apiServer as string, email, password)
+    config.set(`hexabase.${this.currentContext}.email`, email)
+    config.set(`hexabase.${this.currentContext}.token`, token)
     this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
   }
 }

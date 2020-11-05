@@ -1,13 +1,11 @@
-import {Command, flags} from '@oclif/command'
+import {flags} from '@oclif/command'
 import {readFileSync, existsSync} from 'fs'
 import {Validator} from 'jsonschema'
 import {prompt}  from 'enquirer'
 import chalk from 'chalk'
-import Conf from 'conf'
+import BaseWithContext from '../../base-with-context'
 import * as pj from '../../api/projects/projects'
-import {ProjectName} from '../../api/projects/projects'
 
-const config = new Conf()
 const v = new Validator()
 
 const settingsSchema = {
@@ -55,8 +53,7 @@ const questions = [
   },
 ]
 
-// TODO: Create class for Commands with currentContext checking
-export default class AppsInit extends Command {
+export default class AppsInit extends BaseWithContext {
   static description = 'initialize app with hexabase settings'
 
   static aliases = ['init']
@@ -70,25 +67,14 @@ export default class AppsInit extends Command {
     const {flags} = this.parse(AppsInit)
     const hxSettingsFile = flags.file
 
-    const currentContext = config.get('current-context')
-    const apiServer = config.get(`contexts.${currentContext}.server`) as string
-
-    if (!currentContext || !apiServer) {
-      const output = []
-      if (!currentContext) output.push(chalk.red('current-context'))
-      if (!apiServer) output.push(chalk.red('server'))
-      throw new Error(`Missing context settings: ${output.join(', ')}`)
-    }
-
     if (!existsSync(hxSettingsFile)) {
       throw new Error(`${chalk.red(hxSettingsFile)} file not found`)
     }
-
     const hxSettings = JSON.parse(readFileSync(hxSettingsFile, 'utf8'))
 
-    // no 'name' field in hxSettings
+    // no 'name' field in hxSettings -> form prompt
     if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
-      const {pj_name}: {pj_name: ProjectName} = await prompt(questions[0])
+      const {pj_name}: {pj_name: pj.ProjectName} = await prompt(questions[0])
       this.log(`Project Name (en): ${chalk.cyan(pj_name.en)}`)
       this.log(`Project Name (ja): ${chalk.cyan(pj_name.ja)}`)
       Object.assign(hxSettings, {name: pj_name})
@@ -100,7 +86,7 @@ export default class AppsInit extends Command {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
     }
 
-    const {p_id} = await pj.create(apiServer, hxSettings)
+    const {p_id} = await pj.create(this.apiServer as string, hxSettings)
     if (p_id) {
       this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
     }
