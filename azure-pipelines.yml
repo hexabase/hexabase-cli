@@ -10,29 +10,38 @@ trigger:
 
 pr: none
 
-resources:
-- repo: self
-
 variables:
   - name: imageRepository
     value: 'hexabase-cli'
   - name: vmImageName
     value: 'ubuntu-latest'
 
-stages:
-- stage: Publish
-  displayName: Publish stage
-  jobs:
-  - deployment: Publish
-    displayName: Publish
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: Npm@1
-            displayName: Publish to npmjs
-            inputs:
-              command: publish
-              publishEndpoint: 'npmjs_beee-devops'
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps: # Checking out connected repo
+- checkout: self
+  persistCredentials: true
+  clean: true
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js'
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+- bash: | # Grab the package version
+    v=`node -p "const p = require('./package.json'); p.version;"`
+    echo "##vso[task.setvariable variable=packageVersion]$v"
+- task: Npm@1
+  displayName: 'npm publish'
+  inputs:
+    command: publish
+    publishEndpoint: 'npmjs_beee-devops'
+- task: GitHubRelease@1
+  displayName: 'GitHub release (create)'
+  inputs:
+    gitHubConnection: 'github.com_beee-devops'
+    tagSource: 'userSpecifiedTag'
+    tag: 'v$(packageVersion)'
