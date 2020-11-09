@@ -45,3 +45,5 @@ steps: # Checking out connected repo
     gitHubConnection: 'github.com_beee-devops'
     tagSource: 'userSpecifiedTag'
     tag: 'v$(packageVersion)'
+    title: 'v$(packageVersion)'
+    addChangeLog: false
