@@ -1,0 +1,38 @@
+# Deploy to Azure Kubernetes Service
+# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+pr: none
+
+resources:
+- repo: self
+
+variables:
+  - name: imageRepository
+    value: 'hexabase-cli'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+
+stages:
+- stage: Publish
+  displayName: Publish stage
+  jobs:
+  - deployment: Publish
+    displayName: Publish
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Npm@1
+            displayName: Publish to npmjs
+            inputs:
+              command: publish
+              publishEndpoint: 'npmjs_beee-devops'
