@@ -129,6 +129,9 @@ USAGE
 
 OPTIONS
   -h, --help  show CLI help
+
+ALIASES
+  $ hx login
 ```
 
 _See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/login.ts)_

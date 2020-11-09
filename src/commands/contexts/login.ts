@@ -23,6 +23,8 @@ const questions = [
 export default class ContextsLogin extends BaseWithContext {
   static description = 'log in to hexabase within current context'
 
+  static aliases = ['login']
+
   static flags = {
     help: flags.help({char: 'h'}),
   }
