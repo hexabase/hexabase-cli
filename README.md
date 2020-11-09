@@ -19,7 +19,7 @@ $ npm install -g hexabase-cli
 $ hx COMMAND
 running command...
 $ hx (-v|--version|version)
-hexabase-cli/0.0.1 darwin-x64 node-v14.13.0
+hexabase-cli/0.0.2 darwin-x64 node-v14.13.0
 $ hx --help [COMMAND]
 USAGE
   $ hx COMMAND
@@ -54,7 +54,7 @@ OPTIONS
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/create.ts)_
+_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/apps/create.ts)_
 
 ## `hx apps:init`
 
@@ -72,7 +72,7 @@ ALIASES
   $ hx init
 ```
 
-_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/apps/init.ts)_
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/apps/init.ts)_
 
 ## `hx autocomplete [SHELL]`
 
@@ -117,7 +117,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/contexts/get.ts)_
+_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/get.ts)_
 
 ## `hx contexts:login`
 
@@ -131,7 +131,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/contexts/login.ts)_
+_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/login.ts)_
 
 ## `hx contexts:set CONTEXT`
 
@@ -150,7 +150,7 @@ OPTIONS
   --sse=sse        SSE server, e.g. https://sse.hexabase.com
 ```
 
-_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/contexts/set.ts)_
+_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/set.ts)_
 
 ## `hx contexts:use [CONTEXT]`
 
@@ -167,7 +167,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/contexts/use.ts)_
+_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/use.ts)_
 
 ## `hx help [COMMAND]`
 
@@ -201,7 +201,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/logs/actionscript.ts)_
+_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/logs/actionscript.ts)_
 
 ## `hx projects:create`
 
@@ -215,7 +215,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/projects/create.ts)_
+_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/projects/create.ts)_
 
 ## `hx workspaces:get`
 
@@ -237,7 +237,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/workspaces/get.ts)_
+_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/workspaces/get.ts)_
 
 ## `hx workspaces:use [WORKSPACEID]`
 
@@ -254,5 +254,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.1/src/commands/workspaces/use.ts)_
+_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/workspaces/use.ts)_
 <!-- commandsstop -->
