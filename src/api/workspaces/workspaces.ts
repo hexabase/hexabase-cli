@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios'
+import axios from 'axios'
 import Conf from 'conf'
 
 interface GetWorkspacesElemResponse{
@@ -17,7 +17,7 @@ export const select = async (server: string, workspaceId: string): Promise<boole
   try {
     const currentContext = config.get('current-context')
     const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig = {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -34,7 +34,7 @@ export const get = async (server: string): Promise<GetWorkspacesElemResponse[]> 
   try {
     const currentContext = config.get('current-context')
     const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig = {
       headers: {
         authorization: `Bearer ${token}`,
       },

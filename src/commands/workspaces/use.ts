@@ -35,9 +35,8 @@ export default class WorkspacesUse extends BaseWithContext {
       questions[0].choices = workspaces.map(ws => {
         return {
           name: ws.workspace_id,
-          message: `${ws.workspace_name}`,
-          value: ws.workspace_id,
-          hint: `${ws.workspace_id}`,
+          message: ws.workspace_name,
+          hint: ws.workspace_id,
         }
       }) as never[]
       const {workspace: workspace_id}: {workspace: string} = await prompt(questions[0])

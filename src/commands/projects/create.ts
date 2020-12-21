@@ -52,8 +52,7 @@ export default class ProjectsCreate extends BaseWithContext {
       ctg.templates.forEach(tmp => {
         const elem = {
           name: tmp.tp_id,
-          message: `${tmp.name}`,
-          value: tmp.tp_id,
+          message: tmp.name,
           hint: tmp.tp_id,
         } as never
         acc.push(elem)

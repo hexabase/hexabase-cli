@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios'
+import axios from 'axios'
 import Conf from 'conf'
 
 export interface ProjectName{
@@ -22,7 +22,7 @@ export const create = async (server: string, data: CreateProjectData): Promise<C
   try {
     const currentContext = config.get('current-context')
     const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig = {
       headers: {
         authorization: `Bearer ${token}`,
       },
