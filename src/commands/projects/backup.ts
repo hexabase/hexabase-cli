@@ -40,6 +40,11 @@ export default class ProjectsBackup extends BaseWithContext {
 
     try {
       const templateCategories = await tmp.get(this.getApiServer())
+
+      if (templateCategories.length === 0) {
+        return this.log(chalk.red('No template found'))
+      }
+
       questions[0].choices = templateCategories.reduce((acc, ctg) => {
         ctg.templates.forEach(tmp => {
           const elem = {
@@ -63,7 +68,7 @@ export default class ProjectsBackup extends BaseWithContext {
       // download from apicore
       cli.action.start(`downloading template with tp_id ${chalk.cyan(template_id)}`)
       // FIXME: fix apicore url
-      await tmp.downloadTemplate('https://az.hexabase.com', template_id, flags.name!)
+      await tmp.downloadTemplate('https://localhost:9000', template_id, flags.name!)
       cli.action.stop()
     } finally {
       if (noNameFlag) {
