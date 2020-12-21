@@ -30,6 +30,7 @@ export default class ProjectsBackup extends BaseWithContext {
   static description = 'download template file'
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
     name: flags.string({char: 'n', description: 'filename of downloaded template file'}),
   }

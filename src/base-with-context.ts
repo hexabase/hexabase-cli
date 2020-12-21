@@ -1,15 +1,19 @@
-import Command from '@oclif/command'
+import {Command, flags} from '@oclif/command'
+import {Input} from '@oclif/parser'
 import Conf from 'conf'
 import chalk from 'chalk'
 
 const config = new Conf()
 
-export default abstract class extends Command {
+export default abstract class BaseWithContext extends Command {
+  static flags = {
+    context: flags.string({char: 'c', description: 'use provided context instead of currently set context'}),
+  };
+
   currentContext: unknown | string
 
   async init() {
-    // const {flags} = this.parse(this.constructor)
-    // this.flags = flags
+    const {flags} = this.parse(this.constructor as Input<typeof BaseWithContext.flags>)
 
     const currentContext = config.get('current-context')
     if (!currentContext) {

@@ -35,6 +35,7 @@ export default class ProjectsCreate extends BaseWithContext {
   static description = 'create new project within current workspace'
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
   }
 

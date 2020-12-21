@@ -7,6 +7,7 @@ export default class LogsActionscript extends BaseWithContext {
   static description = 'get logs from actionscript'
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
   }
 

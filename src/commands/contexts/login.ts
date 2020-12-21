@@ -26,6 +26,7 @@ export default class ContextsLogin extends BaseWithContext {
   static aliases = ['login']
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
   }
 

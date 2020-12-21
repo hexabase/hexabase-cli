@@ -7,6 +7,7 @@ export default class WorkspacesGet extends BaseWithContext {
   static description = 'get workspaces from hexabase'
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
     ...cli.table.flags(),
   }

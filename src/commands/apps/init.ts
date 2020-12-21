@@ -59,6 +59,7 @@ export default class AppsInit extends BaseWithContext {
   static aliases = ['init']
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f', description: 'hexabase settings file', default: 'hx-settings.json'}),
   }
