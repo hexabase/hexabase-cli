@@ -39,6 +39,7 @@ USAGE
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
 * [`hx projects:create`](#hx-projectscreate)
+* [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
 
@@ -243,6 +244,25 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/create.ts)_
+
+## `hx projects:restore FILE`
+
+restore a project from a template file
+
+```
+USAGE
+  $ hx projects:restore FILE
+
+ARGUMENTS
+  FILE  zip file to be restored from, e.g. template.zip
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -n, --name=name        name of the project to be restored
+```
+
+_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/restore.ts)_
 
 ## `hx workspaces:get`
 
