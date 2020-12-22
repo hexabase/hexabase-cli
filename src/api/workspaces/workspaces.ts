@@ -9,6 +9,7 @@ interface GetWorkspacesElemResponse{
 
 interface GetWorkspacesResponse {
   workspaces: GetWorkspacesElemResponse[];
+  current_workspace_id: string;
 }
 
 const config = new Conf()
@@ -30,7 +31,7 @@ export const select = async (currentContext: string, workspaceId: string): Promi
   }
 }
 
-export const get = async (currentContext: string): Promise<GetWorkspacesElemResponse[]> => {
+export const get = async (currentContext: string): Promise<GetWorkspacesResponse> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
     const url = `${context.server}/api/v0/workspaces`
@@ -41,7 +42,7 @@ export const get = async (currentContext: string): Promise<GetWorkspacesElemResp
       },
     }
     const {data}: {data: GetWorkspacesResponse} = await axios.get(url, requestConfig)
-    return data.workspaces
+    return data
   } catch (error) {
     throw error
   }

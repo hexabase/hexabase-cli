@@ -31,9 +31,9 @@ export default class WorkspacesUse extends BaseWithContext {
   async run() {
     const {args} = this.parse(WorkspacesUse)
 
+    const workspaceResponse = await ws.get(this.currentContext)
     if (!args.workspaceId) {
-      const workspaces = await ws.get(this.currentContext)
-      questions[0].choices = workspaces.map(ws => {
+      questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
           name: ws.workspace_id,
           message: ws.workspace_name,
@@ -46,7 +46,12 @@ export default class WorkspacesUse extends BaseWithContext {
 
     const result = await ws.select(this.currentContext, args.workspaceId)
     if (result) {
-      this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
+      const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
+        return ws.workspace_id === args.workspaceId
+      })
+      this.log(`Current-workspace set to: ${currentWorkspace ?
+        chalk.cyan(currentWorkspace.workspace_name) :
+        chalk.red('could not be determined')}`)
     }
   }
 }

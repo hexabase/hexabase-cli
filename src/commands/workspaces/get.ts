@@ -1,5 +1,6 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
+import chalk from 'chalk'
 import * as ws from '../../api/workspaces/workspaces'
 import BaseWithContext from '../../base-with-context'
 
@@ -15,7 +16,11 @@ export default class WorkspacesGet extends BaseWithContext {
   async run() {
     const {flags} = this.parse(WorkspacesGet)
 
-    const workspaces = await ws.get(this.currentContext)
+    const workspaceResponse = await ws.get(this.currentContext)
+    const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
+      return ws.workspace_id === workspaceResponse.current_workspace_id
+    })
+
     const columns = {
       workspace_id: {
         header: 'ID',
@@ -26,9 +31,12 @@ export default class WorkspacesGet extends BaseWithContext {
       },
     }
 
-    cli.table(workspaces, columns, {
+    cli.table(workspaceResponse.workspaces, columns, {
       printLine: this.log,
       ...flags,
     })
+    this.log(`Current-workspace set to: ${currentWorkspace ?
+      chalk.cyan(currentWorkspace.workspace_name) :
+      chalk.red('could not be determined')}`)
   }
 }
