@@ -41,6 +41,8 @@ export const get = async (currentContext: string): Promise<GetTemplatesCategoryR
 export const downloadTemplate = async (currentContext: string, tp_id: string, filename: string): Promise<void> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
+    // FIXME: delete server
+    context.server = 'https://az.hexabase.com'
     const url = `${context.server}/v1/api/download_pj_template?tp_id=${tp_id}`
     const token = config.get(`hexabase.${currentContext}.token`)
     const downloadOptions = {
