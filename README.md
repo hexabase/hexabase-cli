@@ -66,8 +66,9 @@ USAGE
   $ hx apps:init
 
 OPTIONS
-  -f, --file=file  [default: hx-settings.json] hexabase settings file
-  -h, --help       show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -f, --file=file        [default: hx-settings.json] hexabase settings file
+  -h, --help             show CLI help
 
 ALIASES
   $ hx init
@@ -129,7 +130,8 @@ USAGE
   $ hx contexts:login
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 
 ALIASES
   $ hx login
@@ -202,7 +204,8 @@ ARGUMENTS
   CHANNEL  input format: logs_<userId>_<projectId>
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/logs/actionscript.ts)_
@@ -216,8 +219,9 @@ USAGE
   $ hx projects:backup
 
 OPTIONS
-  -h, --help       show CLI help
-  -n, --name=name  filename of downloaded template file
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -n, --name=name        filename of downloaded template file
 ```
 
 _See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/backup.ts)_
@@ -231,7 +235,8 @@ USAGE
   $ hx projects:create
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
 _See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/create.ts)_
@@ -245,6 +250,7 @@ USAGE
   $ hx workspaces:get
 
 OPTIONS
+  -c, --context=context   use provided context instead of currently set context
   -h, --help              show CLI help
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
@@ -270,7 +276,8 @@ ARGUMENTS
   WORKSPACEID  workspaceId from hexabase
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
 _See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/workspaces/use.ts)_
