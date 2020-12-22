@@ -37,7 +37,7 @@ USAGE
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
-* [`hx projects:backup`](#hx-projectsbackup)
+* [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
 * [`hx projects:create`](#hx-projectscreate)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
@@ -210,13 +210,16 @@ OPTIONS
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/logs/actionscript.ts)_
 
-## `hx projects:backup`
+## `hx projects:backup [TEMPLATEID]`
 
 download template file
 
 ```
 USAGE
-  $ hx projects:backup
+  $ hx projects:backup [TEMPLATEID]
+
+ARGUMENTS
+  TEMPLATEID  templateId from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
