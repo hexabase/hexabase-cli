@@ -23,14 +23,14 @@ export default class LogsActionscript extends BaseWithContext {
     const {args} = this.parse(LogsActionscript)
     const {channel} = args
 
-    const sseInstance = sse.connect(this.currentContext, channel)
+    const sseConnection = sse.connect(this.currentContext, channel)
 
-    this.log(`Listening for logs on ${chalk.cyan(sseInstance.sseServer)}...`)
+    this.log(`Listening for logs on ${chalk.cyan(sseConnection.sseServer)}...`)
 
-    sseInstance.source.addEventListener('log_actionscript', (event: Event) => {
+    sseConnection.source.addEventListener('log_actionscript', (event: Event) => {
       this.log(JSON.parse((event as MessageEvent).data).message)
     })
-    sseInstance.source.addEventListener('error', (error: Event) => {
+    sseConnection.source.addEventListener('error', (error: Event) => {
       throw error
     })
   }
