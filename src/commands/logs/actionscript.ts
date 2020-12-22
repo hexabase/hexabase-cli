@@ -1,10 +1,7 @@
 import {flags} from '@oclif/command'
-import EventSource from 'eventsource'
-import Conf from 'conf'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-
-const config = new Conf()
+import * as sse from '../../api/sse/sse'
 
 export default class LogsActionscript extends BaseWithContext {
   static description = 'get logs from actionscript'
@@ -26,19 +23,14 @@ export default class LogsActionscript extends BaseWithContext {
     const {args} = this.parse(LogsActionscript)
     const {channel} = args
 
-    const sseServer = config.get(`contexts.${this.currentContext}.sse`)
-    if (!sseServer) {
-      throw new Error(`Missing context setting: ${chalk.red('sse')}`)
-    }
+    const sseInstance = sse.connect(this.currentContext, channel)
 
-    const url = `${sseServer}/sse?channel=${channel}`
-    const source = new EventSource(url)
-    this.log(`Listening for logs on ${chalk.cyan(sseServer)}...`)
+    this.log(`Listening for logs on ${chalk.cyan(sseInstance.sseServer)}...`)
 
-    source.addEventListener('log_actionscript', (event: Event) => {
+    sseInstance.source.addEventListener('log_actionscript', (event: Event) => {
       this.log(JSON.parse((event as MessageEvent).data).message)
     })
-    source.addEventListener('error', (error: Event) => {
+    sseInstance.source.addEventListener('error', (error: Event) => {
       throw error
     })
   }
