@@ -1,5 +1,6 @@
 import Conf from 'conf'
 import chalk from 'chalk'
+import EventSource from 'eventsource'
 import {Context} from '../../base-with-context'
 
 export interface SSEConnectOutput {
