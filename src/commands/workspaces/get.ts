@@ -15,7 +15,7 @@ export default class WorkspacesGet extends BaseWithContext {
   async run() {
     const {flags} = this.parse(WorkspacesGet)
 
-    const workspaces = await ws.get(this.getApiServer())
+    const workspaces = await ws.get(this.currentContext)
     const columns = {
       workspace_id: {
         header: 'ID',

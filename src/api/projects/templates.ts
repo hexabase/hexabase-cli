@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Conf from 'conf'
 import download from 'download'
+import {Context} from '../../base-with-context'
 
 interface GetTemplatesTemplateResponse{
   tp_id: string;
@@ -20,10 +21,10 @@ interface GetTemplatesResponse{
 
 const config = new Conf()
 
-export const get = async (server: string): Promise<GetTemplatesCategoryResponse[]> => {
-  const url = `${server}/api/v0/templates`
+export const get = async (currentContext: string): Promise<GetTemplatesCategoryResponse[]> => {
   try {
-    const currentContext = config.get('current-context')
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/templates`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {
@@ -37,19 +38,19 @@ export const get = async (server: string): Promise<GetTemplatesCategoryResponse[
   }
 }
 
-export const downloadTemplate = async (server: string, tp_id: string, filename: string): Promise<void> => {
-  const url = `${server}/v1/api/download_pj_template?tp_id=${tp_id}`
-  const currentContext = config.get('current-context')
-  const token = config.get(`hexabase.${currentContext}.token`)
-  const downloadOptions = {
-    mode: '666',
-    filename: `${filename}.zip`,
-    headers: {
-      accept: 'application/zip',
-      authorization: `Bearer ${token}`,
-    },
-  }
+export const downloadTemplate = async (currentContext: string, tp_id: string, filename: string): Promise<void> => {
   try {
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/v1/api/download_pj_template?tp_id=${tp_id}`
+    const token = config.get(`hexabase.${currentContext}.token`)
+    const downloadOptions = {
+      mode: '666',
+      filename: `${filename}.zip`,
+      headers: {
+        accept: 'application/zip',
+        authorization: `Bearer ${token}`,
+      },
+    }
     await download(url, './', downloadOptions)
   } catch (error) {
     throw error

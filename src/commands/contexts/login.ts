@@ -35,7 +35,7 @@ export default class ContextsLogin extends BaseWithContext {
 
     const {email}: {email: string} = await prompt(questions[0])
     const {password}: {password: string} = await prompt(questions[1])
-    const token = await auth.login(this.getApiServer(), email, password)
+    const token = await auth.login(this.currentContext, email, password)
     config.set(`hexabase.${this.currentContext}.email`, email)
     config.set(`hexabase.${this.currentContext}.token`, token)
     this.log(`Successfully logged in as: ${chalk.cyan(email)}`)

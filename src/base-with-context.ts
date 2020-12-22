@@ -3,6 +3,11 @@ import {Input} from '@oclif/parser'
 import Conf from 'conf'
 import chalk from 'chalk'
 
+export interface Context{
+  server: string;
+  sse: string;
+}
+
 const config = new Conf()
 
 export default abstract class BaseWithContext extends Command {
@@ -10,32 +15,24 @@ export default abstract class BaseWithContext extends Command {
     context: flags.string({char: 'c', description: 'use provided context instead of currently set context'}),
   };
 
-  currentContext: unknown | string
+  currentContext = ''
 
   async init() {
     const {flags} = this.parse(this.constructor as Input<typeof BaseWithContext.flags>)
 
-    const currentContext = config.get('current-context')
-    if (!currentContext) {
-      throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
+    let context: unknown | string
+    if (flags.context) {
+      if (!config.get(`contexts.${flags.context}`)) {
+        throw new Error(`No such context: ${chalk.red(flags.context)}`)
+      }
+      context = flags.context
+    } else {
+      context = config.get('current-context')
+      if (!context) {
+        throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
+      }
     }
 
-    this.currentContext = currentContext
-  }
-
-  getApiServer() {
-    const apiServer = config.get(`contexts.${this.currentContext}.server`)
-    if (!apiServer) {
-      throw new Error(`Missing context setting: ${chalk.red('server')}`)
-    }
-    return apiServer as string
-  }
-
-  getSSE() {
-    const sse = config.get(`contexts.${this.currentContext}.sse`)
-    if (!sse) {
-      throw new Error(`Missing context setting: ${chalk.red('sse')}`)
-    }
-    return sse as string
+    this.currentContext = context as string
   }
 }

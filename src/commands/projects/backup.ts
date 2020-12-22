@@ -40,7 +40,7 @@ export default class ProjectsBackup extends BaseWithContext {
     const noNameFlag = typeof flags.name === 'undefined'
 
     try {
-      const templateCategories = await tmp.get(this.getApiServer())
+      const templateCategories = await tmp.get(this.currentContext)
 
       if (templateCategories.length === 0) {
         return this.log(chalk.red('No template found'))

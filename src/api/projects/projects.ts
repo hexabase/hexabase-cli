@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Conf from 'conf'
+import {Context} from '../../base-with-context'
 
 export interface ProjectName{
     en: string;
@@ -17,10 +18,10 @@ interface CreateProjectResponse {
 
 const config = new Conf()
 
-export const create = async (server: string, data: CreateProjectData): Promise<CreateProjectResponse> => {
-  const url = `${server}/api/v0/applications`
+export const create = async (currentContext: string, data: CreateProjectData): Promise<CreateProjectResponse> => {
   try {
-    const currentContext = config.get('current-context')
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/applications`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {

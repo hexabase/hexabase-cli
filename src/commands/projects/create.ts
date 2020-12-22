@@ -42,7 +42,7 @@ export default class ProjectsCreate extends BaseWithContext {
   async run() {
     this.parse(ProjectsCreate)
 
-    const templateCategories = await tmp.get(this.getApiServer())
+    const templateCategories = await tmp.get(this.currentContext)
     const initalChoice = [{
       name: 'none',
       message: 'none',
@@ -75,7 +75,7 @@ export default class ProjectsCreate extends BaseWithContext {
     if (template_id && template_id !== 'none') {
       data.tp_id = template_id
     }
-    const {p_id} = await pj.create(this.getApiServer(), data)
+    const {p_id} = await pj.create(this.currentContext, data)
     if (p_id) {
       this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
     }

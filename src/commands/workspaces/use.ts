@@ -32,7 +32,7 @@ export default class WorkspacesUse extends BaseWithContext {
     const {args} = this.parse(WorkspacesUse)
 
     if (!args.workspaceId) {
-      const workspaces = await ws.get(this.getApiServer())
+      const workspaces = await ws.get(this.currentContext)
       questions[0].choices = workspaces.map(ws => {
         return {
           name: ws.workspace_id,
@@ -44,7 +44,7 @@ export default class WorkspacesUse extends BaseWithContext {
       args.workspaceId = workspace_id
     }
 
-    const result = await ws.select(this.getApiServer(), args.workspaceId)
+    const result = await ws.select(this.currentContext, args.workspaceId)
     if (result) {
       this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
     }

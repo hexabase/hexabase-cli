@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Conf from 'conf'
+import {Context} from '../../base-with-context'
 
 interface GetWorkspacesElemResponse{
   workspace_id: string;
@@ -12,10 +13,10 @@ interface GetWorkspacesResponse {
 
 const config = new Conf()
 
-export const select = async (server: string, workspaceId: string): Promise<boolean> => {
-  const url = `${server}/api/v0/workspaces/${workspaceId}/select`
+export const select = async (currentContext: string, workspaceId: string): Promise<boolean> => {
   try {
-    const currentContext = config.get('current-context')
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/workspaces/${workspaceId}/select`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {
@@ -29,10 +30,10 @@ export const select = async (server: string, workspaceId: string): Promise<boole
   }
 }
 
-export const get = async (server: string): Promise<GetWorkspacesElemResponse[]> => {
-  const url = `${server}/api/v0/workspaces`
+export const get = async (currentContext: string): Promise<GetWorkspacesElemResponse[]> => {
   try {
-    const currentContext = config.get('current-context')
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/workspaces`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {
