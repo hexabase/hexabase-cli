@@ -62,9 +62,7 @@ export const downloadTemplate = async (currentContext: string, tp_id: string, fi
 export const uploadTemplate = async (currentContext: string, projectname: string, file: string): Promise<void> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
-    // FIXME: delete server
-    context.server = 'http://localhost:9000'
-    const url = `${context.server}/upload_pj_template`
+    const url = `${context.server}/api/v0/templates/upload`
     const token = config.get(`hexabase.${currentContext}.token`)
 
     const form = new FormData()
