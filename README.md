@@ -225,7 +225,7 @@ ARGUMENTS
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
   -h, --help             show CLI help
-  -n, --name=name        filename of downloaded template file
+  -o, --output=output    output file
 ```
 
 _See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/backup.ts)_
@@ -260,6 +260,7 @@ OPTIONS
   -c, --context=context  use provided context instead of currently set context
   -h, --help             show CLI help
   -n, --name=name        name of the project to be restored
+  -y, --yes              skip confirmation
 ```
 
 _See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.3/src/commands/projects/restore.ts)_
