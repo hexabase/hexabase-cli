@@ -51,7 +51,7 @@ export default class ProjectsRestore extends BaseWithContext {
     } finally {
       if (noNameFlag) {
         this.log(
-          "You can specify the name of your app with the '--name' flag in the future"
+          "You can specify the name of the project with the '--name' flag in the future"
         )
       }
     }

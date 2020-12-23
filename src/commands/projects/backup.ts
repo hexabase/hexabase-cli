@@ -83,7 +83,7 @@ export default class ProjectsBackup extends BaseWithContext {
     } finally {
       if (noNameFlag) {
         this.log(
-          "You can specify the name of your app with the '--name' flag in the future"
+          "You can specify the name of the file with the '--name' flag in the future"
         )
       }
     }
