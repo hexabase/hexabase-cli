@@ -40,14 +40,14 @@ export const get = async (currentContext: string): Promise<GetTemplatesCategoryR
   }
 }
 
-export const downloadTemplate = async (currentContext: string, tp_id: string, filename: string): Promise<void> => {
+export const downloadTemplate = async (currentContext: string, tp_id: string, fileoutput: string): Promise<void> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
     const url = `${context.server}/api/v0/templates/${tp_id}/download`
     const token = config.get(`hexabase.${currentContext}.token`)
     const downloadOptions = {
       mode: '666',
-      filename: `${filename}.zip`,
+      filename: fileoutput,
       headers: {
         accept: 'application/zip',
         authorization: `Bearer ${token}`,

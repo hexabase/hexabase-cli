@@ -14,8 +14,8 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'name',
-    message: `Specify the ${chalk.cyan('filename')} of the template file (excluding zip file extension)`,
+    name: 'output',
+    message: `Specify the ${chalk.cyan('output')} of the template file`,
     initial: '',
     validate: function (input: string) {
       if (input.length === 0) {
@@ -32,7 +32,7 @@ export default class ProjectsBackup extends BaseWithContext {
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
-    name: flags.string({char: 'n', description: 'filename of downloaded template file'}),
+    output: flags.string({char: 'o', description: 'output file'}),
   }
 
   static args = [
@@ -44,7 +44,7 @@ export default class ProjectsBackup extends BaseWithContext {
 
   async run() {
     const {args, flags} = this.parse(ProjectsBackup)
-    const noNameFlag = typeof flags.name === 'undefined'
+    const noOutputFlag = typeof flags.output === 'undefined'
 
     try {
       if (!args.templateId) {
@@ -71,19 +71,19 @@ export default class ProjectsBackup extends BaseWithContext {
       }
 
       // specify filename
-      if (noNameFlag) {
-        questions[1].initial = args.templateId
-        flags.name = await prompt(questions[1]).then(({name}: any) => name)
+      if (noOutputFlag) {
+        questions[1].initial = `${args.templateId}.zip`
+        flags.output = await prompt(questions[1]).then(({output}: any) => output)
       }
 
       // download from apicore
       cli.action.start(`downloading template with tp_id ${chalk.cyan(args.templateId)}`)
-      await tmp.downloadTemplate(this.currentContext, args.templateId, flags.name!)
+      await tmp.downloadTemplate(this.currentContext, args.templateId, flags.output!)
       cli.action.stop()
     } finally {
-      if (noNameFlag) {
+      if (noOutputFlag) {
         this.log(
-          "You can specify the name of the file with the '--name' flag in the future"
+          "You can specify the output file with the '--output' flag in the future"
         )
       }
     }
