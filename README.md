@@ -19,7 +19,7 @@ $ npm install -g hexabase-cli
 $ hx COMMAND
 running command...
 $ hx (-v|--version|version)
-hexabase-cli/0.0.2 darwin-x64 node-v14.13.0
+hexabase-cli/0.0.4 darwin-x64 node-v14.13.0
 $ hx --help [COMMAND]
 USAGE
   $ hx COMMAND
@@ -37,7 +37,9 @@ USAGE
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
+* [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
 * [`hx projects:create`](#hx-projectscreate)
+* [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
 
@@ -54,7 +56,7 @@ OPTIONS
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/apps/create.ts)_
+_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/apps/create.ts)_
 
 ## `hx apps:init`
 
@@ -65,14 +67,15 @@ USAGE
   $ hx apps:init
 
 OPTIONS
-  -f, --file=file  [default: hx-settings.json] hexabase settings file
-  -h, --help       show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -f, --file=file        [default: hx-settings.json] hexabase settings file
+  -h, --help             show CLI help
 
 ALIASES
   $ hx init
 ```
 
-_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/apps/init.ts)_
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/apps/init.ts)_
 
 ## `hx autocomplete [SHELL]`
 
@@ -117,7 +120,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/get.ts)_
+_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/contexts/get.ts)_
 
 ## `hx contexts:login`
 
@@ -128,13 +131,14 @@ USAGE
   $ hx contexts:login
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 
 ALIASES
   $ hx login
 ```
 
-_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/login.ts)_
+_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/contexts/login.ts)_
 
 ## `hx contexts:set CONTEXT`
 
@@ -153,7 +157,7 @@ OPTIONS
   --sse=sse        SSE server, e.g. https://sse.hexabase.com
 ```
 
-_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/set.ts)_
+_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/contexts/set.ts)_
 
 ## `hx contexts:use [CONTEXT]`
 
@@ -170,7 +174,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/contexts/use.ts)_
+_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/contexts/use.ts)_
 
 ## `hx help [COMMAND]`
 
@@ -201,10 +205,30 @@ ARGUMENTS
   CHANNEL  input format: logs_<userId>_<projectId>
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
-_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/logs/actionscript.ts)_
+_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/logs/actionscript.ts)_
+
+## `hx projects:backup [TEMPLATEID]`
+
+download template file
+
+```
+USAGE
+  $ hx projects:backup [TEMPLATEID]
+
+ARGUMENTS
+  TEMPLATEID  templateId from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -o, --output=output    output file
+```
+
+_See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/projects/backup.ts)_
 
 ## `hx projects:create`
 
@@ -215,10 +239,31 @@ USAGE
   $ hx projects:create
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
-_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/projects/create.ts)_
+_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/projects/create.ts)_
+
+## `hx projects:restore FILE`
+
+restore a project from a template file
+
+```
+USAGE
+  $ hx projects:restore FILE
+
+ARGUMENTS
+  FILE  zip file to be restored from, e.g. template.zip
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -n, --name=name        name of the project to be restored
+  -y, --yes              skip confirmation
+```
+
+_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/projects/restore.ts)_
 
 ## `hx workspaces:get`
 
@@ -229,6 +274,7 @@ USAGE
   $ hx workspaces:get
 
 OPTIONS
+  -c, --context=context   use provided context instead of currently set context
   -h, --help              show CLI help
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
@@ -240,7 +286,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/workspaces/get.ts)_
+_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/workspaces/get.ts)_
 
 ## `hx workspaces:use [WORKSPACEID]`
 
@@ -254,8 +300,9 @@ ARGUMENTS
   WORKSPACEID  workspaceId from hexabase
 
 OPTIONS
-  -h, --help  show CLI help
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
 ```
 
-_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.2/src/commands/workspaces/use.ts)_
+_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.4/src/commands/workspaces/use.ts)_
 <!-- commandsstop -->

@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "devops@b-eee.com",
   "bin": {
     "hx": "./bin/run"
@@ -14,12 +14,13 @@
     "@oclif/plugin-help": "^3.2.0",
     "@types/download": "^6.2.4",
     "@types/eventsource": "^1.1.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "download": "^8.0.0",
     "enquirer": "^2.3.6",
     "eventsource": "^1.0.7",
+    "form-data": "^3.0.0",
     "jsonschema": "^1.4.0",
     "tslib": "^1.14.1",
     "yarn-or-npm": "^3.0.1"
@@ -36,6 +37,7 @@
     "eslint-config-oclif-typescript": "^0.1.0",
     "globby": "^10.0.2",
     "mocha": "^5.2.0",
+    "nock": "^13.0.5",
     "nyc": "^14.1.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
@@ -85,7 +87,9 @@
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "TS_NODE_FILES=true nyc --extension .ts mocha \"test/**/*.test.ts\"",
+    "test:mocha": "TS_NODE_FILES=true mocha \"test/**/*.test.ts\"",
+    "test:mocha:out": "TEST_OUTPUT=1 TS_NODE_FILES=true mocha \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"

@@ -17,6 +17,7 @@ export default class WorkspacesUse extends BaseWithContext {
   static description = 'set current workspace in hexabase'
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
   }
 
@@ -30,23 +31,27 @@ export default class WorkspacesUse extends BaseWithContext {
   async run() {
     const {args} = this.parse(WorkspacesUse)
 
+    const workspaceResponse = await ws.get(this.currentContext)
     if (!args.workspaceId) {
-      const workspaces = await ws.get(this.getApiServer())
-      questions[0].choices = workspaces.map(ws => {
+      questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
           name: ws.workspace_id,
-          message: `${ws.workspace_name}`,
-          value: ws.workspace_id,
-          hint: `${ws.workspace_id}`,
+          message: ws.workspace_name,
+          hint: ws.workspace_id,
         }
       }) as never[]
       const {workspace: workspace_id}: {workspace: string} = await prompt(questions[0])
       args.workspaceId = workspace_id
     }
 
-    const result = await ws.select(this.getApiServer(), args.workspaceId)
+    const result = await ws.select(this.currentContext, args.workspaceId)
     if (result) {
-      this.log(`Current-workspace successfully set to: ${chalk.cyan(args.workspaceId)}`)
+      const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
+        return ws.workspace_id === args.workspaceId
+      })
+      this.log(`Current-workspace set to: ${currentWorkspace ?
+        chalk.cyan(currentWorkspace.workspace_name) :
+        chalk.red('could not be determined')}`)
     }
   }
 }
