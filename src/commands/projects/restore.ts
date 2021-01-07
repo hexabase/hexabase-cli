@@ -3,7 +3,6 @@ import {prompt}  from 'enquirer'
 import cli from 'cli-ux'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as tmp from '../../api/projects/templates'
 import * as ws from '../../api/workspaces/workspaces'
 
 const questions = [
