@@ -31,11 +31,16 @@ steps: # Checking out connected repo
   displayName: 'npm install'
   inputs:
     verbose: false
-- bash: | # Grab the package version
-    v=`node -p "const p = require('./package.json'); p.version;"`
-    echo "##vso[task.setvariable variable=packageVersion]$v"
+- bash: |
+    packageName=`node -p "const p = require('./package.json'); p.name;"`
+    packageVersion=`node -p "const p = require('./package.json'); p.version;"`
+    publishedPackageVersion=$(npm show $packageName version)
+    echo "##vso[task.setvariable variable=packageVersion;]$packageVersion"
+    echo "##vso[task.setvariable variable=publishedPackageVersion;]$publishedPackageVersion"
+  displayName: 'Extract package versions'
 - task: Npm@1
   displayName: 'npm publish'
+  condition: and(ne(variables['packageVersion'], variables['publishedPackageVersion']),succeeded())
   inputs:
     command: publish
     publishEndpoint: 'npmjs_beee-devops'
