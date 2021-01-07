@@ -59,6 +59,7 @@ export default class AppsInit extends BaseWithContext {
   static aliases = ['init']
 
   static flags = {
+    ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
     file: flags.string({char: 'f', description: 'hexabase settings file', default: 'hx-settings.json'}),
   }
@@ -86,7 +87,7 @@ export default class AppsInit extends BaseWithContext {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
     }
 
-    const {p_id} = await pj.create(this.getApiServer(), hxSettings)
+    const {p_id} = await pj.create(this.currentContext, hxSettings)
     if (p_id) {
       this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
     }

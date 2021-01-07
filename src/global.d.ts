@@ -1,1 +1,1 @@
-declare module 'yarn-or-npm'
+declare module 'yarn-or-npm';
