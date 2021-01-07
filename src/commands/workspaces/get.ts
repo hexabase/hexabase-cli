@@ -35,8 +35,10 @@ export default class WorkspacesGet extends BaseWithContext {
       printLine: this.log,
       ...flags,
     })
-    this.log(`Current-workspace set to: ${currentWorkspace ?
-      chalk.cyan(currentWorkspace.workspace_name) :
-      chalk.red('could not be determined')}`)
+    if (!flags.output) {
+      this.log(`Current-workspace set to: ${currentWorkspace ?
+        chalk.cyan(currentWorkspace.workspace_name) :
+        chalk.red('could not be determined')}`)
+    }
   }
 }

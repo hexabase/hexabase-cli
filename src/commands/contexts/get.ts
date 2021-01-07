@@ -49,8 +49,10 @@ export default class ContextsGet extends Command {
       printLine: this.log,
       ...flags,
     })
-    this.log(`Current-context set to: ${currentContext ?
-      chalk.cyan(currentContext) :
-      chalk.red(currentContext)}`)
+    if (!flags.output) {
+      this.log(`Current-context set to: ${currentContext ?
+        chalk.cyan(currentContext) :
+        chalk.red(currentContext)}`)
+    }
   }
 }
