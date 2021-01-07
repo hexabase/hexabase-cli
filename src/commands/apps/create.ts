@@ -1,13 +1,11 @@
 import {Command, flags} from '@oclif/command'
 import {readdirSync} from 'fs'
 import {prompt} from 'enquirer'
+import {spawn} from 'yarn-or-npm'
 import cli from 'cli-ux'
 import download from 'download'
 import path from 'path'
 import chalk from 'chalk'
-
-// use 'require', because 'npm test' does not recognize .d.ts
-const spawn = require('yarn-or-npm').spawn
 
 interface UrlMap {
   [key: string]: string;
