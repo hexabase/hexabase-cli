@@ -39,6 +39,7 @@ USAGE
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
 * [`hx projects:create`](#hx-projectscreate)
+* [`hx projects:get`](#hx-projectsget)
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
@@ -244,6 +245,29 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.5/src/commands/projects/create.ts)_
+
+## `hx projects:get`
+
+get projects in current workspace
+
+```
+USAGE
+  $ hx projects:get
+
+OPTIONS
+  -c, --context=context   use provided context instead of currently set context
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/projects/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.5/src/commands/projects/get.ts)_
 
 ## `hx projects:restore FILE`
 

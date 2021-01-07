@@ -12,6 +12,10 @@ interface GetWorkspacesResponse {
   current_workspace_id: string;
 }
 
+interface GetCurrentWorkspaceResponse{
+  workspace_id: string;
+}
+
 const config = new Conf()
 
 export const select = async (currentContext: string, workspaceId: string): Promise<boolean> => {
@@ -42,6 +46,23 @@ export const get = async (currentContext: string): Promise<GetWorkspacesResponse
       },
     }
     const {data}: {data: GetWorkspacesResponse} = await axios.get(url, requestConfig)
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const current = async (currentContext: string): Promise<GetCurrentWorkspaceResponse> => {
+  try {
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/workspacecurrent`
+    const token = config.get(`hexabase.${currentContext}.token`)
+    const requestConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    const {data}: {data: GetCurrentWorkspaceResponse} = await axios.get(url, requestConfig)
     return data
   } catch (error) {
     throw error
