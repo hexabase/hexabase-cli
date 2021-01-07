@@ -1,20 +1,16 @@
 import {expect, test} from '@oclif/test'
+import * as ws from '../../../src/api/workspaces/workspaces'
 
 describe('workspaces:get', () => {
   test
-  .nock(
-    'http://localhost:7575',
-    api =>
-      api
-      .get('/api/v0/workspaces')
-      .reply(200, {
-        workspaces: [{
-          workspace_id: '12345',
-          workspace_name: 'test',
-        }],
-        current_workspace_id: '12345',
-      })
-  )
+  .stub(ws, 'get', () => {
+    return {
+      workspaces: [
+        {workspace_id: '12345', workspace_name: 'test'},
+      ],
+      current_workspace_id: '12345',
+    }
+  })
   .stdout()
   .command(['workspaces:get', '-c', 'local'])
   .it('runs', ctx => {

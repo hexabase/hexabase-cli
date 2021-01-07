@@ -88,6 +88,7 @@
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "TS_NODE_FILES=true nyc --extension .ts mocha \"test/**/*.test.ts\"",
+    "test:mocha": "TEST_OUTPUT=1 TS_NODE_FILES=true mocha \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"
