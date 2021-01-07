@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "devops@b-eee.com",
   "bin": {
     "hx": "./bin/run"
