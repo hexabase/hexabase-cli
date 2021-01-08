@@ -36,6 +36,7 @@ USAGE
 * [`hx contexts:set CONTEXT`](#hx-contextsset-context)
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx datastores:get [PROJECTID]`](#hx-datastoresget-projectid)
+* [`hx fields:get DATASTOREID`](#hx-fieldsget-datastoreid)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
@@ -203,6 +204,32 @@ OPTIONS
 ```
 
 _See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.5/src/commands/datastores/get.ts)_
+
+## `hx fields:get DATASTOREID`
+
+get fields of a datastore
+
+```
+USAGE
+  $ hx fields:get DATASTOREID
+
+ARGUMENTS
+  DATASTOREID  datastoreId from hexabase
+
+OPTIONS
+  -c, --context=context   use provided context instead of currently set context
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.5/src/commands/fields/get.ts)_
 
 ## `hx help [COMMAND]`
 
