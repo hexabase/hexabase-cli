@@ -28,6 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx actions:get DATASTOREID [STATUSID]`](#hx-actionsget-datastoreid-statusid)
 * [`hx apps:create`](#hx-appscreate)
 * [`hx apps:init`](#hx-appsinit)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
@@ -45,6 +46,33 @@ USAGE
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
+
+## `hx actions:get DATASTOREID [STATUSID]`
+
+get actions of a datastore
+
+```
+USAGE
+  $ hx actions:get DATASTOREID [STATUSID]
+
+ARGUMENTS
+  DATASTOREID  datastoreId from hexabase
+  STATUSID     statusId of the status action
+
+OPTIONS
+  -c, --context=context   use provided context instead of currently set context
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.0.5/src/commands/actions/get.ts)_
 
 ## `hx apps:create`
 
