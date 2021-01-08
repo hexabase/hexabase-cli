@@ -32,7 +32,7 @@ export default class ActionsGet extends BaseWithContext {
     const columns = {
       a_id: {
         header: 'ID',
-        minWidth: 30,
+        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',

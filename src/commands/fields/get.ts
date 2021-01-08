@@ -35,7 +35,7 @@ export default class FieldsGet extends BaseWithContext {
     const columns = {
       field_id: {
         header: 'ID',
-        minWidth: 30,
+        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',

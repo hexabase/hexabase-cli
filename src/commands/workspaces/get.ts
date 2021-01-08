@@ -24,7 +24,7 @@ export default class WorkspacesGet extends BaseWithContext {
     const columns = {
       workspace_id: {
         header: 'ID',
-        minWidth: 30,
+        minWidth: 25,
       },
       workspace_name: {
         header: 'NAME',

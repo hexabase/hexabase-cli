@@ -22,7 +22,7 @@ export default class ProjectsGet extends BaseWithContext {
     const columns = {
       application_id: {
         header: 'ID',
-        minWidth: 30,
+        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',
