@@ -14,7 +14,7 @@ export default class LogsActionscript extends BaseWithContext {
   static args = [
     {
       name: 'channel',
-      description: `input format: ${chalk.cyan('logs_<userId>_<projectId>')}`,
+      description: `input format: ${chalk.cyan('logs_<user_id>_<project_id>')}`,
       required: true,
     },
   ]

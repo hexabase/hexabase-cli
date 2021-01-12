@@ -15,7 +15,7 @@ export default class FieldsGet extends BaseWithContext {
   static args = [
     {
       name: 'datastoreId',
-      description: 'datastoreId from hexabase',
+      description: 'datastore_id from hexabase',
       required: true,
     },
   ]

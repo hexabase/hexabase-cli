@@ -56,8 +56,8 @@ USAGE
   $ hx actions:get DATASTOREID [STATUSID]
 
 ARGUMENTS
-  DATASTOREID  datastoreId from hexabase
-  STATUSID     statusId of the status action
+  DATASTOREID  datastore_id from hexabase
+  STATUSID     status_id of the status action
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -216,7 +216,7 @@ USAGE
   $ hx datastores:get [PROJECTID]
 
 ARGUMENTS
-  PROJECTID  projectId from hexabase
+  PROJECTID  project_id from hexabase
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -242,7 +242,7 @@ USAGE
   $ hx fields:get DATASTOREID
 
 ARGUMENTS
-  DATASTOREID  datastoreId from hexabase
+  DATASTOREID  datastore_id from hexabase
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -285,7 +285,7 @@ USAGE
   $ hx logs:actionscript CHANNEL
 
 ARGUMENTS
-  CHANNEL  input format: logs_<userId>_<projectId>
+  CHANNEL  input format: logs_<user_id>_<project_id>
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -303,7 +303,7 @@ USAGE
   $ hx projects:backup [TEMPLATEID]
 
 ARGUMENTS
-  TEMPLATEID  templateId from hexabase
+  TEMPLATEID  template_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -403,7 +403,7 @@ USAGE
   $ hx workspaces:use [WORKSPACEID]
 
 ARGUMENTS
-  WORKSPACEID  workspaceId from hexabase
+  WORKSPACEID  workspace_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context

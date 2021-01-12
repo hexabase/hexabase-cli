@@ -27,7 +27,7 @@ export default class DatastoresGet extends BaseWithContext {
   static args = [
     {
       name: 'projectId',
-      description: 'projectId from hexabase',
+      description: 'project_id from hexabase',
     },
   ]
 

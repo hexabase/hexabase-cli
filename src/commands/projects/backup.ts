@@ -38,7 +38,7 @@ export default class ProjectsBackup extends BaseWithContext {
   static args = [
     {
       name: 'templateId',
-      description: 'templateId from hexabase',
+      description: 'template_id from hexabase',
     },
   ]
 

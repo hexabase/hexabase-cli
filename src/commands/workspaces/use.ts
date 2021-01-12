@@ -24,7 +24,7 @@ export default class WorkspacesUse extends BaseWithContext {
   static args = [
     {
       name: 'workspaceId',
-      description: 'workspaceId from hexabase',
+      description: 'workspace_id from hexabase',
     },
   ]
 

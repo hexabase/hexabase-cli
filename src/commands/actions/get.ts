@@ -15,12 +15,12 @@ export default class ActionsGet extends BaseWithContext {
   static args = [
     {
       name: 'datastoreId',
-      description: 'datastoreId from hexabase',
+      description: 'datastore_id from hexabase',
       required: true,
     },
     {
       name: 'statusId',
-      description: 'statusId of the status action',
+      description: 'status_id of the status action',
     },
   ]
 
