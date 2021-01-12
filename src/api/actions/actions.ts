@@ -2,11 +2,18 @@ import axios from 'axios'
 import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
+export enum ActionOperation {
+  new = 1,
+	update,
+	delete,
+	copy,
+}
+
 export interface GetActionsElemResponse {
   a_id: string;
   name: string;
   display_id: string;
-  operation: string;
+  operation: ActionOperation | string;
   is_status_action: boolean;
   status_id: string;
   set_status: string;
