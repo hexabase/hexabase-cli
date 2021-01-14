@@ -1,7 +1,7 @@
 import {flags} from '@oclif/command'
 import {readFileSync, existsSync} from 'fs'
 import {Validator} from 'jsonschema'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as pj from '../../api/projects/projects'

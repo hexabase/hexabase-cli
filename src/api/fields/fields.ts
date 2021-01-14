@@ -38,10 +38,10 @@ interface GetFieldsResponse {
 
 const config = new Conf()
 
-export const create = async (currentContext: string, datastoreId: string, data: CreateFieldData): Promise<CreateFieldResponse> => {
+export const create = async (currentContext: string, d_id: string, data: CreateFieldData): Promise<CreateFieldResponse> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${datastoreId}/fields`
+    const url = `${context.server}/api/v0/datastores/${d_id}/fields`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {

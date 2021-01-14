@@ -1,5 +1,5 @@
 import {Command, flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import Conf from 'conf'
 
 const config = new Conf()

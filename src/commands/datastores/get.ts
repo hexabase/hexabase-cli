@@ -1,5 +1,5 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import {cli} from 'cli-ux'
 import * as ws from '../../api/workspaces/workspaces'
 import * as pj from '../../api/projects/projects'

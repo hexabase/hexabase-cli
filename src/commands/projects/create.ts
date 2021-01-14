@@ -1,5 +1,5 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import * as tmp from '../../api/projects/templates'
 import * as pj from '../../api/projects/projects'

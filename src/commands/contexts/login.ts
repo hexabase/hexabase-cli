@@ -1,5 +1,5 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import Conf from 'conf'
 import chalk from 'chalk'
 import * as auth from '../../api/auth/auth'

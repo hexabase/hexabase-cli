@@ -18,10 +18,10 @@ interface GetCurrentWorkspaceResponse{
 
 const config = new Conf()
 
-export const select = async (currentContext: string, workspaceId: string): Promise<boolean> => {
+export const select = async (currentContext: string, w_id: string): Promise<boolean> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/workspaces/${workspaceId}/select`
+    const url = `${context.server}/api/v0/workspaces/${w_id}/select`
     const token = config.get(`hexabase.${currentContext}.token`)
     const requestConfig = {
       headers: {
