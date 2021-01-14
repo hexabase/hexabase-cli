@@ -3,7 +3,6 @@ import {prompt}  from 'enquirer'
 import chalk from 'chalk'
 import * as tmp from '../../api/projects/templates'
 import * as pj from '../../api/projects/projects'
-import {CreateProjectData, ProjectName} from '../../api/projects/projects'
 import BaseWithContext from '../../base-with-context'
 
 const questions = [
@@ -15,7 +14,7 @@ const questions = [
   },
   {
     type: 'form',
-    name: 'pj_name',
+    name: 'projectName',
     message: 'Please provide a name for your project',
     choices: [
       {name: 'en', message: 'Project Name (en)', validate(value: string) {
@@ -62,22 +61,15 @@ export default class ProjectsCreate extends BaseWithContext {
     }, initalChoice) as never[]
     const {template: template_id}: {template: string} = await prompt(questions[0])
 
-    const {pj_name}: {pj_name: ProjectName} = await prompt(questions[1])
-    this.log(`Project Name (en): ${chalk.cyan(pj_name.en)}`)
-    this.log(`Project Name (ja): ${chalk.cyan(pj_name.ja)}`)
+    const {projectName}: {projectName: pj.ProjectName} = await prompt(questions[1])
+    this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
+    this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
 
-    const data: CreateProjectData = {
-      name: {
-        en: pj_name.en,
-        ja: pj_name.ja,
-      },
-    }
-    if (template_id && template_id !== 'none') {
+    const data: pj.CreateProjectData = {name: projectName}
+    if (template_id !== 'none') {
       data.tp_id = template_id
     }
     const {p_id} = await pj.create(this.currentContext, data)
-    if (p_id) {
-      this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
-    }
+    this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
   }
 }

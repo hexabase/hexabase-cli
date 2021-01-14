@@ -8,7 +8,7 @@ import * as ws from '../../api/workspaces/workspaces'
 const questions = [
   {
     type: 'input',
-    name: 'pj_name',
+    name: 'projectName',
     message: 'Please provide a name for your project',
     validate: function (input: string) {
       if (input.length === 0) {
@@ -48,7 +48,7 @@ export default class ProjectsRestore extends BaseWithContext {
 
     try {
       if (noNameFlag) {
-        flags.name = await prompt(questions[0]).then(({pj_name}: any) => pj_name)
+        flags.name = await prompt(questions[0]).then(({projectName}: any) => projectName)
       }
 
       const workspaceResponse = await ws.get(this.currentContext)

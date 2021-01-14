@@ -2,14 +2,14 @@ import axios from 'axios'
 import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
-export interface ProjectName{
-    en: string;
-    ja: string;
-}
-
 export interface CreateProjectData{
   name: ProjectName;
   tp_id?: string;
+}
+
+export interface ProjectName{
+  en: string;
+  ja: string;
 }
 
 interface CreateProjectResponse {

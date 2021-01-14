@@ -37,7 +37,7 @@ const settingsSchema = {
 const questions = [
   {
     type: 'form',
-    name: 'pj_name',
+    name: 'projectName',
     message: 'Please provide a name for your project',
     choices: [
       {name: 'en', message: 'Project Name (en)', validate(value: string) {
@@ -75,10 +75,10 @@ export default class AppsInit extends BaseWithContext {
 
     // no 'name' field in hxSettings -> form prompt
     if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
-      const {pj_name}: {pj_name: pj.ProjectName} = await prompt(questions[0])
-      this.log(`Project Name (en): ${chalk.cyan(pj_name.en)}`)
-      this.log(`Project Name (ja): ${chalk.cyan(pj_name.ja)}`)
-      Object.assign(hxSettings, {name: pj_name})
+      const {projectName}: {projectName: pj.ProjectName} = await prompt(questions[0])
+      this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
+      this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
+      Object.assign(hxSettings, {name: projectName})
     }
 
     // json schema validation
