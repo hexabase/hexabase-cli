@@ -37,7 +37,7 @@ USAGE
 * [`hx contexts:set CONTEXT`](#hx-contextsset-context)
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx datastores:get [PROJECTID]`](#hx-datastoresget-projectid)
-* [`hx fields:create`](#hx-fieldscreate)
+* [`hx fields:create DATASTOREID`](#hx-fieldscreate-datastoreid)
 * [`hx fields:get DATASTOREID`](#hx-fieldsget-datastoreid)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
@@ -235,13 +235,16 @@ OPTIONS
 
 _See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/datastores/get.ts)_
 
-## `hx fields:create`
+## `hx fields:create DATASTOREID`
 
 create field of a database
 
 ```
 USAGE
-  $ hx fields:create
+  $ hx fields:create DATASTOREID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context

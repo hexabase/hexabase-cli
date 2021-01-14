@@ -1,5 +1,5 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as fld from '../../api/fields/fields'
@@ -16,6 +16,17 @@ const questions = [
         value: defaults[key].dataType,
       }
     }),
+  },
+  {
+    type: 'list',
+    name: 'roles',
+    message: 'Add comma-separated role_ids (must include admin role)',
+    validate: function (input: string) {
+      if (input.length === 0) {
+        return 'At least one item needed'
+      }
+      return input.length !== 0
+    },
   },
   {
     type: 'form',
@@ -43,12 +54,20 @@ export default class FieldsCreate extends BaseWithContext {
     help: flags.help({char: 'h'}),
   }
 
+  static args = [
+    {
+      name: 'datastoreId',
+      description: 'datastore_id from hexabase',
+      required: true,
+    },
+  ]
+
   async run() {
-    this.parse(FieldsCreate)
+    const {args} = this.parse(FieldsCreate)
 
     const {dataType}: {dataType: string} = await prompt(questions[0])
-
-    const {fieldName}: {fieldName: fld.FieldName} = await prompt(questions[1])
+    const {roles}: {roles: string[]} = await prompt(questions[1])
+    const {fieldName}: {fieldName: fld.FieldName} = await prompt(questions[2])
     this.log(`Project Name (en): ${chalk.cyan(fieldName.en)}`)
     this.log(`Project Name (ja): ${chalk.cyan(fieldName.ja)}`)
 
@@ -60,10 +79,10 @@ export default class FieldsCreate extends BaseWithContext {
       show_list: defaults[dataType].showList,
       full_text: defaults[dataType].fullText,
       unique: defaults[dataType].unique,
-      roles: ['5ff6c5d5d87ffd3d7ec98b54'],
+      roles: roles,
     }
 
-    const {field_id} = await fld.create(this.currentContext, '5ff6c5ffd87ffd41074a5e08', data)
+    const {field_id} = await fld.create(this.currentContext, args.datastoreId, data)
     this.log(`Field successfully created. field_id set to: ${chalk.cyan(field_id)}`)
   }
 }
