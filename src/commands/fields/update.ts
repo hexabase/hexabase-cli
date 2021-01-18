@@ -10,7 +10,8 @@ const questions = [
     name: 'roles',
     message: 'Add comma-separated role_ids (must include admin role)',
     initial: '',
-    validate: function (input: string) {
+    validate: function (input: string[]) {
+      console.log(input)
       if (input.length === 0) {
         return 'At least one item needed'
       }
