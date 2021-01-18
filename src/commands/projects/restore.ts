@@ -4,6 +4,7 @@ import cli from 'cli-ux'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as ws from '../../api/workspaces/workspaces'
+import * as tmp from '../../api/projects/templates'
 
 const questions = [
   {
@@ -68,7 +69,7 @@ export default class ProjectsRestore extends BaseWithContext {
 
       if (shouldProceed) {
         cli.action.start(`restoring template from file ${chalk.cyan(args.file)}`)
-        // await tmp.uploadTemplate(this.currentContext, flags.name!, args.file)
+        await tmp.uploadTemplate(this.currentContext, flags.name!, args.file)
         cli.action.stop()
       } else {
         this.log(chalk.red('restoring  aborted'))
