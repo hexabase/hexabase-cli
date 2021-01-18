@@ -35,28 +35,22 @@ export default class ActionsGet extends BaseWithContext {
     const columns = {
       a_id: {
         header: 'ID',
-        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',
-        minWidth: 30,
       },
       name: {
         header: 'NAME',
-        minWidth: 10,
       },
       operation: {
         header: 'OPERATION',
-        minWidth: 10,
       },
       is_status_action: {
         header: 'IS_STATUS',
-        minWidth: 10,
         extended: !args.statusId,
       },
       set_status: {
         header: 'SET_STATUS_ID',
-        minWidth: 10,
         extended: true,
         get: (row: actn.GetActionsElemResponse) => {
           return row.set_status ? row.set_status : ''
@@ -64,7 +58,6 @@ export default class ActionsGet extends BaseWithContext {
       },
       status_id: {
         header: 'STATUS_ID',
-        minWidth: 10,
         extended: true,
         get: (row: actn.GetActionsElemResponse) => {
           return row.status_id ? row.status_id : ''

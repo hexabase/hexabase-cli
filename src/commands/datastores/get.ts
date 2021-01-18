@@ -53,15 +53,12 @@ export default class DatastoresGet extends BaseWithContext {
     const columns = {
       datastore_id: {
         header: 'ID',
-        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',
-        minWidth: 20,
       },
       name: {
         header: 'NAME',
-        minWidth: 20,
       },
       deleted: {
         header: 'DELETED',

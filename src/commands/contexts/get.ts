@@ -33,15 +33,12 @@ export default class ContextsGet extends Command {
     const columns = {
       name: {
         header: 'NAME',
-        minWidth: 15,
       },
       server: {
         header: 'SERVER',
-        minWidth: 30,
       },
       sse: {
         header: 'SSE',
-        minWidth: 30,
       },
     }
 

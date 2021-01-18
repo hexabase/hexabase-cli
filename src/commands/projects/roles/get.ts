@@ -28,15 +28,12 @@ export default class ProjectsRolesGet extends BaseWithContext {
     const columns = {
       role_id: {
         header: 'ID',
-        minWidth: 25,
       },
       display_id: {
         header: 'DISPLAY_ID',
-        minWidth: 20,
       },
       name: {
         header: 'NAME',
-        minWidth: 20,
       },
       type: {
         header: 'TYPE',
