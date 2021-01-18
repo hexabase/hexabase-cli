@@ -21,11 +21,14 @@ const questions = [
     type: 'list',
     name: 'roles',
     message: 'Add comma-separated role_ids (must include admin role)',
-    validate: function (input: string[]) {
-      if (input.length === 0) {
+    validate: function (roles: string[]) {
+      if (roles.length === 0) {
         return 'At least one item needed'
       }
-      return input.length !== 0
+      if (roles.some(role => role.trim() === '')) {
+        return 'Empty role_id'
+      }
+      return roles.length > 0
     },
   },
   {
