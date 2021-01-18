@@ -38,6 +38,7 @@ USAGE
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
 * [`hx datastores:get [PROJECTID]`](#hx-datastoresget-projectid)
 * [`hx fields:create DATASTOREID`](#hx-fieldscreate-datastoreid)
+* [`hx fields:delete DATASTOREID FIELDID`](#hx-fieldsdelete-datastoreid-fieldid)
 * [`hx fields:get DATASTOREID`](#hx-fieldsget-datastoreid)
 * [`hx fields:update DATASTOREID FIELDID`](#hx-fieldsupdate-datastoreid-fieldid)
 * [`hx help [COMMAND]`](#hx-help-command)
@@ -253,6 +254,26 @@ OPTIONS
 ```
 
 _See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/create.ts)_
+
+## `hx fields:delete DATASTOREID FIELDID`
+
+delete field of a database
+
+```
+USAGE
+  $ hx fields:delete DATASTOREID FIELDID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
+  FIELDID      field_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -y, --yes              skip confirmation
+```
+
+_See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/delete.ts)_
 
 ## `hx fields:get DATASTOREID`
 
