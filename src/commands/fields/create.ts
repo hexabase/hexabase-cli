@@ -71,7 +71,7 @@ export default class FieldsCreate extends BaseWithContext {
     this.log(`Project Name (en): ${chalk.cyan(fieldName.en)}`)
     this.log(`Project Name (ja): ${chalk.cyan(fieldName.ja)}`)
 
-    const data: fld.CreateFieldData = {
+    const data: fld.FieldData = {
       name: fieldName,
       dataType: defaults[dataType].dataType,
       as_title: defaults[dataType].asTitle,

@@ -39,6 +39,7 @@ USAGE
 * [`hx datastores:get [PROJECTID]`](#hx-datastoresget-projectid)
 * [`hx fields:create DATASTOREID`](#hx-fieldscreate-datastoreid)
 * [`hx fields:get DATASTOREID`](#hx-fieldsget-datastoreid)
+* [`hx fields:update DATASTOREID FIELDID`](#hx-fieldsupdate-datastoreid-fieldid)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
 * [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
@@ -278,6 +279,25 @@ OPTIONS
 ```
 
 _See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/get.ts)_
+
+## `hx fields:update DATASTOREID FIELDID`
+
+update field of a database
+
+```
+USAGE
+  $ hx fields:update DATASTOREID FIELDID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
+  FIELDID      field_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+```
+
+_See code: [src/commands/fields/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/update.ts)_
 
 ## `hx help [COMMAND]`
 

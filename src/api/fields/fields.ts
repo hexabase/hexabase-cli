@@ -2,15 +2,15 @@ import axios from 'axios'
 import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
-export interface CreateFieldData {
-  name:      FieldName;
-  dataType:  string;
-  as_title:  boolean;
-  search:    boolean;
-  show_list: boolean;
-  full_text: boolean;
-  unique:    boolean;
-  roles:     string[];
+export interface FieldData {
+  name?:      FieldName;
+  dataType?:  string;
+  as_title?:  boolean;
+  search?:    boolean;
+  show_list?: boolean;
+  full_text?: boolean;
+  unique?:    boolean;
+  roles?:     string[];
 }
 
 export interface FieldName {
@@ -36,9 +36,31 @@ interface GetFieldsResponse {
   fields: {[key: string]: GetFieldsElemResponse};
 }
 
+interface GetFieldSettingsResponse {
+  name: FieldName;
+  display_id: string;
+  dataType: string;
+  search: boolean;
+  show_list: boolean;
+  as_title: boolean;
+  status: boolean;
+  full_text: boolean;
+  unique: boolean;
+  hideOnInput: boolean;
+  min_value?: string;
+  max_value?: string;
+  roles: {[key: string]: string | boolean}[];
+  dslookup_info?: {[key: string]: string};
+  users_info?: {[key: string]: boolean | {[key: string]: string}[]};
+  autonum_info?: {[key: string]: string | number};
+  num_info?: {[key: string]: string | boolean};
+  calc_info?: {[key: string]: string | string[] | boolean};
+  file_info?: {[key: string]: boolean};
+}
+
 const config = new Conf()
 
-export const create = async (currentContext: string, d_id: string, data: CreateFieldData): Promise<CreateFieldResponse> => {
+export const create = async (currentContext: string, d_id: string, data: FieldData): Promise<CreateFieldResponse> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
     const url = `${context.server}/api/v0/datastores/${d_id}/fields`
@@ -67,6 +89,39 @@ export const get = async (currentContext: string, d_id: string): Promise<GetFiel
     }
     const {data}: {data: GetFieldsResponse} = await axios.get(url, requestConfig)
     return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getOne = async (currentContext: string, d_id: string, f_id: string): Promise<GetFieldSettingsResponse> => {
+  try {
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/datastores/${d_id}/fields/${f_id}`
+    const token = config.get(`hexabase.${currentContext}.token`)
+    const requestConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    const {data}: {data: GetFieldSettingsResponse} = await axios.get(url, requestConfig)
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const update = async (currentContext: string, d_id: string, f_id: string, data: FieldData): Promise<void> => {
+  try {
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/datastores/${d_id}/fields/${f_id}`
+    const token = config.get(`hexabase.${currentContext}.token`)
+    const requestConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    await axios.patch(url, data, requestConfig)
   } catch (error) {
     throw error
   }
