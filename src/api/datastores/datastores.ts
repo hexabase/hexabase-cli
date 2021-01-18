@@ -7,6 +7,8 @@ interface GetDatastoresElemResponse {
   name: string;
   display_id: string;
   deleted: boolean;
+  imported: boolean;
+  uploading: boolean;
 }
 
 const config = new Conf()

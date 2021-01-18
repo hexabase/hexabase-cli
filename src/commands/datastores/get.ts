@@ -67,6 +67,14 @@ export default class DatastoresGet extends BaseWithContext {
         header: 'DELETED',
         extended: true,
       },
+      imported: {
+        header: 'IMPORTED',
+        extended: true,
+      },
+      uploading: {
+        header: 'UPLOADING',
+        extended: true,
+      },
     }
 
     cli.table(datastores, columns, {
