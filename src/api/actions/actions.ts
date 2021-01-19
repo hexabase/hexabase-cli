@@ -3,7 +3,7 @@ import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
 export enum ActionOperation {
-  new = 1,
+  new,
 	update,
 	delete,
 	copy,
@@ -13,7 +13,7 @@ export interface GetActionsElemResponse {
   a_id: string;
   name: string;
   display_id: string;
-  operation: ActionOperation | string;
+  operation: ActionOperation;
   is_status_action: boolean;
   status_id: string;
   set_status: string;

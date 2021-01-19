@@ -28,9 +28,6 @@ export default class ActionsGet extends BaseWithContext {
     const {args, flags} = this.parse(ActionsGet)
 
     const actions = await actn.get(this.currentContext, args.datastoreId, args.statusId)
-    actions.forEach(action => {
-      action.operation = actn.ActionOperation[action.operation as number]
-    })
 
     const columns = {
       a_id: {
