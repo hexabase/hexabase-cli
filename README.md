@@ -28,6 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`hx actions:create DATASTOREID`](#hx-actionscreate-datastoreid)
 * [`hx actions:get DATASTOREID [STATUSID]`](#hx-actionsget-datastoreid-statusid)
 * [`hx apps:create`](#hx-appscreate)
 * [`hx apps:init`](#hx-appsinit)
@@ -50,6 +51,24 @@ USAGE
 * [`hx projects:roles:get PROJECTID`](#hx-projectsrolesget-projectid)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
+
+## `hx actions:create DATASTOREID`
+
+create action in a database
+
+```
+USAGE
+  $ hx actions:create DATASTOREID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+```
+
+_See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/create.ts)_
 
 ## `hx actions:get DATASTOREID [STATUSID]`
 

@@ -9,6 +9,26 @@ export enum ActionOperation {
 	copy,
 }
 
+export interface ActionData {
+  operation:  string;
+  display_id?: string;
+  set_status?: string;
+  name:       ActionName;
+  roles:      string[];
+  is_status_action?: boolean;
+  status_id?: string;
+}
+
+export interface ActionName {
+  en: string;
+  ja: string;
+}
+
+interface CreateActionResponse {
+  display_id: string;
+  action_id:  string;
+}
+
 export interface GetActionsElemResponse {
   a_id: string;
   name: string;
@@ -20,6 +40,23 @@ export interface GetActionsElemResponse {
 }
 
 const config = new Conf()
+
+export const create = async (currentContext: string, d_id: string, data: ActionData): Promise<CreateActionResponse> => {
+  try {
+    const context = config.get(`contexts.${currentContext}`) as Context
+    const url = `${context.server}/api/v0/datastores/${d_id}/actions`
+    const token = config.get(`hexabase.${currentContext}.token`)
+    const requestConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    const {data: responseData}: {data: CreateActionResponse} = await axios.post(url, data, requestConfig)
+    return responseData
+  } catch (error) {
+    throw error
+  }
+}
 
 export const get = async (currentContext: string, d_id: string, s_id = ''): Promise<GetActionsElemResponse[]> => {
   try {
