@@ -30,6 +30,7 @@ USAGE
 <!-- commands -->
 * [`hx actions:create DATASTOREID`](#hx-actionscreate-datastoreid)
 * [`hx actions:get DATASTOREID [STATUSID]`](#hx-actionsget-datastoreid-statusid)
+* [`hx actions:update DATASTOREID ACTIONID`](#hx-actionsupdate-datastoreid-actionid)
 * [`hx apps:create`](#hx-appscreate)
 * [`hx apps:init`](#hx-appsinit)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
@@ -96,6 +97,25 @@ OPTIONS
 ```
 
 _See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/get.ts)_
+
+## `hx actions:update DATASTOREID ACTIONID`
+
+update action of a database
+
+```
+USAGE
+  $ hx actions:update DATASTOREID ACTIONID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
+  ACTIONID     action_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+```
+
+_See code: [src/commands/actions/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/update.ts)_
 
 ## `hx apps:create`
 
