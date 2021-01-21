@@ -29,6 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`hx actions:create DATASTOREID`](#hx-actionscreate-datastoreid)
+* [`hx actions:delete DATASTOREID ACTIONID`](#hx-actionsdelete-datastoreid-actionid)
 * [`hx actions:get DATASTOREID [STATUSID]`](#hx-actionsget-datastoreid-statusid)
 * [`hx actions:update DATASTOREID ACTIONID`](#hx-actionsupdate-datastoreid-actionid)
 * [`hx apps:create`](#hx-appscreate)
@@ -70,6 +71,26 @@ OPTIONS
 ```
 
 _See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/create.ts)_
+
+## `hx actions:delete DATASTOREID ACTIONID`
+
+delete action of a database
+
+```
+USAGE
+  $ hx actions:delete DATASTOREID ACTIONID
+
+ARGUMENTS
+  DATASTOREID  datastore_id from hexabase
+  ACTIONID     action_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -y, --yes              skip confirmation
+```
+
+_See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/delete.ts)_
 
 ## `hx actions:get DATASTOREID [STATUSID]`
 
