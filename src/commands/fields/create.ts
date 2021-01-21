@@ -71,8 +71,8 @@ export default class FieldsCreate extends BaseWithContext {
     const {dataType}: {dataType: string} = await prompt(questions[0])
     const {roles}: {roles: string[]} = await prompt(questions[1])
     const {fieldName}: {fieldName: fld.FieldName} = await prompt(questions[2])
-    this.log(`Project Name (en): ${chalk.cyan(fieldName.en)}`)
-    this.log(`Project Name (ja): ${chalk.cyan(fieldName.ja)}`)
+    this.log(`Field Name (en): ${chalk.cyan(fieldName.en)}`)
+    this.log(`Field Name (ja): ${chalk.cyan(fieldName.ja)}`)
 
     const data: fld.FieldData = {
       name: fieldName,

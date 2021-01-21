@@ -26,14 +26,16 @@ const questions = [
     message: 'Please provide the name for your field',
     choices: [
       {
-        name: 'en', message: 'Field Name (en)',
+        name: 'en',
+        message: 'Field Name (en)',
         initial: '',
         validate(value: string) {
           return value.length > 0
         },
       },
       {
-        name: 'ja', message: 'Field Name (ja)',
+        name: 'ja',
+        message: 'Field Name (ja)',
         initial: '',
         validate(value: string) {
           return value.length > 0
@@ -76,8 +78,8 @@ export default class FieldsUpdate extends BaseWithContext {
     questions[1].choices![0].initial = fieldSettings.name.en
     questions[1].choices![1].initial = fieldSettings.name.ja
     const {fieldName}: {fieldName: fld.FieldName} = await prompt(questions[1])
-    this.log(`Project Name (en): ${chalk.cyan(fieldName.en)}`)
-    this.log(`Project Name (ja): ${chalk.cyan(fieldName.ja)}`)
+    this.log(`Field Name (en): ${chalk.cyan(fieldName.en)}`)
+    this.log(`Field Name (ja): ${chalk.cyan(fieldName.ja)}`)
 
     const data: fld.FieldData = {
       name: fieldName,
