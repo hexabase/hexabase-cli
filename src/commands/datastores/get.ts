@@ -6,16 +6,16 @@ import * as pj from '../../api/projects/projects'
 import * as ds from '../../api/datastores/datastores'
 import BaseWithContext from '../../base-with-context'
 
-const questions = [
-  {
-    type: 'select',
-    name: 'project',
-    message: 'Select your project',
-    choices: [],
-  },
-]
-
 export default class DatastoresGet extends BaseWithContext {
+  private questions = [
+    {
+      type: 'select',
+      name: 'project',
+      message: 'Select your project',
+      choices: [],
+    },
+  ]
+
   static description = 'get datastores within a project'
 
   static flags = {
@@ -37,14 +37,14 @@ export default class DatastoresGet extends BaseWithContext {
     if (!args.projectId) {
       const currentWorkspace = await ws.current(this.currentContext)
       const projects = await pj.get(this.currentContext, currentWorkspace.workspace_id)
-      questions[0].choices = projects.map(pj => {
+      this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
           message: pj.name,
           hint: pj.application_id,
         }
       }) as never[]
-      const {project: project_id}: {project: string} = await prompt(questions[0])
+      const {project: project_id}: {project: string} = await prompt(this.questions[0])
       args.projectId = project_id
     }
 

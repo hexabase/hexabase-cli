@@ -6,26 +6,26 @@ import BaseWithContext from '../../base-with-context'
 import * as ws from '../../api/workspaces/workspaces'
 import * as tmp from '../../api/projects/templates'
 
-const questions = [
-  {
-    type: 'input',
-    name: 'projectName',
-    message: 'Please provide a name for your project',
-    validate: function (input: string) {
-      if (input.length === 0) {
-        return 'Cannot be empty'
-      }
-      return input.length !== 0
-    },
-  },
-  {
-    type: 'confirm',
-    name: 'confirm',
-    message: 'Do you want to proceed?',
-  },
-]
-
 export default class ProjectsRestore extends BaseWithContext {
+  private questions = [
+    {
+      type: 'input',
+      name: 'projectName',
+      message: 'Please provide a name for your project',
+      validate: function (input: string) {
+        if (input.length === 0) {
+          return 'Cannot be empty'
+        }
+        return input.length !== 0
+      },
+    },
+    {
+      type: 'confirm',
+      name: 'confirm',
+      message: 'Do you want to proceed?',
+    },
+  ]
+
   static description = 'restore a project from a template file'
 
   static flags = {
@@ -49,7 +49,7 @@ export default class ProjectsRestore extends BaseWithContext {
 
     try {
       if (noNameFlag) {
-        flags.name = await prompt(questions[0]).then(({projectName}: any) => projectName)
+        flags.name = await prompt(this.questions[0]).then(({projectName}: any) => projectName)
       }
 
       const workspaceResponse = await ws.get(this.currentContext)
@@ -64,7 +64,7 @@ export default class ProjectsRestore extends BaseWithContext {
         this.log(`You are about to restore the template to:
   workspace: ${chalk.cyan(currentWorkspace?.workspace_name)}
   context: ${chalk.cyan(this.currentContext)}`)
-        shouldProceed = await prompt(questions[1]).then(({confirm}: any) => confirm as boolean)
+        shouldProceed = await prompt(this.questions[1]).then(({confirm}: any) => confirm as boolean)
       }
 
       if (shouldProceed) {

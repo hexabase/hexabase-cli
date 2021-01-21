@@ -5,51 +5,51 @@ import BaseWithContext from '../../base-with-context'
 import * as fld from '../../api/fields/fields'
 import {defaults} from '../../api/fields/data-types'
 
-const questions = [
-  {
-    type: 'select',
-    name: 'dataType',
-    message: 'Select a data type',
-    choices: Object.keys(defaults).map(key => {
-      return {
-        message: defaults[key].name,
-        value: defaults[key].dataType,
-      }
-    }),
-  },
-  {
-    type: 'list',
-    name: 'roles',
-    message: 'Add comma-separated role_ids (must include admin role)',
-    validate: function (roles: string | string[]) {
-      if (roles.length === 0) {
-        return 'At least one item needed'
-      }
-      if (Array.isArray(roles) && roles.some(role => role.trim() === '')) {
-        return 'Empty role_id'
-      }
-      return roles.length > 0
-    },
-  },
-  {
-    type: 'form',
-    name: 'fieldName',
-    message: 'Please provide the name for your field',
-    choices: [
-      {name: 'en', message: 'Field Name (en)', validate(value: string) {
-        return value.length > 0
-      }},
-      {name: 'ja', message: 'Field Name (ja)', validate(value: string) {
-        return value.length > 0
-      }},
-    ],
-    validate(value: any) {
-      return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
-    },
-  },
-]
-
 export default class FieldsCreate extends BaseWithContext {
+  private questions = [
+    {
+      type: 'select',
+      name: 'dataType',
+      message: 'Select a data type',
+      choices: Object.keys(defaults).map(key => {
+        return {
+          message: defaults[key].name,
+          value: defaults[key].dataType,
+        }
+      }),
+    },
+    {
+      type: 'list',
+      name: 'roles',
+      message: 'Add comma-separated role_ids (must include admin role)',
+      validate: function (roles: string | string[]) {
+        if (roles.length === 0) {
+          return 'At least one item needed'
+        }
+        if (Array.isArray(roles) && roles.some(role => role.trim() === '')) {
+          return 'Empty role_id'
+        }
+        return roles.length > 0
+      },
+    },
+    {
+      type: 'form',
+      name: 'fieldName',
+      message: 'Please provide the name for your field',
+      choices: [
+        {name: 'en', message: 'Field Name (en)', validate(value: string) {
+          return value.length > 0
+        }},
+        {name: 'ja', message: 'Field Name (ja)', validate(value: string) {
+          return value.length > 0
+        }},
+      ],
+      validate(value: any) {
+        return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
+      },
+    },
+  ]
+
   static description = 'create field of a database'
 
   static flags = {
@@ -68,9 +68,9 @@ export default class FieldsCreate extends BaseWithContext {
   async run() {
     const {args} = this.parse(FieldsCreate)
 
-    const {dataType}: {dataType: string} = await prompt(questions[0])
-    const {roles}: {roles: string[]} = await prompt(questions[1])
-    const {fieldName}: {fieldName: fld.FieldName} = await prompt(questions[2])
+    const {dataType}: {dataType: string} = await prompt(this.questions[0])
+    const {roles}: {roles: string[]} = await prompt(this.questions[1])
+    const {fieldName}: {fieldName: fld.FieldName} = await prompt(this.questions[2])
     this.log(`Field Name (en): ${chalk.cyan(fieldName.en)}`)
     this.log(`Field Name (ja): ${chalk.cyan(fieldName.ja)}`)
 

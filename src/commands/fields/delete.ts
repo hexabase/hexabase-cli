@@ -4,15 +4,15 @@ import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as fld from '../../api/fields/fields'
 
-const questions = [
-  {
-    type: 'confirm',
-    name: 'confirm',
-    message: 'Do you want to proceed?',
-  },
-]
-
 export default class FieldsDelete extends BaseWithContext {
+  private questions = [
+    {
+      type: 'confirm',
+      name: 'confirm',
+      message: 'Do you want to proceed?',
+    },
+  ]
+
   static description = 'delete field of a database'
 
   static flags = {
@@ -42,7 +42,7 @@ export default class FieldsDelete extends BaseWithContext {
       shouldProceed = true
     } else {
       this.log(`You are about to delete the field with id: ${chalk.cyan(args.fieldId)}`)
-      shouldProceed = await prompt(questions[0]).then(({confirm}: any) => confirm as boolean)
+      shouldProceed = await prompt(this.questions[0]).then(({confirm}: any) => confirm as boolean)
     }
 
     if (shouldProceed) {

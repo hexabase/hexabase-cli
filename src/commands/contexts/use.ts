@@ -4,16 +4,16 @@ import Conf from 'conf'
 
 const config = new Conf()
 
-const questions = [
-  {
-    type: 'select',
-    name: 'context',
-    message: 'Select your current-context',
-    choices: [],
-  },
-]
-
 export default class ContextsUse extends Command {
+  private questions = [
+    {
+      type: 'select',
+      name: 'context',
+      message: 'Select your current-context',
+      choices: [],
+    },
+  ]
+
   static description = 'set current-context'
 
   static flags = {
@@ -43,8 +43,8 @@ export default class ContextsUse extends Command {
       return this.log('Current-context set successfully')
     }
 
-    questions[0].choices = Object.keys(contexts as string[]) as never[]
-    const {context}: {context: string} = await prompt(questions[0])
+    this.questions[0].choices = Object.keys(contexts as string[]) as never[]
+    const {context}: {context: string} = await prompt(this.questions[0])
     config.set('current-context', context)
     this.log('Current-context set successfully')
   }

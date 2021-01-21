@@ -4,51 +4,51 @@ import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as actn from '../../api/actions/actions'
 
-const questions = [
-  {
-    type: 'list',
-    name: 'roles',
-    message: 'Add comma-separated role_ids (must include admin role)',
-    initial: '',
-    validate: function (roles: string | string[]) {
-      if (roles.length === 0) {
-        return 'At least one item needed'
-      }
-      if (Array.isArray(roles) && roles.some(role => role.trim() === '')) {
-        return 'Empty role_id'
-      }
-      return roles.length > 0
-    },
-  },
-  {
-    type: 'form',
-    name: 'actionName',
-    message: 'Please provide the name for your action',
-    choices: [
-      {
-        name: 'en',
-        message: 'Action Name (en)',
-        initial: '',
-        validate(value: string) {
-          return value.length > 0
-        },
-      },
-      {
-        name: 'ja',
-        message: 'Action Name (ja)',
-        initial: '',
-        validate(value: string) {
-          return value.length > 0
-        },
-      },
-    ],
-    validate(value: any) {
-      return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
-    },
-  },
-]
-
 export default class ActionsUpdate extends BaseWithContext {
+  private questions = [
+    {
+      type: 'list',
+      name: 'roles',
+      message: 'Add comma-separated role_ids (must include admin role)',
+      initial: '',
+      validate: function (roles: string | string[]) {
+        if (roles.length === 0) {
+          return 'At least one item needed'
+        }
+        if (Array.isArray(roles) && roles.some(role => role.trim() === '')) {
+          return 'Empty role_id'
+        }
+        return roles.length > 0
+      },
+    },
+    {
+      type: 'form',
+      name: 'actionName',
+      message: 'Please provide the name for your action',
+      choices: [
+        {
+          name: 'en',
+          message: 'Action Name (en)',
+          initial: '',
+          validate(value: string) {
+            return value.length > 0
+          },
+        },
+        {
+          name: 'ja',
+          message: 'Action Name (ja)',
+          initial: '',
+          validate(value: string) {
+            return value.length > 0
+          },
+        },
+      ],
+      validate(value: any) {
+        return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
+      },
+    },
+  ]
+
   static description = 'update action of a database'
 
   static flags = {
@@ -73,11 +73,11 @@ export default class ActionsUpdate extends BaseWithContext {
     const {args} = this.parse(ActionsUpdate)
 
     const actionSettings = await actn.getOne(this.currentContext, args.datastoreId, args.actionId)
-    questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
-    const {roles}: {roles: string[]} = await prompt(questions[0])
-    questions[1].choices![0].initial = actionSettings.name.en
-    questions[1].choices![1].initial = actionSettings.name.ja
-    const {actionName}: {actionName: actn.ActionName} = await prompt(questions[1])
+    this.questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
+    const {roles}: {roles: string[]} = await prompt(this.questions[0])
+    this.questions[1].choices![0].initial = actionSettings.name.en
+    this.questions[1].choices![1].initial = actionSettings.name.ja
+    const {actionName}: {actionName: actn.ActionName} = await prompt(this.questions[1])
     this.log(`Action Name (en): ${chalk.cyan(actionName.en)}`)
     this.log(`Action Name (ja): ${chalk.cyan(actionName.ja)}`)
 

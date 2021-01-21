@@ -4,15 +4,15 @@ import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
 import * as actn from '../../api/actions/actions'
 
-const questions = [
-  {
-    type: 'confirm',
-    name: 'confirm',
-    message: 'Do you want to proceed?',
-  },
-]
-
 export default class ActionsDelete extends BaseWithContext {
+  private questions = [
+    {
+      type: 'confirm',
+      name: 'confirm',
+      message: 'Do you want to proceed?',
+    },
+  ]
+
   static description = 'delete action of a database'
 
   static flags = {
@@ -42,7 +42,7 @@ export default class ActionsDelete extends BaseWithContext {
       shouldProceed = true
     } else {
       this.log(`You are about to delete the action with id: ${chalk.cyan(args.actionId)}`)
-      shouldProceed = await prompt(questions[0]).then(({confirm}: any) => confirm as boolean)
+      shouldProceed = await prompt(this.questions[0]).then(({confirm}: any) => confirm as boolean)
     }
 
     if (shouldProceed) {

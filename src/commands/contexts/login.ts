@@ -7,20 +7,20 @@ import BaseWithContext from '../../base-with-context'
 
 const config = new Conf()
 
-const questions = [
-  {
-    type: 'input',
-    name: 'email',
-    message: `Enter your ${chalk.cyan('email')}`,
-  },
-  {
-    type: 'password',
-    name: 'password',
-    message: `Enter your ${chalk.cyan('password')}`,
-  },
-]
-
 export default class ContextsLogin extends BaseWithContext {
+  private questions = [
+    {
+      type: 'input',
+      name: 'email',
+      message: `Enter your ${chalk.cyan('email')}`,
+    },
+    {
+      type: 'password',
+      name: 'password',
+      message: `Enter your ${chalk.cyan('password')}`,
+    },
+  ]
+
   static description = 'log in to hexabase within current context'
 
   static aliases = ['login']
@@ -33,8 +33,8 @@ export default class ContextsLogin extends BaseWithContext {
   async run() {
     this.parse(ContextsLogin)
 
-    const {email}: {email: string} = await prompt(questions[0])
-    const {password}: {password: string} = await prompt(questions[1])
+    const {email}: {email: string} = await prompt(this.questions[0])
+    const {password}: {password: string} = await prompt(this.questions[1])
     const token = await auth.login(this.currentContext, email, password)
     config.set(`hexabase.${this.currentContext}.email`, email)
     config.set(`hexabase.${this.currentContext}.token`, token)

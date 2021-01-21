@@ -5,28 +5,28 @@ import chalk from 'chalk'
 import * as tmp from '../../api/projects/templates'
 import BaseWithContext from '../../base-with-context'
 
-const questions = [
-  {
-    type: 'select',
-    name: 'template',
-    message: 'Select a template',
-    choices: [],
-  },
-  {
-    type: 'input',
-    name: 'output',
-    message: `Specify the ${chalk.cyan('output')} of the template file`,
-    initial: '',
-    validate: function (input: string) {
-      if (input.length === 0) {
-        return 'Cannot be empty'
-      }
-      return input.length !== 0
-    },
-  },
-]
-
 export default class ProjectsBackup extends BaseWithContext {
+  private questions = [
+    {
+      type: 'select',
+      name: 'template',
+      message: 'Select a template',
+      choices: [],
+    },
+    {
+      type: 'input',
+      name: 'output',
+      message: `Specify the ${chalk.cyan('output')} of the template file`,
+      initial: '',
+      validate: function (input: string) {
+        if (input.length === 0) {
+          return 'Cannot be empty'
+        }
+        return input.length !== 0
+      },
+    },
+  ]
+
   static description = 'download template file'
 
   static flags = {
@@ -54,7 +54,7 @@ export default class ProjectsBackup extends BaseWithContext {
           return this.log(chalk.red('No template found'))
         }
 
-        questions[0].choices = templateCategories.reduce((acc, ctg) => {
+        this.questions[0].choices = templateCategories.reduce((acc, ctg) => {
           ctg.templates.forEach(tmp => {
             const elem = {
               name: tmp.tp_id,
@@ -66,14 +66,14 @@ export default class ProjectsBackup extends BaseWithContext {
           })
           return acc
         }, []) as never[]
-        const {template: template_id}: {template: string} = await prompt(questions[0])
+        const {template: template_id}: {template: string} = await prompt(this.questions[0])
         args.templateId = template_id
       }
 
       // specify filename
       if (noOutputFlag) {
-        questions[1].initial = `${args.templateId}.zip`
-        flags.output = await prompt(questions[1]).then(({output}: any) => output)
+        this.questions[1].initial = `${args.templateId}.zip`
+        flags.output = await prompt(this.questions[1]).then(({output}: any) => output)
       }
 
       // download from apicore

@@ -4,16 +4,16 @@ import chalk from 'chalk'
 import * as ws from '../../api/workspaces/workspaces'
 import BaseWithContext from '../../base-with-context'
 
-const questions = [
-  {
-    type: 'select',
-    name: 'workspace',
-    message: 'Select your workspace',
-    choices: [],
-  },
-]
-
 export default class WorkspacesUse extends BaseWithContext {
+  private questions = [
+    {
+      type: 'select',
+      name: 'workspace',
+      message: 'Select your workspace',
+      choices: [],
+    },
+  ]
+
   static description = 'set current workspace in hexabase'
 
   static flags = {
@@ -33,14 +33,14 @@ export default class WorkspacesUse extends BaseWithContext {
 
     const workspaceResponse = await ws.get(this.currentContext)
     if (!args.workspaceId) {
-      questions[0].choices = workspaceResponse.workspaces.map(ws => {
+      this.questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
           name: ws.workspace_id,
           message: ws.workspace_name,
           hint: ws.workspace_id,
         }
       }) as never[]
-      const {workspace: workspace_id}: {workspace: string} = await prompt(questions[0])
+      const {workspace: workspace_id}: {workspace: string} = await prompt(this.questions[0])
       args.workspaceId = workspace_id
     }
 

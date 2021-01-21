@@ -34,26 +34,27 @@ const settingsSchema = {
     },
   },
 }
-const questions = [
-  {
-    type: 'form',
-    name: 'projectName',
-    message: 'Please provide a name for your project',
-    choices: [
-      {name: 'en', message: 'Project Name (en)', validate(value: string) {
-        return value.length > 0
-      }},
-      {name: 'ja', message: 'Project Name (ja)', validate(value: string) {
-        return value.length > 0
-      }},
-    ],
-    validate(value: any) {
-      return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
-    },
-  },
-]
 
 export default class AppsInit extends BaseWithContext {
+  private questions = [
+    {
+      type: 'form',
+      name: 'projectName',
+      message: 'Please provide a name for your project',
+      choices: [
+        {name: 'en', message: 'Project Name (en)', validate(value: string) {
+          return value.length > 0
+        }},
+        {name: 'ja', message: 'Project Name (ja)', validate(value: string) {
+          return value.length > 0
+        }},
+      ],
+      validate(value: any) {
+        return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
+      },
+    },
+  ]
+
   static description = 'initialize app with hexabase settings'
 
   static aliases = ['init']
@@ -75,7 +76,7 @@ export default class AppsInit extends BaseWithContext {
 
     // no 'name' field in hxSettings -> form prompt
     if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
-      const {projectName}: {projectName: pj.ProjectName} = await prompt(questions[0])
+      const {projectName}: {projectName: pj.ProjectName} = await prompt(this.questions[0])
       this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
       this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
       Object.assign(hxSettings, {name: projectName})
