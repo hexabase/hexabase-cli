@@ -23,7 +23,7 @@ const questions = [
   {
     type: 'form',
     name: 'fieldName',
-    message: 'Please provide a name for your field',
+    message: 'Please provide the name for your field',
     choices: [
       {
         name: 'en', message: 'Field Name (en)',
@@ -71,7 +71,7 @@ export default class FieldsUpdate extends BaseWithContext {
     const {args} = this.parse(FieldsUpdate)
 
     const fieldSettings = await fld.getOne(this.currentContext, args.datastoreId, args.fieldId)
-    questions[0].initial = fieldSettings.roles.filter(field => field.can_use).map(field => field.role_id).join(', ')
+    questions[0].initial = fieldSettings.roles.filter(role => role.can_use).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(questions[0])
     questions[1].choices![0].initial = fieldSettings.name.en
     questions[1].choices![1].initial = fieldSettings.name.ja

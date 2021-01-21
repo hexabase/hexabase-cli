@@ -37,6 +37,10 @@ interface GetFieldsResponse {
 }
 
 interface GetFieldSettingsResponse {
+  workspace_id: string;
+  project_id:   string;
+  datastore_id: string;
+  field_id:     string;
   name: FieldName;
   display_id: string;
   dataType: string;

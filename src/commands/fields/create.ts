@@ -34,7 +34,7 @@ const questions = [
   {
     type: 'form',
     name: 'fieldName',
-    message: 'Please provide a name for your field',
+    message: 'Please provide the name for your field',
     choices: [
       {name: 'en', message: 'Field Name (en)', validate(value: string) {
         return value.length > 0
