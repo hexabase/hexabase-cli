@@ -28,7 +28,7 @@ const questions = [
   {
     type: 'form',
     name: 'actionName',
-    message: 'Please provide name & display id for your action',
+    message: 'Please provide the name for your action',
     choices: [
       {name: 'en', message: 'Action Name (en)', validate(value: string) {
         return value.length > 0

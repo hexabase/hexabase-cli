@@ -30,7 +30,7 @@ export default class ActionsGet extends BaseWithContext {
     const actions = await actn.get(this.currentContext, args.datastoreId, args.statusId)
 
     const columns = {
-      a_id: {
+      action_id: {
         header: 'ID',
       },
       display_id: {
