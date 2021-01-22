@@ -44,6 +44,7 @@ USAGE
 * [`hx fields:create DATASTORE_ID`](#hx-fieldscreate-datastore_id)
 * [`hx fields:delete DATASTORE_ID FIELD_ID`](#hx-fieldsdelete-datastore_id-field_id)
 * [`hx fields:get DATASTORE_ID`](#hx-fieldsget-datastore_id)
+* [`hx fields:show DATASTORE_ID FIELD_ID`](#hx-fieldsshow-datastore_id-field_id)
 * [`hx fields:update DATASTORE_ID FIELD_ID`](#hx-fieldsupdate-datastore_id-field_id)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
@@ -380,6 +381,25 @@ OPTIONS
 ```
 
 _See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/get.ts)_
+
+## `hx fields:show DATASTORE_ID FIELD_ID`
+
+show details of a field
+
+```
+USAGE
+  $ hx fields:show DATASTORE_ID FIELD_ID
+
+ARGUMENTS
+  DATASTORE_ID  datastore_id from hexabase
+  FIELD_ID      field_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+```
+
+_See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/show.ts)_
 
 ## `hx fields:update DATASTORE_ID FIELD_ID`
 
