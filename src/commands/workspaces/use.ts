@@ -23,7 +23,7 @@ export default class WorkspacesUse extends BaseWithContext {
 
   static args = [
     {
-      name: 'workspaceId',
+      name: 'workspace_id',
       description: 'workspace_id from hexabase',
     },
   ]
@@ -32,7 +32,7 @@ export default class WorkspacesUse extends BaseWithContext {
     const {args} = this.parse(WorkspacesUse)
 
     const workspaceResponse = await ws.get(this.currentContext)
-    if (!args.workspaceId) {
+    if (!args.workspace_id) {
       this.questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
           name: ws.workspace_id,
@@ -41,13 +41,13 @@ export default class WorkspacesUse extends BaseWithContext {
         }
       }) as never[]
       const {workspace: workspace_id}: {workspace: string} = await prompt(this.questions[0])
-      args.workspaceId = workspace_id
+      args.workspace_id = workspace_id
     }
 
-    const result = await ws.select(this.currentContext, args.workspaceId)
+    const result = await ws.select(this.currentContext, args.workspace_id)
     if (result) {
       const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
-        return ws.workspace_id === args.workspaceId
+        return ws.workspace_id === args.workspace_id
       })
       this.log(`Current-workspace set to: ${currentWorkspace ?
         chalk.cyan(currentWorkspace.workspace_name) :

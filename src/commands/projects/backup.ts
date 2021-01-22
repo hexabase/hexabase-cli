@@ -37,7 +37,7 @@ export default class ProjectsBackup extends BaseWithContext {
 
   static args = [
     {
-      name: 'templateId',
+      name: 'template_id',
       description: 'template_id from hexabase',
     },
   ]
@@ -47,7 +47,7 @@ export default class ProjectsBackup extends BaseWithContext {
     const noOutputFlag = typeof flags.output === 'undefined'
 
     try {
-      if (!args.templateId) {
+      if (!args.template_id) {
         const templateCategories = await tmp.get(this.currentContext)
 
         if (templateCategories.length === 0) {
@@ -67,18 +67,18 @@ export default class ProjectsBackup extends BaseWithContext {
           return acc
         }, []) as never[]
         const {template: template_id}: {template: string} = await prompt(this.questions[0])
-        args.templateId = template_id
+        args.template_id = template_id
       }
 
       // specify filename
       if (noOutputFlag) {
-        this.questions[1].initial = `${args.templateId}.zip`
+        this.questions[1].initial = `${args.template_id}.zip`
         flags.output = await prompt(this.questions[1]).then(({output}: any) => output)
       }
 
       // download from apicore
-      cli.action.start(`downloading template with tp_id ${chalk.cyan(args.templateId)}`)
-      await tmp.downloadTemplate(this.currentContext, args.templateId, flags.output!)
+      cli.action.start(`downloading template with tp_id ${chalk.cyan(args.template_id)}`)
+      await tmp.downloadTemplate(this.currentContext, args.template_id, flags.output!)
       cli.action.stop()
     } finally {
       if (noOutputFlag) {

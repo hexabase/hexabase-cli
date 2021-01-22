@@ -23,12 +23,12 @@ export default class FieldsDelete extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
     {
-      name: 'fieldId',
+      name: 'field_id',
       description: 'field_id from hexabase',
       required: true,
     },
@@ -41,12 +41,12 @@ export default class FieldsDelete extends BaseWithContext {
     if (flags.yes) {
       shouldProceed = true
     } else {
-      this.log(`You are about to delete the field with id: ${chalk.cyan(args.fieldId)}`)
+      this.log(`You are about to delete the field with id: ${chalk.cyan(args.field_id)}`)
       shouldProceed = await prompt(this.questions[0]).then(({confirm}: any) => confirm as boolean)
     }
 
     if (shouldProceed) {
-      await fld.del(this.currentContext, args.datastoreId, args.fieldId)
+      await fld.del(this.currentContext, args.datastore_id, args.field_id)
       this.log('Field successfully deleted')
     } else {
       this.log(chalk.red('deletion  aborted'))

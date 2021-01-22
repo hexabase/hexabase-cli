@@ -53,7 +53,7 @@ export default class ActionsCreate extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
@@ -74,7 +74,7 @@ export default class ActionsCreate extends BaseWithContext {
       roles: roles,
     }
 
-    const {action_id} = await actn.create(this.currentContext, args.datastoreId, data)
+    const {action_id} = await actn.create(this.currentContext, args.datastore_id, data)
     this.log(`Action successfully created. action_id set to: ${chalk.cyan(action_id)}`)
   }
 }

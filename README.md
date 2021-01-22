@@ -28,10 +28,10 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`hx actions:create DATASTOREID`](#hx-actionscreate-datastoreid)
-* [`hx actions:delete DATASTOREID ACTIONID`](#hx-actionsdelete-datastoreid-actionid)
-* [`hx actions:get DATASTOREID [STATUSID]`](#hx-actionsget-datastoreid-statusid)
-* [`hx actions:update DATASTOREID ACTIONID`](#hx-actionsupdate-datastoreid-actionid)
+* [`hx actions:create DATASTORE_ID`](#hx-actionscreate-datastore_id)
+* [`hx actions:delete DATASTORE_ID ACTION_ID`](#hx-actionsdelete-datastore_id-action_id)
+* [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
+* [`hx actions:update DATASTORE_ID ACTION_ID`](#hx-actionsupdate-datastore_id-action_id)
 * [`hx apps:create`](#hx-appscreate)
 * [`hx apps:init`](#hx-appsinit)
 * [`hx autocomplete [SHELL]`](#hx-autocomplete-shell)
@@ -39,31 +39,31 @@ USAGE
 * [`hx contexts:login`](#hx-contextslogin)
 * [`hx contexts:set CONTEXT`](#hx-contextsset-context)
 * [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
-* [`hx datastores:get [PROJECTID]`](#hx-datastoresget-projectid)
-* [`hx fields:create DATASTOREID`](#hx-fieldscreate-datastoreid)
-* [`hx fields:delete DATASTOREID FIELDID`](#hx-fieldsdelete-datastoreid-fieldid)
-* [`hx fields:get DATASTOREID`](#hx-fieldsget-datastoreid)
-* [`hx fields:update DATASTOREID FIELDID`](#hx-fieldsupdate-datastoreid-fieldid)
+* [`hx datastores:get [PROJECT_ID]`](#hx-datastoresget-project_id)
+* [`hx fields:create DATASTORE_ID`](#hx-fieldscreate-datastore_id)
+* [`hx fields:delete DATASTORE_ID FIELD_ID`](#hx-fieldsdelete-datastore_id-field_id)
+* [`hx fields:get DATASTORE_ID`](#hx-fieldsget-datastore_id)
+* [`hx fields:update DATASTORE_ID FIELD_ID`](#hx-fieldsupdate-datastore_id-field_id)
 * [`hx help [COMMAND]`](#hx-help-command)
 * [`hx logs:actionscript CHANNEL`](#hx-logsactionscript-channel)
-* [`hx projects:backup [TEMPLATEID]`](#hx-projectsbackup-templateid)
+* [`hx projects:backup [TEMPLATE_ID]`](#hx-projectsbackup-template_id)
 * [`hx projects:create`](#hx-projectscreate)
 * [`hx projects:get`](#hx-projectsget)
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
-* [`hx projects:roles:get PROJECTID`](#hx-projectsrolesget-projectid)
+* [`hx projects:roles:get PROJECT_ID`](#hx-projectsrolesget-project_id)
 * [`hx workspaces:get`](#hx-workspacesget)
-* [`hx workspaces:use [WORKSPACEID]`](#hx-workspacesuse-workspaceid)
+* [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
 
-## `hx actions:create DATASTOREID`
+## `hx actions:create DATASTORE_ID`
 
 create action in a database
 
 ```
 USAGE
-  $ hx actions:create DATASTOREID
+  $ hx actions:create DATASTORE_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -72,17 +72,17 @@ OPTIONS
 
 _See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/create.ts)_
 
-## `hx actions:delete DATASTOREID ACTIONID`
+## `hx actions:delete DATASTORE_ID ACTION_ID`
 
 delete action of a database
 
 ```
 USAGE
-  $ hx actions:delete DATASTOREID ACTIONID
+  $ hx actions:delete DATASTORE_ID ACTION_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
-  ACTIONID     action_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
+  ACTION_ID     action_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -92,17 +92,17 @@ OPTIONS
 
 _See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/delete.ts)_
 
-## `hx actions:get DATASTOREID [STATUSID]`
+## `hx actions:get DATASTORE_ID [STATUS_ID]`
 
 get actions of a datastore
 
 ```
 USAGE
-  $ hx actions:get DATASTOREID [STATUSID]
+  $ hx actions:get DATASTORE_ID [STATUS_ID]
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
-  STATUSID     status_id of the status action
+  DATASTORE_ID  datastore_id from hexabase
+  STATUS_ID     status_id of the status action
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -119,17 +119,17 @@ OPTIONS
 
 _See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/get.ts)_
 
-## `hx actions:update DATASTOREID ACTIONID`
+## `hx actions:update DATASTORE_ID ACTION_ID`
 
 update action of a database
 
 ```
 USAGE
-  $ hx actions:update DATASTOREID ACTIONID
+  $ hx actions:update DATASTORE_ID ACTION_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
-  ACTIONID     action_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
+  ACTION_ID     action_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -271,16 +271,16 @@ OPTIONS
 
 _See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/contexts/use.ts)_
 
-## `hx datastores:get [PROJECTID]`
+## `hx datastores:get [PROJECT_ID]`
 
 get datastores within a project
 
 ```
 USAGE
-  $ hx datastores:get [PROJECTID]
+  $ hx datastores:get [PROJECT_ID]
 
 ARGUMENTS
-  PROJECTID  project_id from hexabase
+  PROJECT_ID  project_id from hexabase
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -297,16 +297,16 @@ OPTIONS
 
 _See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/datastores/get.ts)_
 
-## `hx fields:create DATASTOREID`
+## `hx fields:create DATASTORE_ID`
 
 create field of a database
 
 ```
 USAGE
-  $ hx fields:create DATASTOREID
+  $ hx fields:create DATASTORE_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -315,17 +315,17 @@ OPTIONS
 
 _See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/create.ts)_
 
-## `hx fields:delete DATASTOREID FIELDID`
+## `hx fields:delete DATASTORE_ID FIELD_ID`
 
 delete field of a database
 
 ```
 USAGE
-  $ hx fields:delete DATASTOREID FIELDID
+  $ hx fields:delete DATASTORE_ID FIELD_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
-  FIELDID      field_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
+  FIELD_ID      field_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -335,16 +335,16 @@ OPTIONS
 
 _See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/delete.ts)_
 
-## `hx fields:get DATASTOREID`
+## `hx fields:get DATASTORE_ID`
 
 get fields of a datastore
 
 ```
 USAGE
-  $ hx fields:get DATASTOREID
+  $ hx fields:get DATASTORE_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -361,17 +361,17 @@ OPTIONS
 
 _See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/fields/get.ts)_
 
-## `hx fields:update DATASTOREID FIELDID`
+## `hx fields:update DATASTORE_ID FIELD_ID`
 
 update field of a database
 
 ```
 USAGE
-  $ hx fields:update DATASTOREID FIELDID
+  $ hx fields:update DATASTORE_ID FIELD_ID
 
 ARGUMENTS
-  DATASTOREID  datastore_id from hexabase
-  FIELDID      field_id from hexabase
+  DATASTORE_ID  datastore_id from hexabase
+  FIELD_ID      field_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -415,16 +415,16 @@ OPTIONS
 
 _See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/logs/actionscript.ts)_
 
-## `hx projects:backup [TEMPLATEID]`
+## `hx projects:backup [TEMPLATE_ID]`
 
 download template file
 
 ```
 USAGE
-  $ hx projects:backup [TEMPLATEID]
+  $ hx projects:backup [TEMPLATE_ID]
 
 ARGUMENTS
-  TEMPLATEID  template_id from hexabase
+  TEMPLATE_ID  template_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
@@ -492,16 +492,16 @@ OPTIONS
 
 _See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/projects/restore.ts)_
 
-## `hx projects:roles:get PROJECTID`
+## `hx projects:roles:get PROJECT_ID`
 
 get roles of a project
 
 ```
 USAGE
-  $ hx projects:roles:get PROJECTID
+  $ hx projects:roles:get PROJECT_ID
 
 ARGUMENTS
-  PROJECTID  project_id from hexabase
+  PROJECT_ID  project_id from hexabase
 
 OPTIONS
   -c, --context=context   use provided context instead of currently set context
@@ -541,16 +541,16 @@ OPTIONS
 
 _See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/workspaces/get.ts)_
 
-## `hx workspaces:use [WORKSPACEID]`
+## `hx workspaces:use [WORKSPACE_ID]`
 
 set current workspace in hexabase
 
 ```
 USAGE
-  $ hx workspaces:use [WORKSPACEID]
+  $ hx workspaces:use [WORKSPACE_ID]
 
 ARGUMENTS
-  WORKSPACEID  workspace_id from hexabase
+  WORKSPACE_ID  workspace_id from hexabase
 
 OPTIONS
   -c, --context=context  use provided context instead of currently set context

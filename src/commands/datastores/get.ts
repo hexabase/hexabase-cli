@@ -26,7 +26,7 @@ export default class DatastoresGet extends BaseWithContext {
 
   static args = [
     {
-      name: 'projectId',
+      name: 'project_id',
       description: 'project_id from hexabase',
     },
   ]
@@ -34,7 +34,7 @@ export default class DatastoresGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(DatastoresGet)
 
-    if (!args.projectId) {
+    if (!args.project_id) {
       const currentWorkspace = await ws.current(this.currentContext)
       const projects = await pj.get(this.currentContext, currentWorkspace.workspace_id)
       this.questions[0].choices = projects.map(pj => {
@@ -45,10 +45,10 @@ export default class DatastoresGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      args.projectId = project_id
+      args.project_id = project_id
     }
 
-    const datastores = await ds.get(this.currentContext, args.projectId)
+    const datastores = await ds.get(this.currentContext, args.project_id)
 
     const columns = {
       datastore_id: {

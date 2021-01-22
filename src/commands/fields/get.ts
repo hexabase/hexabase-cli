@@ -14,7 +14,7 @@ export default class FieldsGet extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
@@ -23,7 +23,7 @@ export default class FieldsGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(FieldsGet)
 
-    const fieldsResponse = await fld.get(this.currentContext, args.datastoreId)
+    const fieldsResponse = await fld.get(this.currentContext, args.datastore_id)
     let fields: fld.GetFieldsElemResponse[] = []
     if (fieldsResponse?.fields) {
       // fieldsResponse is returned as an object -> convert to sorted array

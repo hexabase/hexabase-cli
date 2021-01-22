@@ -58,12 +58,12 @@ export default class ActionsUpdate extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
     {
-      name: 'actionId',
+      name: 'action_id',
       description: 'action_id from hexabase',
       required: true,
     },
@@ -72,7 +72,7 @@ export default class ActionsUpdate extends BaseWithContext {
   async run() {
     const {args} = this.parse(ActionsUpdate)
 
-    const actionSettings = await actn.getOne(this.currentContext, args.datastoreId, args.actionId)
+    const actionSettings = await actn.getOne(this.currentContext, args.datastore_id, args.action_id)
     this.questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
     this.questions[1].choices![0].initial = actionSettings.name.en
@@ -86,7 +86,7 @@ export default class ActionsUpdate extends BaseWithContext {
       roles: roles,
     }
 
-    await actn.update(this.currentContext, args.datastoreId, args.actionId, data)
+    await actn.update(this.currentContext, args.datastore_id, args.action_id, data)
     this.log('Action successfully updated')
   }
 }

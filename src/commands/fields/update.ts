@@ -58,12 +58,12 @@ export default class FieldsUpdate extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
     {
-      name: 'fieldId',
+      name: 'field_id',
       description: 'field_id from hexabase',
       required: true,
     },
@@ -72,7 +72,7 @@ export default class FieldsUpdate extends BaseWithContext {
   async run() {
     const {args} = this.parse(FieldsUpdate)
 
-    const fieldSettings = await fld.getOne(this.currentContext, args.datastoreId, args.fieldId)
+    const fieldSettings = await fld.getOne(this.currentContext, args.datastore_id, args.field_id)
     this.questions[0].initial = fieldSettings.roles.filter(role => role.can_use).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
     this.questions[1].choices![0].initial = fieldSettings.name.en
@@ -86,7 +86,7 @@ export default class FieldsUpdate extends BaseWithContext {
       roles: roles,
     }
 
-    await fld.update(this.currentContext, args.datastoreId, args.fieldId, data)
+    await fld.update(this.currentContext, args.datastore_id, args.field_id, data)
     this.log('Field successfully updated')
   }
 }

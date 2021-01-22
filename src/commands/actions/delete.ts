@@ -23,12 +23,12 @@ export default class ActionsDelete extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
     {
-      name: 'actionId',
+      name: 'action_id',
       description: 'action_id from hexabase',
       required: true,
     },
@@ -41,12 +41,12 @@ export default class ActionsDelete extends BaseWithContext {
     if (flags.yes) {
       shouldProceed = true
     } else {
-      this.log(`You are about to delete the action with id: ${chalk.cyan(args.actionId)}`)
+      this.log(`You are about to delete the action with id: ${chalk.cyan(args.action_id)}`)
       shouldProceed = await prompt(this.questions[0]).then(({confirm}: any) => confirm as boolean)
     }
 
     if (shouldProceed) {
-      await actn.del(this.currentContext, args.datastoreId, args.actionId)
+      await actn.del(this.currentContext, args.datastore_id, args.action_id)
       this.log('action successfully deleted')
     } else {
       this.log(chalk.red('deletion  aborted'))

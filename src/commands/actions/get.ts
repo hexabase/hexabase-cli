@@ -14,12 +14,12 @@ export default class ActionsGet extends BaseWithContext {
 
   static args = [
     {
-      name: 'datastoreId',
+      name: 'datastore_id',
       description: 'datastore_id from hexabase',
       required: true,
     },
     {
-      name: 'statusId',
+      name: 'status_id',
       description: 'status_id of the status action',
     },
   ]
@@ -27,7 +27,7 @@ export default class ActionsGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(ActionsGet)
 
-    const actions = await actn.get(this.currentContext, args.datastoreId, args.statusId)
+    const actions = await actn.get(this.currentContext, args.datastore_id, args.status_id)
 
     const columns = {
       action_id: {
@@ -44,7 +44,7 @@ export default class ActionsGet extends BaseWithContext {
       },
       is_status_action: {
         header: 'IS_STATUS',
-        extended: !args.statusId,
+        extended: !args.status_id,
       },
       set_status: {
         header: 'SET_STATUS_ID',

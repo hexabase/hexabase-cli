@@ -14,7 +14,7 @@ export default class ProjectsRolesGet extends BaseWithContext {
 
   static args = [
     {
-      name: 'projectId',
+      name: 'project_id',
       description: 'project_id from hexabase',
       required: true,
     },
@@ -23,7 +23,7 @@ export default class ProjectsRolesGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(ProjectsRolesGet)
 
-    const roles = await rl.get(this.currentContext, args.projectId)
+    const roles = await rl.get(this.currentContext, args.project_id)
 
     const columns = {
       role_id: {
