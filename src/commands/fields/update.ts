@@ -23,9 +23,17 @@ export default class FieldsUpdate extends BaseWithContext {
     },
     {
       type: 'form',
-      name: 'fieldName',
-      message: 'Please provide the name for your field',
+      name: 'fieldForm',
+      message: 'Please provide the display_id and name for your field',
       choices: [
+        {
+          name: 'display_id',
+          message: 'Display_ID',
+          initial: '',
+          validate(value: string) {
+            return value.length > 0
+          },
+        },
         {
           name: 'en',
           message: 'Field Name (en)',
@@ -75,14 +83,17 @@ export default class FieldsUpdate extends BaseWithContext {
     const fieldSettings = await fld.getOne(this.currentContext, args.datastore_id, args.field_id)
     this.questions[0].initial = fieldSettings.roles.filter(role => role.can_use).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
-    this.questions[1].choices![0].initial = fieldSettings.name.en
-    this.questions[1].choices![1].initial = fieldSettings.name.ja
-    const {fieldName}: {fieldName: fld.FieldName} = await prompt(this.questions[1])
-    this.log(`Field Name (en): ${chalk.cyan(fieldName.en)}`)
-    this.log(`Field Name (ja): ${chalk.cyan(fieldName.ja)}`)
+    this.questions[1].choices![0].initial = fieldSettings.display_id
+    this.questions[1].choices![1].initial = fieldSettings.name.en
+    this.questions[1].choices![2].initial = fieldSettings.name.ja
+    const {fieldForm}: {fieldForm: {[key: string]: string}} = await prompt(this.questions[1])
+    this.log(`Display_ID: ${chalk.cyan(fieldForm.display_id)}`)
+    this.log(`Field Name (en): ${chalk.cyan(fieldForm.en)}`)
+    this.log(`Field Name (ja): ${chalk.cyan(fieldForm.ja)}`)
 
     const data: fld.FieldData = {
-      name: fieldName,
+      display_id: fieldForm.display_id,
+      name: {en: fieldForm.en, ja: fieldForm.ja},
       roles: roles,
     }
 

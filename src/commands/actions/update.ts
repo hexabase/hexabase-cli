@@ -23,9 +23,17 @@ export default class ActionsUpdate extends BaseWithContext {
     },
     {
       type: 'form',
-      name: 'actionName',
-      message: 'Please provide the name for your action',
+      name: 'actionForm',
+      message: 'Please provide the display_id and name for your action',
       choices: [
+        {
+          name: 'display_id',
+          message: 'Display_ID',
+          initial: '',
+          validate(value: string) {
+            return value.length > 0
+          },
+        },
         {
           name: 'en',
           message: 'Action Name (en)',
@@ -75,14 +83,17 @@ export default class ActionsUpdate extends BaseWithContext {
     const actionSettings = await actn.getOne(this.currentContext, args.datastore_id, args.action_id)
     this.questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
-    this.questions[1].choices![0].initial = actionSettings.name.en
-    this.questions[1].choices![1].initial = actionSettings.name.ja
-    const {actionName}: {actionName: actn.ActionName} = await prompt(this.questions[1])
-    this.log(`Action Name (en): ${chalk.cyan(actionName.en)}`)
-    this.log(`Action Name (ja): ${chalk.cyan(actionName.ja)}`)
+    this.questions[1].choices![0].initial = actionSettings.display_id
+    this.questions[1].choices![1].initial = actionSettings.name.en
+    this.questions[1].choices![2].initial = actionSettings.name.ja
+    const {actionForm}: {actionForm: {[key: string]: string}} = await prompt(this.questions[1])
+    this.log(`Display_ID: ${chalk.cyan(actionForm.display_id)}`)
+    this.log(`Action Name (en): ${chalk.cyan(actionForm.en)}`)
+    this.log(`Action Name (ja): ${chalk.cyan(actionForm.ja)}`)
 
     const data: actn.ActionData = {
-      name: actionName,
+      display_id: actionForm.display_id,
+      name: {en: actionForm.en, ja: actionForm.ja},
       roles: roles,
     }
 

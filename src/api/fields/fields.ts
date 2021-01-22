@@ -3,14 +3,16 @@ import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
 export interface FieldData {
-  name?:      FieldName;
-  dataType?:  string;
-  as_title?:  boolean;
-  search?:    boolean;
-  show_list?: boolean;
-  full_text?: boolean;
-  unique?:    boolean;
-  roles?:     string[];
+  name?:        FieldName;
+  display_id?:  string;
+  dataType?:    string;
+  as_title?:    boolean;
+  search?:      boolean;
+  show_list?:   boolean;
+  full_text?:   boolean;
+  unique?:      boolean;
+  hideOnInput?: boolean;
+  roles?:       string[];
 }
 
 export interface FieldName {
