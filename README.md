@@ -31,6 +31,7 @@ USAGE
 * [`hx actions:create DATASTORE_ID`](#hx-actionscreate-datastore_id)
 * [`hx actions:delete DATASTORE_ID ACTION_ID`](#hx-actionsdelete-datastore_id-action_id)
 * [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
+* [`hx actions:show DATASTORE_ID ACTION_ID`](#hx-actionsshow-datastore_id-action_id)
 * [`hx actions:update DATASTORE_ID ACTION_ID`](#hx-actionsupdate-datastore_id-action_id)
 * [`hx apps:create`](#hx-appscreate)
 * [`hx apps:init`](#hx-appsinit)
@@ -118,6 +119,25 @@ OPTIONS
 ```
 
 _See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/get.ts)_
+
+## `hx actions:show DATASTORE_ID ACTION_ID`
+
+show details of an action
+
+```
+USAGE
+  $ hx actions:show DATASTORE_ID ACTION_ID
+
+ARGUMENTS
+  DATASTORE_ID  datastore_id from hexabase
+  ACTION_ID     action_id from hexabase
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+```
+
+_See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/actions/show.ts)_
 
 ## `hx actions:update DATASTORE_ID ACTION_ID`
 
