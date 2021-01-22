@@ -40,7 +40,7 @@ export default class AppsInit extends BaseWithContext {
     {
       type: 'form',
       name: 'projectName',
-      message: 'Please provide a name for your project',
+      message: 'Please provide the name for your project',
       choices: [
         {name: 'en', message: 'Project Name (en)', validate(value: string) {
           return value.length > 0

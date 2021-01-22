@@ -11,7 +11,7 @@ export default class ProjectsRestore extends BaseWithContext {
     {
       type: 'input',
       name: 'projectName',
-      message: 'Please provide a name for your project',
+      message: 'Please provide the name for your project',
       validate: function (input: string) {
         if (input.length === 0) {
           return 'Cannot be empty'
