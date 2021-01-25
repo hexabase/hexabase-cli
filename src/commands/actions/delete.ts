@@ -2,7 +2,6 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as actn from '../../api/actions/actions'
 
 export default class ActionsDelete extends BaseWithContext {
   private questions = [
@@ -46,7 +45,8 @@ export default class ActionsDelete extends BaseWithContext {
     }
 
     if (shouldProceed) {
-      await actn.del(this.currentContext, args.datastore_id, args.action_id)
+      const url = `/api/v0/datastores/${args.datastore_id}/actions/${args.action_id}`
+      await this.hexaapi.delete<void>(url)
       this.log('action successfully deleted')
     } else {
       this.log(chalk.red('deletion  aborted'))
