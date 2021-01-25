@@ -1,6 +1,3 @@
-import axios from 'axios'
-import Conf from 'conf'
-
 export enum ActionOperation {
   new,
 	update,
@@ -52,22 +49,4 @@ export interface GetActionSettingsResponse {
   set_status:       string;
   name:             ActionName;
   roles: {[key: string]: string | boolean}[];
-}
-
-const config = new Conf()
-
-export const update = async (currentContext: string, d_id: string, a_id: string, data: ActionData): Promise<void> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${d_id}/actions/${a_id}`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    await axios.patch(url, data, requestConfig)
-  } catch (error) {
-    throw error
-  }
 }

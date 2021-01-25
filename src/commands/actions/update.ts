@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as actn from '../../api/actions/actions'
+import {ActionData, GetActionSettingsResponse} from '../../api/actions/actions'
 
 export default class ActionsUpdate extends BaseWithContext {
   private questions = [
@@ -80,7 +80,9 @@ export default class ActionsUpdate extends BaseWithContext {
   async run() {
     const {args} = this.parse(ActionsUpdate)
 
-    const actionSettings = await actn.getOne(this.currentContext, args.datastore_id, args.action_id)
+    const url = `/api/v0/datastores/${args.datastore_id}/actions/${args.action_id}`
+    const {data: actionSettings} = await this.hexaapi.get<GetActionSettingsResponse>(url)
+
     this.questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
     this.questions[1].choices![0].initial = actionSettings.display_id
@@ -91,13 +93,13 @@ export default class ActionsUpdate extends BaseWithContext {
     this.log(`Action Name (en): ${chalk.cyan(actionForm.en)}`)
     this.log(`Action Name (ja): ${chalk.cyan(actionForm.ja)}`)
 
-    const data: actn.ActionData = {
+    const data: ActionData = {
       display_id: actionForm.display_id,
       name: {en: actionForm.en, ja: actionForm.ja},
       roles: roles,
     }
 
-    await actn.update(this.currentContext, args.datastore_id, args.action_id, data)
-    this.log('Action successfully updated')
+    await this.hexaapi.patch<void>(url, data)
+    this.log('action successfully updated')
   }
 }
