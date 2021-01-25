@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import {prompt} from 'enquirer'
+import chalk from 'chalk'
 import Conf from 'conf'
 
 const config = new Conf()
@@ -35,17 +36,17 @@ export default class ContextsUse extends Command {
       return this.log('No context found')
     }
 
-    if (args.context) {
-      if (!Object.keys(contexts as string[]).includes(args.context)) {
-        throw new Error('No such context')
-      }
-      config.set('current-context', args.context)
-      return this.log('Current-context set successfully')
+    if (!args.context) {
+      this.questions[0].choices = Object.keys(contexts as string[]) as never[]
+      const {context}: {context: string} = await prompt(this.questions[0])
+      args.context = context
     }
 
-    this.questions[0].choices = Object.keys(contexts as string[]) as never[]
-    const {context}: {context: string} = await prompt(this.questions[0])
-    config.set('current-context', context)
-    this.log('Current-context set successfully')
+    if (!Object.keys(contexts as string[]).includes(args.context)) {
+      throw new Error('No such context')
+    }
+
+    config.set('current-context', args.context)
+    this.log(`Current-context successfully set to: ${chalk.cyan(args.context)}`)
   }
 }
