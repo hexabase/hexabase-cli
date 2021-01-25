@@ -12,11 +12,11 @@ export interface ProjectName{
   ja: string;
 }
 
-interface CreateProjectResponse {
-  p_id: string;
+export interface CreateProjectResponse {
+  project_id: string;
 }
 
-interface GetProjectsElemResponse {
+export interface GetProjectsElemResponse {
   application_id: string;
   name: string;
   display_id: string;

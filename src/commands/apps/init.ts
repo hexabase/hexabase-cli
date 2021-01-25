@@ -4,7 +4,7 @@ import {Validator} from 'jsonschema'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as pj from '../../api/projects/projects'
+import {CreateProjectResponse, ProjectName} from '../../api/projects/projects'
 
 const v = new Validator()
 
@@ -76,7 +76,7 @@ export default class AppsInit extends BaseWithContext {
 
     // no 'name' field in hxSettings -> form prompt
     if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
-      const {projectName}: {projectName: pj.ProjectName} = await prompt(this.questions[0])
+      const {projectName}: {projectName: ProjectName} = await prompt(this.questions[0])
       this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
       this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
       Object.assign(hxSettings, {name: projectName})
@@ -88,9 +88,10 @@ export default class AppsInit extends BaseWithContext {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
     }
 
-    const {p_id} = await pj.create(this.currentContext, hxSettings)
-    if (p_id) {
-      this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
-    }
+    const url = '/api/v0/applications'
+    const {data: project} = await this.hexaapi.post<CreateProjectResponse>(url, hxSettings)
+    this.log(`task successfully queued:
+project_id: ${chalk.cyan(project.project_id)}`
+    )
   }
 }
