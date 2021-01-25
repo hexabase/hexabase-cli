@@ -20,6 +20,8 @@ export default abstract class BaseWithContext extends Command {
 
   private _context!: Context
 
+  currentContext!: string | flags.IOptionFlag<string|undefined>
+
   get hexaapi(): APIClient {
     return this._hexaapi
   }
@@ -27,23 +29,22 @@ export default abstract class BaseWithContext extends Command {
   async init() {
     const {flags} = this.parse(this.constructor as Input<typeof BaseWithContext.flags>)
 
-    let currentContext: string | flags.IOptionFlag<string|undefined>
     if (flags.context) {
-      currentContext = flags.context
+      this.currentContext = flags.context
     } else {
-      currentContext = config.get('current-context') as string
-      if (!currentContext) {
+      this.currentContext = config.get('current-context') as string
+      if (!this.currentContext) {
         throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
       }
     }
 
-    const context = config.get(`contexts.${currentContext}`)
+    const context = config.get(`contexts.${this.currentContext}`)
     if (!context) {
       throw new Error(`No such context: ${chalk.red(flags.context)}`)
     }
     this._context = context as Context
 
-    const token = config.get(`hexabase.${currentContext}.token`)
+    const token = config.get(`hexabase.${this.currentContext}.token`)
     if (!token) {
       throw new Error('Could not get login info')
     }
