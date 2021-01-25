@@ -4,7 +4,7 @@ import Conf from 'conf'
 import chalk from 'chalk'
 import {APIClient} from './api/api-client'
 
-export interface Context{
+type Context = {
   server: string;
   sse: string;
 }
@@ -16,9 +16,9 @@ export default abstract class BaseWithContext extends Command {
     context: flags.string({char: 'c', description: 'use provided context instead of currently set context'}),
   };
 
-  private _hexaapi: APIClient = new APIClient('', '')
+  private _hexaapi!: APIClient
 
-  private _context: Context = {server: '', sse: ''}
+  private _context!: Context
 
   get hexaapi(): APIClient {
     return this._hexaapi
@@ -47,6 +47,11 @@ export default abstract class BaseWithContext extends Command {
     if (!token) {
       throw new Error('Could not get login info')
     }
-    this._hexaapi = new APIClient(this._context.server, token as string)
+    const authConfig = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+    this._hexaapi = new APIClient(this._context.server, authConfig)
   }
 }
