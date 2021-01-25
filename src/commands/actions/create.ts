@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as actn from '../../api/actions/actions'
+import {ActionData, ActionName, CreateActionResponse} from '../../api/actions/actions'
 
 export default class ActionsCreate extends BaseWithContext {
   private questions = [
@@ -64,17 +64,23 @@ export default class ActionsCreate extends BaseWithContext {
 
     const {operationType}: {operationType: string} = await prompt(this.questions[0])
     const {roles}: {roles: string[]} = await prompt(this.questions[1])
-    const {actionName}: {actionName: actn.ActionName} = await prompt(this.questions[2])
+    const {actionName}: {actionName: ActionName} = await prompt(this.questions[2])
     this.log(`Project Name (en): ${chalk.cyan(actionName.en)}`)
     this.log(`Project Name (ja): ${chalk.cyan(actionName.ja)}`)
 
-    const data: actn.ActionData = {
+    const data: ActionData = {
       operation: operationType,
       name: actionName,
       roles: roles,
     }
 
-    const {action_id} = await actn.create(this.currentContext, args.datastore_id, data)
-    this.log(`Action successfully created. action_id set to: ${chalk.cyan(action_id)}`)
+    const url = `/api/v0/datastores/${args.datastore_id}/actions`
+    const {data: action} = await this.hexaapi.post<CreateActionResponse>(url, data)
+
+    this.log(`
+action successfully created:
+action_id: ${chalk.cyan(action.action_id)}
+display_id: ${chalk.cyan(action.display_id)}`
+    )
   }
 }

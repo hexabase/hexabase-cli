@@ -24,7 +24,7 @@ export interface ActionName {
   ja: string;
 }
 
-interface CreateActionResponse {
+export interface CreateActionResponse {
   display_id: string;
   action_id:  string;
 }
@@ -56,23 +56,6 @@ interface GetActionSettingsResponse {
 }
 
 const config = new Conf()
-
-export const create = async (currentContext: string, d_id: string, data: ActionData): Promise<CreateActionResponse> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${d_id}/actions`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    const {data: responseData}: {data: CreateActionResponse} = await axios.post(url, data, requestConfig)
-    return responseData
-  } catch (error) {
-    throw error
-  }
-}
 
 export const getOne = async (currentContext: string, d_id: string, a_id: string): Promise<GetActionSettingsResponse> => {
   try {
