@@ -1,7 +1,7 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import * as actn from '../../api/actions/actions'
 import BaseWithContext from '../../base-with-context'
+import {GetActionsElemResponse} from '../../api/actions/actions'
 
 export default class ActionsGet extends BaseWithContext {
   static description = 'get actions of a datastore'
@@ -27,7 +27,11 @@ export default class ActionsGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(ActionsGet)
 
-    const actions = await actn.get(this.currentContext, args.datastore_id, args.status_id)
+    let url = `/api/v0/datastores/${args.datastore_id}/actions`
+    if (args.status_id) {
+      url = `${url}?status_id=${args.status_id}`
+    }
+    const {data: actions} = await this.hexaapi.get<GetActionsElemResponse[]>(url)
 
     const columns = {
       action_id: {
@@ -49,14 +53,14 @@ export default class ActionsGet extends BaseWithContext {
       set_status: {
         header: 'SET_STATUS_ID',
         extended: true,
-        get: (row: actn.GetActionsElemResponse) => {
+        get: (row: GetActionsElemResponse) => {
           return row.set_status ? row.set_status : ''
         },
       },
       status_id: {
         header: 'STATUS_ID',
         extended: true,
-        get: (row: actn.GetActionsElemResponse) => {
+        get: (row: GetActionsElemResponse) => {
           return row.status_id ? row.status_id : ''
         },
       },
