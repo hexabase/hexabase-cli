@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Conf from 'conf'
-import {Context} from '../../base-with-context'
 
 export enum ActionOperation {
   new,
@@ -39,7 +38,7 @@ export interface GetActionsElemResponse {
   set_status: string;
 }
 
-interface GetActionSettingsResponse {
+export interface GetActionSettingsResponse {
   workspace_id:     string;
   project_id:       string;
   datastore_id:     string;
@@ -56,23 +55,6 @@ interface GetActionSettingsResponse {
 }
 
 const config = new Conf()
-
-export const getOne = async (currentContext: string, d_id: string, a_id: string): Promise<GetActionSettingsResponse> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${d_id}/actions/${a_id}`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    const {data}: {data: GetActionSettingsResponse} = await axios.get(url, requestConfig)
-    return data
-  } catch (error) {
-    throw error
-  }
-}
 
 export const update = async (currentContext: string, d_id: string, a_id: string, data: ActionData): Promise<void> => {
   try {

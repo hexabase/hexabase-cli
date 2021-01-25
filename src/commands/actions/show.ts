@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import BaseWithContext from '../../base-with-context'
-import * as actn from '../../api/actions/actions'
+import {GetActionSettingsResponse} from '../../api/actions/actions'
 
 export default class ActionsShow extends BaseWithContext {
   static description = 'show details of an action'
@@ -26,7 +26,8 @@ export default class ActionsShow extends BaseWithContext {
   async run() {
     const {args} = this.parse(ActionsShow)
 
-    const actionSettings = await actn.getOne(this.currentContext, args.datastore_id, args.action_id)
+    const url = `/api/v0/datastores/${args.datastore_id}/actions/${args.action_id}`
+    const {data: actionSettings} = await this.hexaapi.get<GetActionSettingsResponse>(url)
 
     this.log(JSON.stringify(actionSettings, undefined, 2))
   }
