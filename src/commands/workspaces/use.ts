@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
-import * as ws from '../../api/workspaces/workspaces'
 import BaseWithContext from '../../base-with-context'
+import {GetWorkspacesResponse} from '../../api/workspaces/workspaces'
 
 export default class WorkspacesUse extends BaseWithContext {
   private questions = [
@@ -31,7 +31,8 @@ export default class WorkspacesUse extends BaseWithContext {
   async run() {
     const {args} = this.parse(WorkspacesUse)
 
-    const workspaceResponse = await ws.get(this.currentContext)
+    let url = '/api/v0/workspaces'
+    const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
     if (!args.workspace_id) {
       this.questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
@@ -44,14 +45,13 @@ export default class WorkspacesUse extends BaseWithContext {
       args.workspace_id = workspace_id
     }
 
-    const result = await ws.select(this.currentContext, args.workspace_id)
-    if (result) {
-      const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
-        return ws.workspace_id === args.workspace_id
-      })
-      this.log(`Current-workspace set to: ${currentWorkspace ?
-        chalk.cyan(currentWorkspace.workspace_name) :
-        chalk.red('could not be determined')}`)
-    }
+    url = `/api/v0/workspaces/${args.workspace_id}/select`
+    await this.hexaapi.post<void>(url)
+    const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
+      return ws.workspace_id === args.workspace_id
+    })
+    this.log(`Current-workspace set to: ${currentWorkspace ?
+      chalk.cyan(currentWorkspace.workspace_name) :
+      chalk.red('could not be determined')}`)
   }
 }
