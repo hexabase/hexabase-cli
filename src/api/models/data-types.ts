@@ -1,4 +1,4 @@
-interface DataType {
+type DataType = {
   name: string;
   dataType: string;
   unique: boolean;
