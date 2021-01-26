@@ -18,7 +18,7 @@ export default abstract class BaseWithContext extends Command {
 
   private _hexaapi!: APIClient
 
-  private _context!: Context
+  context!: Context
 
   currentContext!: string | flags.IOptionFlag<string|undefined>
 
@@ -42,7 +42,7 @@ export default abstract class BaseWithContext extends Command {
     if (!context) {
       throw new Error(`No such context: ${chalk.red(flags.context)}`)
     }
-    this._context = context as Context
+    this.context = context as Context
 
     const token = config.get(`hexabase.${this.currentContext}.token`)
     if (!token) {
@@ -53,6 +53,6 @@ export default abstract class BaseWithContext extends Command {
         authorization: `Bearer ${token}`,
       },
     }
-    this._hexaapi = new APIClient(this._context.server, authConfig)
+    this._hexaapi = new APIClient(this.context.server, authConfig)
   }
 }
