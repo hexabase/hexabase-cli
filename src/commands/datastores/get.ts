@@ -2,9 +2,9 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import {cli} from 'cli-ux'
 import BaseWithContext from '../../base-with-context'
-import {GetCurrentWorkspaceResponse} from '../../api/workspaces/workspaces'
-import {GetProjectsElemResponse} from '../../api/projects/projects'
-import {GetDatastoresElemResponse} from '../../api/datastores/datastores'
+import {GetCurrentWorkspaceResponse} from '../../api/models/workspaces'
+import {GetProjectsElemResponse} from '../../api/models/projects'
+import {GetDatastoresElemResponse} from '../../api/models/datastores'
 
 export default class DatastoresGet extends BaseWithContext {
   private questions = [

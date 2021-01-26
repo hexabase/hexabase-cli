@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {FieldData, GetFieldSettingsResponse} from '../../api/fields/fields'
+import {FieldData, GetFieldSettingsResponse} from '../../api/models/fields'
 
 export default class FieldsUpdate extends BaseWithContext {
   private questions = [

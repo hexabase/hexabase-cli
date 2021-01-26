@@ -3,7 +3,7 @@ import {prompt} from 'enquirer'
 import Conf from 'conf'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {PostLoginResponse} from '../../api/auth/auth'
+import {PostLoginResponse} from '../../api/models/auth'
 
 const config = new Conf()
 

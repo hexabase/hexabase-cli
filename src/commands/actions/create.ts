@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {ActionData, ActionName, CreateActionResponse} from '../../api/actions/actions'
+import {ActionData, ActionName, CreateActionResponse} from '../../api/models/actions'
 
 export default class ActionsCreate extends BaseWithContext {
   private questions = [

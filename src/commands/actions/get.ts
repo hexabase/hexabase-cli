@@ -1,7 +1,7 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import BaseWithContext from '../../base-with-context'
-import {GetActionsElemResponse} from '../../api/actions/actions'
+import {GetActionsElemResponse} from '../../api/models/actions'
 
 export default class ActionsGet extends BaseWithContext {
   static description = 'get actions of a datastore'

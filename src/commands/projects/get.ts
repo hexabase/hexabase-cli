@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import BaseWithContext from '../../base-with-context'
-import {GetCurrentWorkspaceResponse} from '../../api/workspaces/workspaces'
-import {GetProjectsElemResponse} from '../../api/projects/projects'
+import {GetCurrentWorkspaceResponse} from '../../api/models/workspaces'
+import {GetProjectsElemResponse} from '../../api/models/projects'
 
 export default class ProjectsGet extends BaseWithContext {
   static description = 'get projects in current workspace'

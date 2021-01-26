@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import {GetProjectRolesElemResponse} from '../../../api/roles/roles'
+import {GetProjectRolesElemResponse} from '../../../api/models/roles'
 import BaseWithContext from '../../../base-with-context'
 
 export default class ProjectsRolesGet extends BaseWithContext {

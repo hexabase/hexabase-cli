@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {GetWorkspacesResponse} from '../../api/workspaces/workspaces'
+import {GetWorkspacesResponse} from '../../api/models/workspaces'
 
 export default class WorkspacesUse extends BaseWithContext {
   private questions = [

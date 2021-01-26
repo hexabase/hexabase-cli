@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import fs from 'fs'
 import FormData from 'form-data'
 import BaseWithContext from '../../base-with-context'
-import {GetWorkspacesResponse} from '../../api/workspaces/workspaces'
+import {GetWorkspacesResponse} from '../../api/models/workspaces'
 
 const config = new Conf()
 

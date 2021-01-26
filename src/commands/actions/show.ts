@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import BaseWithContext from '../../base-with-context'
-import {GetActionSettingsResponse} from '../../api/actions/actions'
+import {GetActionSettingsResponse} from '../../api/models/actions'
 
 export default class ActionsShow extends BaseWithContext {
   static description = 'show details of an action'

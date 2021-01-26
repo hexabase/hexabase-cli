@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import BaseWithContext from '../../base-with-context'
-import {GetFieldSettingsResponse} from '../../api/fields/fields'
+import {GetFieldSettingsResponse} from '../../api/models/fields'
 
 export default class FieldsShow extends BaseWithContext {
   static description = 'show details of a field'

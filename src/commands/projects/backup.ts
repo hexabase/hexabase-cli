@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import Conf from 'conf'
 import download from 'download'
 import BaseWithContext from '../../base-with-context'
-import {GetTemplatesCategoryResponse} from '../../api/projects/templates'
+import {GetTemplatesCategoryResponse} from '../../api/models/templates'
 
 const config = new Conf()
 

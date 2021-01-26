@@ -4,7 +4,7 @@ import {Validator} from 'jsonschema'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {CreateProjectResponse, ProjectName} from '../../api/projects/projects'
+import {CreateProjectResponse, ProjectName} from '../../api/models/projects'
 
 const v = new Validator()
 

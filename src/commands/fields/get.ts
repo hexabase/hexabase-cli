@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import {GetFieldsElemResponse, GetFieldsResponse} from '../../api/fields/fields'
+import {GetFieldsElemResponse, GetFieldsResponse} from '../../api/models/fields'
 import BaseWithContext from '../../base-with-context'
 
 export default class FieldsGet extends BaseWithContext {

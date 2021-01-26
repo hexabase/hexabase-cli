@@ -2,8 +2,8 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {defaults} from '../../api/fields/data-types'
-import {CreateFieldResponse, FieldData, FieldName} from '../../api/fields/fields'
+import {defaults} from '../../api/models/data-types'
+import {CreateFieldResponse, FieldData, FieldName} from '../../api/models/fields'
 
 export default class FieldsCreate extends BaseWithContext {
   private questions = [

@@ -2,8 +2,8 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {GetTemplatesCategoryResponse} from '../../api/projects/templates'
-import {CreateProjectData, CreateProjectResponse, ProjectName} from '../../api/projects/projects'
+import {GetTemplatesCategoryResponse} from '../../api/models/templates'
+import {CreateProjectData, CreateProjectResponse, ProjectName} from '../../api/models/projects'
 
 export default class ProjectsCreate extends BaseWithContext {
   private questions = [
