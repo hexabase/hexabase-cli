@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import * as ws from '../../api/workspaces/workspaces'
-import * as pj from '../../api/projects/projects'
 import BaseWithContext from '../../base-with-context'
+import {GetCurrentWorkspaceResponse} from '../../api/workspaces/workspaces'
+import {GetProjectsElemResponse} from '../../api/projects/projects'
 
 export default class ProjectsGet extends BaseWithContext {
   static description = 'get projects in current workspace'
@@ -16,8 +16,11 @@ export default class ProjectsGet extends BaseWithContext {
   async run() {
     const {flags} = this.parse(ProjectsGet)
 
-    const currentWorkspace = await ws.current(this.currentContext)
-    const projects = await pj.get(this.currentContext, currentWorkspace.workspace_id)
+    let url = '/api/v0/workspacecurrent'
+    const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+
+    url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
+    const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
 
     const columns = {
       application_id: {

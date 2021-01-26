@@ -51,20 +51,3 @@ export const get = async (currentContext: string): Promise<GetWorkspacesResponse
     throw error
   }
 }
-
-export const current = async (currentContext: string): Promise<GetCurrentWorkspaceResponse> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/workspacecurrent`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    const {data}: {data: GetCurrentWorkspaceResponse} = await axios.get(url, requestConfig)
-    return data
-  } catch (error) {
-    throw error
-  }
-}
