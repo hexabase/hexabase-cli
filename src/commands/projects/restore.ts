@@ -1,10 +1,14 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
+import Conf from 'conf/dist/source'
 import cli from 'cli-ux'
 import chalk from 'chalk'
+import fs from 'fs'
+import FormData from 'form-data'
 import BaseWithContext from '../../base-with-context'
-import * as ws from '../../api/workspaces/workspaces'
-import * as tmp from '../../api/projects/templates'
+import {GetWorkspacesResponse} from '../../api/workspaces/workspaces'
+
+const config = new Conf()
 
 export default class ProjectsRestore extends BaseWithContext {
   private questions = [
@@ -52,7 +56,8 @@ export default class ProjectsRestore extends BaseWithContext {
         flags.name = await prompt(this.questions[0]).then(({projectName}: any) => projectName)
       }
 
-      const workspaceResponse = await ws.get(this.currentContext)
+      const url = '/api/v0/workspaces'
+      const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
       const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
         return ws.workspace_id === workspaceResponse.current_workspace_id
       })
@@ -69,7 +74,19 @@ export default class ProjectsRestore extends BaseWithContext {
 
       if (shouldProceed) {
         cli.action.start(`restoring template from file ${chalk.cyan(args.file)}`)
-        await tmp.uploadTemplate(this.currentContext, flags.name!, args.file)
+        const url = '/api/v0/templates/upload'
+        const form = new FormData()
+        form.append('file', fs.createReadStream(args.file))
+        form.append('name', flags.name)
+
+        const token = config.get(`hexabase.${this.currentContext}.token`)
+        const requestConfig = {
+          headers: {
+            authorization: `Bearer ${token}`,
+            ...form.getHeaders(),
+          },
+        }
+        await this.hexaapi.post(url, form, requestConfig)
         cli.action.stop()
       } else {
         this.log(chalk.red('restoring  aborted'))
