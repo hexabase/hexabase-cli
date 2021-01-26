@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import * as rl from '../../../api/roles/roles'
+import {GetProjectRolesElemResponse} from '../../../api/roles/roles'
 import BaseWithContext from '../../../base-with-context'
 
 export default class ProjectsRolesGet extends BaseWithContext {
@@ -23,7 +23,8 @@ export default class ProjectsRolesGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(ProjectsRolesGet)
 
-    const roles = await rl.get(this.currentContext, args.project_id)
+    const url = `/api/v0/applications/${args.project_id}/roles`
+    const {data: roles} = await this.hexaapi.get<GetProjectRolesElemResponse[]>(url)
 
     const columns = {
       role_id: {
