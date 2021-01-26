@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
 import chalk from 'chalk'
-import * as ws from '../../api/workspaces/workspaces'
 import BaseWithContext from '../../base-with-context'
+import {GetWorkspacesResponse} from '../../api/workspaces/workspaces'
 
 export default class WorkspacesGet extends BaseWithContext {
   static description = 'get workspaces from hexabase'
@@ -16,7 +16,8 @@ export default class WorkspacesGet extends BaseWithContext {
   async run() {
     const {flags} = this.parse(WorkspacesGet)
 
-    const workspaceResponse = await ws.get(this.currentContext)
+    const url = '/api/v0/workspaces'
+    const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
     const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
       return ws.workspace_id === workspaceResponse.current_workspace_id
     })
