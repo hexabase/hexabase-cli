@@ -24,23 +24,6 @@ export interface GetProjectsElemResponse {
 
 const config = new Conf()
 
-export const create = async (currentContext: string, data: CreateProjectData): Promise<CreateProjectResponse> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/applications`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    const {data: responseData}: {data: CreateProjectResponse} = await axios.post(url, data, requestConfig)
-    return responseData
-  } catch (error) {
-    throw error
-  }
-}
-
 export const get = async (currentContext: string, w_id: string): Promise<GetProjectsElemResponse[]> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context

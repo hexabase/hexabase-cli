@@ -1,9 +1,9 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
-import * as tmp from '../../api/projects/templates'
-import * as pj from '../../api/projects/projects'
 import BaseWithContext from '../../base-with-context'
+import {GetTemplatesCategoryResponse} from '../../api/projects/templates'
+import {CreateProjectData, CreateProjectResponse, ProjectName} from '../../api/projects/projects'
 
 export default class ProjectsCreate extends BaseWithContext {
   private questions = [
@@ -41,14 +41,15 @@ export default class ProjectsCreate extends BaseWithContext {
   async run() {
     this.parse(ProjectsCreate)
 
-    const templateCategories = await tmp.get(this.currentContext)
+    let url = '/api/v0/templates'
+    const {data: templates} = await this.hexaapi.get<GetTemplatesCategoryResponse>(url)
     const initalChoice = [{
       name: 'none',
       message: 'none',
       value: 'none',
       hint: '',
     }]
-    this.questions[0].choices = templateCategories.reduce((acc, ctg) => {
+    this.questions[0].choices = templates.categories.reduce((acc, ctg) => {
       ctg.templates.forEach(tmp => {
         const elem = {
           name: tmp.tp_id,
@@ -61,15 +62,16 @@ export default class ProjectsCreate extends BaseWithContext {
     }, initalChoice) as never[]
     const {template: template_id}: {template: string} = await prompt(this.questions[0])
 
-    const {projectName}: {projectName: pj.ProjectName} = await prompt(this.questions[1])
+    const {projectName}: {projectName: ProjectName} = await prompt(this.questions[1])
     this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
     this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
 
-    const data: pj.CreateProjectData = {name: projectName}
+    const data: CreateProjectData = {name: projectName}
     if (template_id !== 'none') {
       data.tp_id = template_id
     }
-    const {p_id} = await pj.create(this.currentContext, data)
-    this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
+    url = '/api/v0/applications'
+    const {data: project} = await this.hexaapi.post<CreateProjectResponse>(url, data)
+    this.log(`Task successfully queued. project_id set to: ${chalk.cyan(project.project_id)}`)
   }
 }
