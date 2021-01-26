@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import {cli} from 'cli-ux'
-import * as fld from '../../api/fields/fields'
+import {GetFieldsElemResponse, GetFieldsResponse} from '../../api/fields/fields'
 import BaseWithContext from '../../base-with-context'
 
 export default class FieldsGet extends BaseWithContext {
@@ -23,9 +23,10 @@ export default class FieldsGet extends BaseWithContext {
   async run() {
     const {args, flags} = this.parse(FieldsGet)
 
-    const fieldsResponse = await fld.get(this.currentContext, args.datastore_id)
-    let fields: fld.GetFieldsElemResponse[] = []
-    if (fieldsResponse?.fields) {
+    const url = `/api/v0/datastores/${args.datastore_id}/fields`
+    const {data: fieldsResponse} = await this.hexaapi.get<GetFieldsResponse>(url)
+    let fields: GetFieldsElemResponse[] = []
+    if (fieldsResponse.fields) {
       // fieldsResponse is returned as an object -> convert to sorted array
       fields = Object.keys(fieldsResponse.fields)
       .map(key => fieldsResponse.fields[key])
