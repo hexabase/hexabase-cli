@@ -66,23 +66,6 @@ export interface GetFieldSettingsResponse {
 
 const config = new Conf()
 
-export const getOne = async (currentContext: string, d_id: string, f_id: string): Promise<GetFieldSettingsResponse> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${d_id}/fields/${f_id}`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    const {data}: {data: GetFieldSettingsResponse} = await axios.get(url, requestConfig)
-    return data
-  } catch (error) {
-    throw error
-  }
-}
-
 export const update = async (currentContext: string, d_id: string, f_id: string, data: FieldData): Promise<void> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context

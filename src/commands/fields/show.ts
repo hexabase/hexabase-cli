@@ -1,6 +1,6 @@
 import {flags} from '@oclif/command'
 import BaseWithContext from '../../base-with-context'
-import * as fld from '../../api/fields/fields'
+import {GetFieldSettingsResponse} from '../../api/fields/fields'
 
 export default class FieldsShow extends BaseWithContext {
   static description = 'show details of a field'
@@ -26,7 +26,8 @@ export default class FieldsShow extends BaseWithContext {
   async run() {
     const {args} = this.parse(FieldsShow)
 
-    const fieldSettings = await fld.getOne(this.currentContext, args.datastore_id, args.field_id)
+    const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
+    const {data: fieldSettings} = await this.hexaapi.get<GetFieldSettingsResponse>(url)
 
     this.log(JSON.stringify(fieldSettings, undefined, 2))
   }
