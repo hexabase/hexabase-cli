@@ -2,7 +2,6 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as fld from '../../api/fields/fields'
 
 export default class FieldsDelete extends BaseWithContext {
   private questions = [
@@ -46,7 +45,8 @@ export default class FieldsDelete extends BaseWithContext {
     }
 
     if (shouldProceed) {
-      await fld.del(this.currentContext, args.datastore_id, args.field_id)
+      const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
+      await this.hexaapi.delete<void>(url)
       this.log('Field successfully deleted')
     } else {
       this.log(chalk.red('deletion  aborted'))
