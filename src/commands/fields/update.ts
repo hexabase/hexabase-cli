@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as fld from '../../api/fields/fields'
+import {FieldData, GetFieldSettingsResponse} from '../../api/fields/fields'
 
 export default class FieldsUpdate extends BaseWithContext {
   private questions = [
@@ -80,9 +80,12 @@ export default class FieldsUpdate extends BaseWithContext {
   async run() {
     const {args} = this.parse(FieldsUpdate)
 
-    const fieldSettings = await fld.getOne(this.currentContext, args.datastore_id, args.field_id)
+    const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
+    const {data: fieldSettings} = await this.hexaapi.get<GetFieldSettingsResponse>(url)
+
     this.questions[0].initial = fieldSettings.roles.filter(role => role.can_use).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
+
     this.questions[1].choices![0].initial = fieldSettings.display_id
     this.questions[1].choices![1].initial = fieldSettings.name.en
     this.questions[1].choices![2].initial = fieldSettings.name.ja
@@ -91,13 +94,13 @@ export default class FieldsUpdate extends BaseWithContext {
     this.log(`Field Name (en): ${chalk.cyan(fieldForm.en)}`)
     this.log(`Field Name (ja): ${chalk.cyan(fieldForm.ja)}`)
 
-    const data: fld.FieldData = {
+    const data: FieldData = {
       display_id: fieldForm.display_id,
       name: {en: fieldForm.en, ja: fieldForm.ja},
       roles: roles,
     }
 
-    await fld.update(this.currentContext, args.datastore_id, args.field_id, data)
+    await this.hexaapi.patch<void>(url, data)
     this.log('Field successfully updated')
   }
 }

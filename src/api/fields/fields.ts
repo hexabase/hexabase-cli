@@ -1,7 +1,3 @@
-import axios from 'axios'
-import Conf from 'conf'
-import {Context} from '../../base-with-context'
-
 export interface FieldData {
   name?:        FieldName;
   display_id?:  string;
@@ -62,22 +58,4 @@ export interface GetFieldSettingsResponse {
   num_info?: {[key: string]: string | boolean};
   calc_info?: {[key: string]: string | string[] | boolean};
   file_info?: {[key: string]: boolean};
-}
-
-const config = new Conf()
-
-export const update = async (currentContext: string, d_id: string, f_id: string, data: FieldData): Promise<void> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/datastores/${d_id}/fields/${f_id}`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const requestConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
-    await axios.patch(url, data, requestConfig)
-  } catch (error) {
-    throw error
-  }
 }
