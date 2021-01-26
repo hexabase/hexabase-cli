@@ -1,14 +1,11 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
-import Conf from 'conf/dist/source'
 import cli from 'cli-ux'
 import chalk from 'chalk'
 import fs from 'fs'
 import FormData from 'form-data'
 import BaseWithContext from '../../base-with-context'
 import {GetWorkspacesResponse} from '../../api/models/workspaces'
-
-const config = new Conf()
 
 export default class ProjectsRestore extends BaseWithContext {
   private questions = [
@@ -79,7 +76,7 @@ export default class ProjectsRestore extends BaseWithContext {
         form.append('file', fs.createReadStream(args.file))
         form.append('name', flags.name)
 
-        const token = config.get(`hexabase.${this.currentContext}.token`)
+        const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
         const requestConfig = {
           headers: {
             authorization: `Bearer ${token}`,

@@ -2,12 +2,9 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import cli from 'cli-ux'
 import chalk from 'chalk'
-import Conf from 'conf'
 import download from 'download'
 import BaseWithContext from '../../base-with-context'
 import {GetTemplatesCategoryResponse} from '../../api/models/templates'
-
-const config = new Conf()
 
 export default class ProjectsBackup extends BaseWithContext {
   private questions = [
@@ -84,7 +81,7 @@ export default class ProjectsBackup extends BaseWithContext {
       // download from apicore
       cli.action.start(`downloading template with tp_id ${chalk.cyan(args.template_id)}`)
       const url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
-      const token = config.get(`hexabase.${this.currentContext}.token`)
+      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
       const downloadOptions = {
         mode: '666',
         filename: flags.output,

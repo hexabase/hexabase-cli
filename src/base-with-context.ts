@@ -10,8 +10,6 @@ type Context = {
   sse: string;
 }
 
-const config = new Conf()
-
 export default abstract class BaseWithContext extends Command {
   static flags = {
     context: flags.string({char: 'c', description: 'use provided context instead of currently set context'}),
@@ -20,6 +18,8 @@ export default abstract class BaseWithContext extends Command {
   private _hexaapi!: APIClient
 
   private _hexasse!: SSEClient
+
+  hexaconfig = new Conf()
 
   context!: Context
 
@@ -39,19 +39,19 @@ export default abstract class BaseWithContext extends Command {
     if (flags.context) {
       this.currentContext = flags.context
     } else {
-      this.currentContext = config.get('current-context') as string
+      this.currentContext = this.hexaconfig.get('current-context') as string
       if (!this.currentContext) {
         throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
       }
     }
 
-    const context = config.get(`contexts.${this.currentContext}`)
+    const context = this.hexaconfig.get(`contexts.${this.currentContext}`)
     if (!context) {
       throw new Error(`No such context: ${chalk.red(flags.context)}`)
     }
     this.context = context as Context
 
-    const token = config.get(`hexabase.${this.currentContext}.token`)
+    const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
     if (!token) {
       throw new Error('Could not get login info')
     }

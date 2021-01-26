@@ -3,8 +3,6 @@ import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import Conf from 'conf'
 
-const config = new Conf()
-
 export default class ContextsUse extends Command {
   private questions = [
     {
@@ -28,10 +26,12 @@ export default class ContextsUse extends Command {
     },
   ]
 
+  hexaconfig = new Conf()
+
   async run() {
     const {args} = this.parse(ContextsUse)
 
-    const contexts = config.get('contexts')
+    const contexts = this.hexaconfig.get('contexts')
     if (!contexts) {
       return this.log('No context found')
     }
@@ -46,7 +46,7 @@ export default class ContextsUse extends Command {
       throw new Error('No such context')
     }
 
-    config.set('current-context', args.context)
+    this.hexaconfig.set('current-context', args.context)
     this.log(`Current-context successfully set to: ${chalk.cyan(args.context)}`)
   }
 }
