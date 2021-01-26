@@ -2,8 +2,8 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as fld from '../../api/fields/fields'
 import {defaults} from '../../api/fields/data-types'
+import {CreateFieldResponse, FieldData, FieldName} from '../../api/fields/fields'
 
 export default class FieldsCreate extends BaseWithContext {
   private questions = [
@@ -70,11 +70,11 @@ export default class FieldsCreate extends BaseWithContext {
 
     const {dataType}: {dataType: string} = await prompt(this.questions[0])
     const {roles}: {roles: string[]} = await prompt(this.questions[1])
-    const {fieldName}: {fieldName: fld.FieldName} = await prompt(this.questions[2])
+    const {fieldName}: {fieldName: FieldName} = await prompt(this.questions[2])
     this.log(`Field Name (en): ${chalk.cyan(fieldName.en)}`)
     this.log(`Field Name (ja): ${chalk.cyan(fieldName.ja)}`)
 
-    const data: fld.FieldData = {
+    const data: FieldData = {
       name: fieldName,
       dataType: defaults[dataType].dataType,
       as_title: defaults[dataType].asTitle,
@@ -85,7 +85,11 @@ export default class FieldsCreate extends BaseWithContext {
       roles: roles,
     }
 
-    const {field_id} = await fld.create(this.currentContext, args.datastore_id, data)
-    this.log(`Field successfully created. field_id set to: ${chalk.cyan(field_id)}`)
+    const url = `/api/v0/datastores/${args.datastore_id}/fields`
+    const {data: field} = await this.hexaapi.post<CreateFieldResponse>(url, data)
+    this.log(`Field successfully created:
+field_id: ${chalk.cyan(field.field_id)}
+display_id: ${chalk.cyan(field.display_id)}`
+    )
   }
 }

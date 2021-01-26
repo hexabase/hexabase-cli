@@ -90,7 +90,7 @@ export default class AppsInit extends BaseWithContext {
 
     const url = '/api/v0/applications'
     const {data: project} = await this.hexaapi.post<CreateProjectResponse>(url, hxSettings)
-    this.log(`task successfully queued:
+    this.log(`Task successfully queued:
 project_id: ${chalk.cyan(project.project_id)}`
     )
   }

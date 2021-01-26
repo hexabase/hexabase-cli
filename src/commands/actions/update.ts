@@ -100,6 +100,6 @@ export default class ActionsUpdate extends BaseWithContext {
     }
 
     await this.hexaapi.patch<void>(url, data)
-    this.log('action successfully updated')
+    this.log('Action successfully updated')
   }
 }

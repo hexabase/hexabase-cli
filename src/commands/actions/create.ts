@@ -76,9 +76,7 @@ export default class ActionsCreate extends BaseWithContext {
 
     const url = `/api/v0/datastores/${args.datastore_id}/actions`
     const {data: action} = await this.hexaapi.post<CreateActionResponse>(url, data)
-
-    this.log(`
-action successfully created:
+    this.log(`Action successfully created:
 action_id: ${chalk.cyan(action.action_id)}
 display_id: ${chalk.cyan(action.display_id)}`
     )
