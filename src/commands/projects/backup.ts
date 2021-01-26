@@ -2,8 +2,12 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import cli from 'cli-ux'
 import chalk from 'chalk'
-import * as tmp from '../../api/projects/templates'
+import Conf from 'conf'
+import download from 'download'
 import BaseWithContext from '../../base-with-context'
+import {GetTemplatesCategoryResponse} from '../../api/projects/templates'
+
+const config = new Conf()
 
 export default class ProjectsBackup extends BaseWithContext {
   private questions = [
@@ -48,13 +52,14 @@ export default class ProjectsBackup extends BaseWithContext {
 
     try {
       if (!args.template_id) {
-        const templateCategories = await tmp.get(this.currentContext)
+        const url = '/api/v0/templates'
+        const {data: templates} = await this.hexaapi.get<GetTemplatesCategoryResponse>(url)
 
-        if (templateCategories.length === 0) {
+        if (templates.categories.length === 0) {
           return this.log(chalk.red('No template found'))
         }
 
-        this.questions[0].choices = templateCategories.reduce((acc, ctg) => {
+        this.questions[0].choices = templates.categories.reduce((acc, ctg) => {
           ctg.templates.forEach(tmp => {
             const elem = {
               name: tmp.tp_id,
@@ -78,7 +83,17 @@ export default class ProjectsBackup extends BaseWithContext {
 
       // download from apicore
       cli.action.start(`downloading template with tp_id ${chalk.cyan(args.template_id)}`)
-      await tmp.downloadTemplate(this.currentContext, args.template_id, flags.output!)
+      const url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
+      const token = config.get(`hexabase.${this.currentContext}.token`)
+      const downloadOptions = {
+        mode: '666',
+        filename: flags.output,
+        headers: {
+          accept: 'application/zip',
+          authorization: `Bearer ${token}`,
+        },
+      }
+      await download(url, './', downloadOptions)
       cli.action.stop()
     } finally {
       if (noOutputFlag) {

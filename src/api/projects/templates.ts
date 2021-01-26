@@ -1,29 +1,28 @@
 import axios from 'axios'
 import Conf from 'conf'
-import download from 'download'
 import fs from 'fs'
 import FormData from 'form-data'
 import {Context} from '../../base-with-context'
 
-interface GetTemplatesTemplateResponse{
+export interface GetTemplatesTemplateResponse{
   tp_id: string;
   name: string;
   description: string;
 }
 
-interface GetTemplatesCategoryResponse{
+export interface GetTemplatesCategoryElemResponse{
   category: string;
   templates: GetTemplatesTemplateResponse[];
 }
 
-interface GetTemplatesResponse{
+export interface GetTemplatesCategoryResponse{
   enabled: boolean;
-  categories: GetTemplatesCategoryResponse[];
+  categories: GetTemplatesCategoryElemResponse[];
 }
 
 const config = new Conf()
 
-export const get = async (currentContext: string): Promise<GetTemplatesCategoryResponse[]> => {
+export const get = async (currentContext: string): Promise<GetTemplatesCategoryElemResponse[]> => {
   try {
     const context = config.get(`contexts.${currentContext}`) as Context
     const url = `${context.server}/api/v0/templates`
@@ -33,27 +32,8 @@ export const get = async (currentContext: string): Promise<GetTemplatesCategoryR
         authorization: `Bearer ${token}`,
       },
     }
-    const {data}: {data: GetTemplatesResponse} = await axios.get(url, requestConfig)
+    const {data}: {data: GetTemplatesCategoryResponse} = await axios.get(url, requestConfig)
     return data.categories
-  } catch (error) {
-    throw error
-  }
-}
-
-export const downloadTemplate = async (currentContext: string, tp_id: string, fileoutput: string): Promise<void> => {
-  try {
-    const context = config.get(`contexts.${currentContext}`) as Context
-    const url = `${context.server}/api/v0/templates/${tp_id}/download`
-    const token = config.get(`hexabase.${currentContext}.token`)
-    const downloadOptions = {
-      mode: '666',
-      filename: fileoutput,
-      headers: {
-        accept: 'application/zip',
-        authorization: `Bearer ${token}`,
-      },
-    }
-    await download(url, './', downloadOptions)
   } catch (error) {
     throw error
   }
