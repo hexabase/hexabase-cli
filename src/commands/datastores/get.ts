@@ -1,10 +1,10 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import {cli} from 'cli-ux'
-import * as ws from '../../api/workspaces/workspaces'
-import * as pj from '../../api/projects/projects'
-import * as ds from '../../api/datastores/datastores'
 import BaseWithContext from '../../base-with-context'
+import {GetCurrentWorkspaceResponse} from '../../api/workspaces/workspaces'
+import {GetProjectsElemResponse} from '../../api/projects/projects'
+import {GetDatastoresElemResponse} from '../../api/datastores/datastores'
 
 export default class DatastoresGet extends BaseWithContext {
   private questions = [
@@ -35,8 +35,11 @@ export default class DatastoresGet extends BaseWithContext {
     const {args, flags} = this.parse(DatastoresGet)
 
     if (!args.project_id) {
-      const currentWorkspace = await ws.current(this.currentContext)
-      const projects = await pj.get(this.currentContext, currentWorkspace.workspace_id)
+      let url = '/api/v0/workspacecurrent'
+      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+
+      url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
+      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
       this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
@@ -48,7 +51,8 @@ export default class DatastoresGet extends BaseWithContext {
       args.project_id = project_id
     }
 
-    const datastores = await ds.get(this.currentContext, args.project_id)
+    const url = `/api/v0/applications/${args.project_id}/datastores`
+    const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
 
     const columns = {
       datastore_id: {

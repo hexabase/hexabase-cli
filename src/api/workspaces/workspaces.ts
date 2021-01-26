@@ -2,17 +2,17 @@ import axios from 'axios'
 import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
-interface GetWorkspacesElemResponse{
+export interface GetWorkspacesElemResponse{
   workspace_id: string;
   workspace_name: string;
 }
 
-interface GetWorkspacesResponse {
+export interface GetWorkspacesResponse {
   workspaces: GetWorkspacesElemResponse[];
   current_workspace_id: string;
 }
 
-interface GetCurrentWorkspaceResponse{
+export interface GetCurrentWorkspaceResponse{
   workspace_id: string;
 }
 

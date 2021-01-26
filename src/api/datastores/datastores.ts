@@ -2,7 +2,7 @@ import axios from 'axios'
 import Conf from 'conf'
 import {Context} from '../../base-with-context'
 
-interface GetDatastoresElemResponse {
+export interface GetDatastoresElemResponse {
   datastore_id: string;
   name: string;
   display_id: string;
