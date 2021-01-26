@@ -3,6 +3,7 @@ import {Input} from '@oclif/parser'
 import Conf from 'conf'
 import chalk from 'chalk'
 import {APIClient} from './api/api-client'
+import {SSEClient} from './api/sse-client'
 
 type Context = {
   server: string;
@@ -18,12 +19,18 @@ export default abstract class BaseWithContext extends Command {
 
   private _hexaapi!: APIClient
 
+  private _hexasse!: SSEClient
+
   context!: Context
 
   currentContext!: string | flags.IOptionFlag<string|undefined>
 
   get hexaapi(): APIClient {
     return this._hexaapi
+  }
+
+  get hexasse(): SSEClient {
+    return this._hexasse
   }
 
   async init() {
@@ -54,5 +61,6 @@ export default abstract class BaseWithContext extends Command {
       },
     }
     this._hexaapi = new APIClient(this.context.server, authConfig)
+    this._hexasse = new SSEClient(this.context.sse)
   }
 }
