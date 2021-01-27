@@ -3,7 +3,7 @@ import axios, {AxiosRequestConfig} from 'axios'
 export class APIClient {
   private _http: typeof axios;
 
-  constructor(private baseUrl: string, private baseConfig = {}) {
+  constructor(public baseUrl: string, public baseConfig = {}) {
     this._http = axios
   }
 
