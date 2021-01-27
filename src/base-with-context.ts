@@ -51,14 +51,14 @@ export default abstract class BaseWithContext extends Command {
     }
     this.context = context as Context
 
+    let authConfig = {}
     const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
-    if (!token) {
-      throw new Error('Could not get login info')
-    }
-    const authConfig = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
+    if (token) {
+      authConfig = {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
     }
     this._hexaapi = new APIClient(this.context.server, authConfig)
     this._hexasse = new SSEClient(this.context.sse)
