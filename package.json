@@ -60,20 +60,29 @@
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
+      "actions": {
+        "description": "manage ACTIONS in Hexabase"
+      },
       "apps": {
-        "description": "APPS topic"
+        "description": "download app template, init app"
       },
       "contexts": {
-        "description": "CONTEXTS topic"
+        "description": "configure CONTEXTS"
+      },
+      "datastores": {
+        "description": "manage DATASTORES in Hexabase"
+      },
+      "fields": {
+        "description": "manage FIELDS in Hexabase"
       },
       "logs": {
-        "description": "LOGS topic"
+        "description": "stream LOGS from Hexabase"
       },
       "projects": {
-        "description": "PROJECTS topic"
+        "description": "manage PROJECTS in Hexabase"
       },
       "workspaces": {
-        "description": "WORKSPACES topic"
+        "description": "manage WORKSPACES in Hexabase"
       }
     },
     "bin": "hx",
