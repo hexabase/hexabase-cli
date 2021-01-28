@@ -53,6 +53,7 @@ USAGE
 * [`hx projects:get`](#hx-projectsget)
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx projects:roles:get PROJECT_ID`](#hx-projectsrolesget-project_id)
+* [`hx statuses:get DATASTORE_ID`](#hx-statusesget-datastore_id)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
 
@@ -557,6 +558,32 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/projects/roles/get.ts)_
+
+## `hx statuses:get DATASTORE_ID`
+
+get statuses of a datastore
+
+```
+USAGE
+  $ hx statuses:get DATASTORE_ID
+
+ARGUMENTS
+  DATASTORE_ID  datastore_id from hexabase
+
+OPTIONS
+  -c, --context=context   use provided context instead of currently set context
+  -h, --help              show CLI help
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+```
+
+_See code: [src/commands/statuses/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.1.0/src/commands/statuses/get.ts)_
 
 ## `hx workspaces:get`
 

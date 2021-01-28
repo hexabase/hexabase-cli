@@ -81,6 +81,9 @@
       "projects": {
         "description": "manage PROJECTS in Hexabase"
       },
+      "statuses": {
+        "description": "manage STATUSES in Hexabase"
+      },
       "workspaces": {
         "description": "manage WORKSPACES in Hexabase"
       }
