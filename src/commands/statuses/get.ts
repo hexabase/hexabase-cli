@@ -4,7 +4,7 @@ import {GetStatusesElemResponse} from '../../api/models/statuses'
 import BaseWithContext from '../../base-with-context'
 
 export default class StatusesGet extends BaseWithContext {
-  static description = 'get statuses of a datastore'
+  static description = 'get statuses in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

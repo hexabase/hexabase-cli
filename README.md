@@ -19,7 +19,7 @@ $ npm install -g hexabase-cli
 $ hx COMMAND
 running command...
 $ hx (-v|--version|version)
-hexabase-cli/0.1.0 darwin-x64 node-v14.13.0
+hexabase-cli/0.1.0 darwin-x64 node-v14.15.4
 $ hx --help [COMMAND]
 USAGE
   $ hx COMMAND
@@ -59,7 +59,7 @@ USAGE
 
 ## `hx actions:create DATASTORE_ID`
 
-create action in a database
+create an action in a datastore
 
 ```
 USAGE
@@ -77,7 +77,7 @@ _See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cl
 
 ## `hx actions:delete DATASTORE_ID ACTION_ID`
 
-delete action of a database
+delete an action in a datastore
 
 ```
 USAGE
@@ -97,7 +97,7 @@ _See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cl
 
 ## `hx actions:get DATASTORE_ID [STATUS_ID]`
 
-get actions of a datastore
+get actions in a datastore
 
 ```
 USAGE
@@ -143,7 +143,7 @@ _See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/
 
 ## `hx actions:update DATASTORE_ID ACTION_ID`
 
-update action of a database
+update an action in a datastore
 
 ```
 USAGE
@@ -241,7 +241,7 @@ _See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/
 
 ## `hx contexts:login`
 
-log in to hexabase within current context
+login to hexabase within current context
 
 ```
 USAGE
@@ -259,7 +259,7 @@ _See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cl
 
 ## `hx contexts:set CONTEXT`
 
-set context entries (server, sse, etc)
+set context entries (server & sse)
 
 ```
 USAGE
@@ -321,7 +321,7 @@ _See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cl
 
 ## `hx fields:create DATASTORE_ID`
 
-create field of a database
+create a field in a datastore
 
 ```
 USAGE
@@ -339,7 +339,7 @@ _See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli
 
 ## `hx fields:delete DATASTORE_ID FIELD_ID`
 
-delete field of a database
+delete a field in a datastore
 
 ```
 USAGE
@@ -359,7 +359,7 @@ _See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli
 
 ## `hx fields:get DATASTORE_ID`
 
-get fields of a datastore
+get fields in a datastore
 
 ```
 USAGE
@@ -404,7 +404,7 @@ _See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/b
 
 ## `hx fields:update DATASTORE_ID FIELD_ID`
 
-update field of a database
+update a field in a datastore
 
 ```
 USAGE
@@ -561,7 +561,7 @@ _See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabas
 
 ## `hx statuses:get DATASTORE_ID`
 
-get statuses of a datastore
+get statuses in a datastore
 
 ```
 USAGE

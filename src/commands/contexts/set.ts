@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import Conf from 'conf'
 
 export default class ContextsSet extends Command {
-  static description = 'set context entries (server, sse, etc)'
+  static description = 'set context entries (server & sse)'
 
   static flags = {
     help: flags.help({char: 'h'}),

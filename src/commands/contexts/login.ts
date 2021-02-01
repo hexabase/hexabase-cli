@@ -18,7 +18,7 @@ export default class ContextsLogin extends BaseWithContext {
     },
   ]
 
-  static description = 'log in to hexabase within current context'
+  static description = 'login to hexabase within current context'
 
   static aliases = ['login']
 
