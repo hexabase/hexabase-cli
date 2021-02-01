@@ -50,7 +50,7 @@ export default class FieldsCreate extends BaseWithContext {
     },
   ]
 
-  static description = 'create field of a database'
+  static description = 'create a field in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

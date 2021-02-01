@@ -12,7 +12,7 @@ export default class ActionsDelete extends BaseWithContext {
     },
   ]
 
-  static description = 'delete action of a database'
+  static description = 'delete an action in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

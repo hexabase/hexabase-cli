@@ -57,7 +57,7 @@ export default class ActionsUpdate extends BaseWithContext {
     },
   ]
 
-  static description = 'update action of a database'
+  static description = 'update an action in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

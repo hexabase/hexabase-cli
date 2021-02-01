@@ -4,7 +4,7 @@ import {GetFieldsElemResponse, GetFieldsResponse} from '../../api/models/fields'
 import BaseWithContext from '../../base-with-context'
 
 export default class FieldsGet extends BaseWithContext {
-  static description = 'get fields of a datastore'
+  static description = 'get fields in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

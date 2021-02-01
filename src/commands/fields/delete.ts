@@ -12,7 +12,7 @@ export default class FieldsDelete extends BaseWithContext {
     },
   ]
 
-  static description = 'delete field of a database'
+  static description = 'delete a field in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

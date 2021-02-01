@@ -57,7 +57,7 @@ export default class FieldsUpdate extends BaseWithContext {
     },
   ]
 
-  static description = 'update field of a database'
+  static description = 'update a field in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

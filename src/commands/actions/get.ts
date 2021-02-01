@@ -4,7 +4,7 @@ import BaseWithContext from '../../base-with-context'
 import {GetActionsElemResponse} from '../../api/models/actions'
 
 export default class ActionsGet extends BaseWithContext {
-  static description = 'get actions of a datastore'
+  static description = 'get actions in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,

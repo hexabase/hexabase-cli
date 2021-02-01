@@ -44,7 +44,7 @@ export default class ActionsCreate extends BaseWithContext {
     },
   ]
 
-  static description = 'create action in a database'
+  static description = 'create an action in a datastore'
 
   static flags = {
     ...BaseWithContext.flags,
