@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "author": "devops@b-eee.com",
   "bin": {
     "hx": "./bin/run"
@@ -60,20 +60,32 @@
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
+      "actions": {
+        "description": "manage ACTIONS in Hexabase"
+      },
       "apps": {
-        "description": "APPS topic"
+        "description": "download app template, init app"
       },
       "contexts": {
-        "description": "CONTEXTS topic"
+        "description": "configure CONTEXTS"
+      },
+      "datastores": {
+        "description": "manage DATASTORES in Hexabase"
+      },
+      "fields": {
+        "description": "manage FIELDS in Hexabase"
       },
       "logs": {
-        "description": "LOGS topic"
+        "description": "stream LOGS from Hexabase"
       },
       "projects": {
-        "description": "PROJECTS topic"
+        "description": "manage PROJECTS in Hexabase"
+      },
+      "statuses": {
+        "description": "manage STATUSES in Hexabase"
       },
       "workspaces": {
-        "description": "WORKSPACES topic"
+        "description": "manage WORKSPACES in Hexabase"
       }
     },
     "bin": "hx",

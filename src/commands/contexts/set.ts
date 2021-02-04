@@ -2,10 +2,8 @@ import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
 import Conf from 'conf'
 
-const config = new Conf()
-
 export default class ContextsSet extends Command {
-  static description = 'set context entries (server, sse, etc)'
+  static description = 'set context entries (server & sse)'
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -21,16 +19,18 @@ export default class ContextsSet extends Command {
     },
   ]
 
+  hexaconfig = new Conf()
+
   async run() {
     const {args, flags} = this.parse(ContextsSet)
     if (Object.keys(flags).length === 0 && typeof flags === 'object') {
       throw new Error('at least one flag needed')
     }
     Object.entries(flags).forEach(entry => {
-      config.set(`contexts.${args.context}.${entry[0]}`, entry[1])
+      this.hexaconfig.set(`contexts.${args.context}.${entry[0]}`, entry[1])
     })
-    if (!config.get('current-context')) {
-      config.set('current-context', args.context)
+    if (!this.hexaconfig.get('current-context')) {
+      this.hexaconfig.set('current-context', args.context)
       this.log(`Current-context set to: ${chalk.cyan(args.context)}`)
     }
   }
