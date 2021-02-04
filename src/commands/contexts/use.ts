@@ -1,19 +1,18 @@
 import {Command, flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
+import chalk from 'chalk'
 import Conf from 'conf'
 
-const config = new Conf()
-
-const questions = [
-  {
-    type: 'select',
-    name: 'context',
-    message: 'Select your current-context',
-    choices: [],
-  },
-]
-
 export default class ContextsUse extends Command {
+  private questions = [
+    {
+      type: 'select',
+      name: 'context',
+      message: 'Select your current-context',
+      choices: [],
+    },
+  ]
+
   static description = 'set current-context'
 
   static flags = {
@@ -27,25 +26,27 @@ export default class ContextsUse extends Command {
     },
   ]
 
+  hexaconfig = new Conf()
+
   async run() {
     const {args} = this.parse(ContextsUse)
 
-    const contexts = config.get('contexts')
+    const contexts = this.hexaconfig.get('contexts')
     if (!contexts) {
       return this.log('No context found')
     }
 
-    if (args.context) {
-      if (!Object.keys(contexts as string[]).includes(args.context)) {
-        throw new Error('No such context')
-      }
-      config.set('current-context', args.context)
-      return this.log('Current-context set successfully')
+    if (!args.context) {
+      this.questions[0].choices = Object.keys(contexts as string[]) as never[]
+      const {context}: {context: string} = await prompt(this.questions[0])
+      args.context = context
     }
 
-    questions[0].choices = Object.keys(contexts as string[]) as never[]
-    const {context}: {context: string} = await prompt(questions[0])
-    config.set('current-context', context)
-    this.log('Current-context set successfully')
+    if (!Object.keys(contexts as string[]).includes(args.context)) {
+      throw new Error('No such context')
+    }
+
+    this.hexaconfig.set('current-context', args.context)
+    this.log(`Current-context successfully set to: ${chalk.cyan(args.context)}`)
   }
 }

@@ -1,27 +1,24 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
-import Conf from 'conf'
+import {prompt} from 'enquirer'
 import chalk from 'chalk'
-import * as auth from '../../api/auth/auth'
 import BaseWithContext from '../../base-with-context'
-
-const config = new Conf()
-
-const questions = [
-  {
-    type: 'input',
-    name: 'email',
-    message: `Enter your ${chalk.cyan('email')}`,
-  },
-  {
-    type: 'password',
-    name: 'password',
-    message: `Enter your ${chalk.cyan('password')}`,
-  },
-]
+import {PostLoginResponse} from '../../api/models/auth'
 
 export default class ContextsLogin extends BaseWithContext {
-  static description = 'log in to hexabase within current context'
+  private questions = [
+    {
+      type: 'input',
+      name: 'email',
+      message: `Enter your ${chalk.cyan('email')}`,
+    },
+    {
+      type: 'password',
+      name: 'password',
+      message: `Enter your ${chalk.cyan('password')}`,
+    },
+  ]
+
+  static description = 'login to hexabase within current context'
 
   static aliases = ['login']
 
@@ -33,11 +30,15 @@ export default class ContextsLogin extends BaseWithContext {
   async run() {
     this.parse(ContextsLogin)
 
-    const {email}: {email: string} = await prompt(questions[0])
-    const {password}: {password: string} = await prompt(questions[1])
-    const token = await auth.login(this.currentContext, email, password)
-    config.set(`hexabase.${this.currentContext}.email`, email)
-    config.set(`hexabase.${this.currentContext}.token`, token)
+    const {email}: {email: string} = await prompt(this.questions[0])
+    const {password}: {password: string} = await prompt(this.questions[1])
+
+    const data = {email, password}
+    const url = '/api/v0/login'
+    const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
+
+    this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
+    this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
     this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
   }
 }

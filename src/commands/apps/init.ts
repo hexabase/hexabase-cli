@@ -1,10 +1,10 @@
 import {flags} from '@oclif/command'
 import {readFileSync, existsSync} from 'fs'
 import {Validator} from 'jsonschema'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import * as pj from '../../api/projects/projects'
+import {CreateProjectResponse, ProjectName} from '../../api/models/projects'
 
 const v = new Validator()
 
@@ -34,26 +34,27 @@ const settingsSchema = {
     },
   },
 }
-const questions = [
-  {
-    type: 'form',
-    name: 'pj_name',
-    message: 'Please provide a name for your project',
-    choices: [
-      {name: 'en', message: 'Project Name (en)', validate(value: string) {
-        return value.length > 0
-      }},
-      {name: 'ja', message: 'Project Name (ja)', validate(value: string) {
-        return value.length > 0
-      }},
-    ],
-    validate(value: any) {
-      return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
-    },
-  },
-]
 
 export default class AppsInit extends BaseWithContext {
+  private questions = [
+    {
+      type: 'form',
+      name: 'projectName',
+      message: 'Please provide the name for your project',
+      choices: [
+        {name: 'en', message: 'Project Name (en)', validate(value: string) {
+          return value.length > 0
+        }},
+        {name: 'ja', message: 'Project Name (ja)', validate(value: string) {
+          return value.length > 0
+        }},
+      ],
+      validate(value: any) {
+        return (value.en.length > 0 && value.ja.length > 0) ? true : 'Cannot be empty'
+      },
+    },
+  ]
+
   static description = 'initialize app with hexabase settings'
 
   static aliases = ['init']
@@ -75,10 +76,10 @@ export default class AppsInit extends BaseWithContext {
 
     // no 'name' field in hxSettings -> form prompt
     if (!Object.prototype.hasOwnProperty.call(hxSettings, 'name')) {
-      const {pj_name}: {pj_name: pj.ProjectName} = await prompt(questions[0])
-      this.log(`Project Name (en): ${chalk.cyan(pj_name.en)}`)
-      this.log(`Project Name (ja): ${chalk.cyan(pj_name.ja)}`)
-      Object.assign(hxSettings, {name: pj_name})
+      const {projectName}: {projectName: ProjectName} = await prompt(this.questions[0])
+      this.log(`Project Name (en): ${chalk.cyan(projectName.en)}`)
+      this.log(`Project Name (ja): ${chalk.cyan(projectName.ja)}`)
+      Object.assign(hxSettings, {name: projectName})
     }
 
     // json schema validation
@@ -87,9 +88,10 @@ export default class AppsInit extends BaseWithContext {
       throw new Error(`JSON Schema\n${validatorResult.toString()}`)
     }
 
-    const {p_id} = await pj.create(this.currentContext, hxSettings)
-    if (p_id) {
-      this.log(`Task successfully queued. project_id set to: ${chalk.cyan(p_id)}`)
-    }
+    const url = '/api/v0/applications'
+    const {data: project} = await this.hexaapi.post<CreateProjectResponse>(url, hxSettings)
+    this.log(`Task successfully queued:
+project_id: ${chalk.cyan(project.project_id)}`
+    )
   }
 }

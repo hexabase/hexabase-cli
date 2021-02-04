@@ -15,27 +15,27 @@ const urlMap: UrlMap = {
   vue: 'https://github.com/b-eee/hexa-vue-example1/archive/develop.zip',
 }
 
-const questions = [
-  {
-    type: 'input',
-    name: 'name',
-    message: `Specify the ${chalk.cyan('name')} of your app`,
-    validate: function (input: string) {
-      if (input.length === 0) {
-        return 'Cannot be empty'
-      }
-      return input.length !== 0
-    },
-  },
-  {
-    type: 'select',
-    name: 'template',
-    message: 'Select a template',
-    choices: ['vue'],
-  },
-]
-
 export default class AppsCreate extends Command {
+  private questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: `Specify the ${chalk.cyan('name')} of your app`,
+      validate: function (input: string) {
+        if (input.length === 0) {
+          return 'Cannot be empty'
+        }
+        return input.length !== 0
+      },
+    },
+    {
+      type: 'select',
+      name: 'template',
+      message: 'Select a template',
+      choices: ['vue'],
+    },
+  ]
+
   static description = 'download & create new app from a template';
 
   static flags = {
@@ -49,7 +49,7 @@ export default class AppsCreate extends Command {
     try {
       // prompt: name (if not specified as flag --name)
       if (noNameFlag) {
-        flags.name = await prompt(questions[0]).then(({name}: any) => name)
+        flags.name = await prompt(this.questions[0]).then(({name}: any) => name)
       }
       // check if folder already exists
       const isExistsDir = readdirSync('.', {withFileTypes: true}).some(
@@ -60,7 +60,7 @@ export default class AppsCreate extends Command {
       }
 
       // prompt: template
-      const {template}: { template: string } = await prompt(questions[1])
+      const {template}: { template: string } = await prompt(this.questions[1])
 
       // download from github
       cli.action.start(`initializing app with name ${chalk.cyan(flags.name)}`)

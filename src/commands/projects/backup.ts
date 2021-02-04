@@ -1,32 +1,33 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import cli from 'cli-ux'
 import chalk from 'chalk'
-import * as tmp from '../../api/projects/templates'
+import download from 'download'
 import BaseWithContext from '../../base-with-context'
-
-const questions = [
-  {
-    type: 'select',
-    name: 'template',
-    message: 'Select a template',
-    choices: [],
-  },
-  {
-    type: 'input',
-    name: 'output',
-    message: `Specify the ${chalk.cyan('output')} of the template file`,
-    initial: '',
-    validate: function (input: string) {
-      if (input.length === 0) {
-        return 'Cannot be empty'
-      }
-      return input.length !== 0
-    },
-  },
-]
+import {GetTemplatesCategoryResponse} from '../../api/models/templates'
 
 export default class ProjectsBackup extends BaseWithContext {
+  private questions = [
+    {
+      type: 'select',
+      name: 'template',
+      message: 'Select a template',
+      choices: [],
+    },
+    {
+      type: 'input',
+      name: 'output',
+      message: `Specify the ${chalk.cyan('output')} of the template file`,
+      initial: '',
+      validate: function (input: string) {
+        if (input.length === 0) {
+          return 'Cannot be empty'
+        }
+        return input.length !== 0
+      },
+    },
+  ]
+
   static description = 'download template file'
 
   static flags = {
@@ -37,8 +38,8 @@ export default class ProjectsBackup extends BaseWithContext {
 
   static args = [
     {
-      name: 'templateId',
-      description: 'templateId from hexabase',
+      name: 'template_id',
+      description: 'template_id from hexabase',
     },
   ]
 
@@ -47,14 +48,15 @@ export default class ProjectsBackup extends BaseWithContext {
     const noOutputFlag = typeof flags.output === 'undefined'
 
     try {
-      if (!args.templateId) {
-        const templateCategories = await tmp.get(this.currentContext)
+      if (!args.template_id) {
+        const url = '/api/v0/templates'
+        const {data: templates} = await this.hexaapi.get<GetTemplatesCategoryResponse>(url)
 
-        if (templateCategories.length === 0) {
+        if (templates.categories.length === 0) {
           return this.log(chalk.red('No template found'))
         }
 
-        questions[0].choices = templateCategories.reduce((acc, ctg) => {
+        this.questions[0].choices = templates.categories.reduce((acc, ctg) => {
           ctg.templates.forEach(tmp => {
             const elem = {
               name: tmp.tp_id,
@@ -66,19 +68,29 @@ export default class ProjectsBackup extends BaseWithContext {
           })
           return acc
         }, []) as never[]
-        const {template: template_id}: {template: string} = await prompt(questions[0])
-        args.templateId = template_id
+        const {template: template_id}: {template: string} = await prompt(this.questions[0])
+        args.template_id = template_id
       }
 
       // specify filename
       if (noOutputFlag) {
-        questions[1].initial = `${args.templateId}.zip`
-        flags.output = await prompt(questions[1]).then(({output}: any) => output)
+        this.questions[1].initial = `${args.template_id}.zip`
+        flags.output = await prompt(this.questions[1]).then(({output}: any) => output)
       }
 
       // download from apicore
-      cli.action.start(`downloading template with tp_id ${chalk.cyan(args.templateId)}`)
-      await tmp.downloadTemplate(this.currentContext, args.templateId, flags.output!)
+      cli.action.start(`downloading template with tp_id ${chalk.cyan(args.template_id)}`)
+      const url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
+      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+      const downloadOptions = {
+        mode: '666',
+        filename: flags.output,
+        headers: {
+          accept: 'application/zip',
+          authorization: `Bearer ${token}`,
+        },
+      }
+      await download(url, './', downloadOptions)
       cli.action.stop()
     } finally {
       if (noOutputFlag) {

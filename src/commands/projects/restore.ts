@@ -1,30 +1,32 @@
 import {flags} from '@oclif/command'
-import {prompt}  from 'enquirer'
+import {prompt} from 'enquirer'
 import cli from 'cli-ux'
 import chalk from 'chalk'
+import fs from 'fs'
+import FormData from 'form-data'
 import BaseWithContext from '../../base-with-context'
-import * as ws from '../../api/workspaces/workspaces'
-
-const questions = [
-  {
-    type: 'input',
-    name: 'pj_name',
-    message: 'Please provide a name for your project',
-    validate: function (input: string) {
-      if (input.length === 0) {
-        return 'Cannot be empty'
-      }
-      return input.length !== 0
-    },
-  },
-  {
-    type: 'confirm',
-    name: 'confirm',
-    message: 'Do you want to proceed?',
-  },
-]
+import {GetWorkspacesResponse} from '../../api/models/workspaces'
 
 export default class ProjectsRestore extends BaseWithContext {
+  private questions = [
+    {
+      type: 'input',
+      name: 'projectName',
+      message: 'Please provide the name for your project',
+      validate: function (input: string) {
+        if (input.length === 0) {
+          return 'Cannot be empty'
+        }
+        return input.length !== 0
+      },
+    },
+    {
+      type: 'confirm',
+      name: 'confirm',
+      message: 'Do you want to proceed?',
+    },
+  ]
+
   static description = 'restore a project from a template file'
 
   static flags = {
@@ -48,10 +50,11 @@ export default class ProjectsRestore extends BaseWithContext {
 
     try {
       if (noNameFlag) {
-        flags.name = await prompt(questions[0]).then(({pj_name}: any) => pj_name)
+        flags.name = await prompt(this.questions[0]).then(({projectName}: any) => projectName)
       }
 
-      const workspaceResponse = await ws.get(this.currentContext)
+      const url = '/api/v0/workspaces'
+      const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
       const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
         return ws.workspace_id === workspaceResponse.current_workspace_id
       })
@@ -63,12 +66,24 @@ export default class ProjectsRestore extends BaseWithContext {
         this.log(`You are about to restore the template to:
   workspace: ${chalk.cyan(currentWorkspace?.workspace_name)}
   context: ${chalk.cyan(this.currentContext)}`)
-        shouldProceed = await prompt(questions[1]).then(({confirm}: any) => confirm as boolean)
+        shouldProceed = await prompt(this.questions[1]).then(({confirm}: any) => confirm as boolean)
       }
 
       if (shouldProceed) {
         cli.action.start(`restoring template from file ${chalk.cyan(args.file)}`)
-        // await tmp.uploadTemplate(this.currentContext, flags.name!, args.file)
+        const url = '/api/v0/templates/upload'
+        const form = new FormData()
+        form.append('file', fs.createReadStream(args.file))
+        form.append('name', flags.name)
+
+        const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+        const requestConfig = {
+          headers: {
+            authorization: `Bearer ${token}`,
+            ...form.getHeaders(),
+          },
+        }
+        await this.hexaapi.post(url, form, requestConfig)
         cli.action.stop()
       } else {
         this.log(chalk.red('restoring  aborted'))
