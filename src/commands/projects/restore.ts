@@ -86,7 +86,7 @@ export default class ProjectsRestore extends BaseWithContext {
         await this.hexaapi.post(url, form, requestConfig)
         cli.action.stop()
       } else {
-        this.log(chalk.red('restoring  aborted'))
+        this.log(chalk.red('restoring aborted'))
       }
     } finally {
       if (noNameFlag) {
