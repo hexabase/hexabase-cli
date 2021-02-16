@@ -32,6 +32,7 @@ USAGE
 * [`hx actions:delete DATASTORE_ID ACTION_ID`](#hx-actionsdelete-datastore_id-action_id)
 * [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
 * [`hx actions:scripts:download ACTION_ID`](#hx-actionsscriptsdownload-action_id)
+* [`hx actions:scripts:upload ACTION_ID FILE`](#hx-actionsscriptsupload-action_id-file)
 * [`hx actions:show DATASTORE_ID ACTION_ID`](#hx-actionsshow-datastore_id-action_id)
 * [`hx actions:update DATASTORE_ID ACTION_ID`](#hx-actionsupdate-datastore_id-action_id)
 * [`hx apps:create`](#hx-appscreate)
@@ -145,6 +146,30 @@ ALIASES
 ```
 
 _See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/scripts/download.ts)_
+
+## `hx actions:scripts:upload ACTION_ID FILE`
+
+upload actionscript file
+
+```
+USAGE
+  $ hx actions:scripts:upload ACTION_ID FILE
+
+ARGUMENTS
+  ACTION_ID  action_id from hexabase
+  FILE       file to be uploaded, e.g. script.js
+
+OPTIONS
+  -c, --context=context  use provided context instead of currently set context
+  -h, --help             show CLI help
+  -t, --type=post|pre    (required) script type
+  -y, --yes              skip confirmation
+
+ALIASES
+  $ hx scripts:upload
+```
+
+_See code: [src/commands/actions/scripts/upload.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/scripts/upload.ts)_
 
 ## `hx actions:show DATASTORE_ID ACTION_ID`
 
