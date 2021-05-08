@@ -59,6 +59,24 @@ USAGE
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
 
+# Commands Aliases
+
+* hx env : [`hx contexts:get`](#hx-contextsget)
+* hx use : [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
+* hx login : [`hx contexts:login`](#hx-contextslogin)
+* hx ws : [`hx workspaces:get`](#hx-workspacesget)
+* hx select : [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
+* hx sel : [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
+* hx pj : [`hx projects:get`](#hx-projectsget)
+* hx ds : [`hx datastores:get [PROJECT_ID]`](#hx-datastoresget-project_id)
+* hx fd : [`hx fields:get DATASTORE_ID`](#hx-fieldsget-datastore_id)
+* hx ac : [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
+* hx st : [`hx statuses:get DATASTORE_ID`](#hx-statusesget-datastore_id)
+* hx as:get : [`hx actions:scripts:download ACTION_ID`](#hx-actionsscriptsdownload-action_id)
+* hx as:put : [`hx actions:scripts:upload ACTION_ID FILE`](#hx-actionsscriptsupload-action_id-file)
+
+# Commands Details
+
 ## `hx actions:create DATASTORE_ID`
 
 create an action in a datastore
