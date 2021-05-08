@@ -14,6 +14,7 @@ export default class ContextsUse extends Command {
   ]
 
   static description = 'set current-context'
+  static aliases = ['use']
 
   static flags = {
     help: flags.help({char: 'h'}),

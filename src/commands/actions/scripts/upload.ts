@@ -17,7 +17,7 @@ export default class ActionsScriptsUpload extends BaseWithContext {
 
   static description = 'upload actionscript file'
 
-  static aliases = ['scripts:upload']
+  static aliases = ['scripts:upload', 'as:put']
 
   static flags = {
     ...BaseWithContext.flags,

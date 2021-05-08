@@ -5,7 +5,7 @@ import Conf from 'conf'
 
 export default class ContextsGet extends Command {
   static description = 'get contexts'
-
+  static aliases = ['env']
   static flags = {
     help: flags.help({char: 'h'}),
     ...cli.table.flags(),

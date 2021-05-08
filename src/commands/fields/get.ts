@@ -5,7 +5,7 @@ import BaseWithContext from '../../base-with-context'
 
 export default class FieldsGet extends BaseWithContext {
   static description = 'get fields in a datastore'
-
+  static aliases = ['fd', 'fields']
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),

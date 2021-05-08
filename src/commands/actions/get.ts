@@ -5,7 +5,7 @@ import {GetActionsElemResponse} from '../../api/models/actions'
 
 export default class ActionsGet extends BaseWithContext {
   static description = 'get actions in a datastore'
-
+  static aliases = ['ac']
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
