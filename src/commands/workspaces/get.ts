@@ -6,7 +6,7 @@ import {GetWorkspacesResponse} from '../../api/models/workspaces'
 
 export default class WorkspacesGet extends BaseWithContext {
   static description = 'get workspaces from hexabase'
-
+  static aliases = ['ws', 'workspaces']
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),

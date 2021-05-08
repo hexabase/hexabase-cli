@@ -17,6 +17,7 @@ export default class DatastoresGet extends BaseWithContext {
   ]
 
   static description = 'get datastores within a project'
+  static aliases = ['ds', 'datastores']
 
   static flags = {
     ...BaseWithContext.flags,
