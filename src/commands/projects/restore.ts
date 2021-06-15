@@ -28,6 +28,7 @@ export default class ProjectsRestore extends BaseWithContext {
   ]
 
   static description = 'restore a project from a template file'
+  static aliases = ['pj:restore']
 
   static flags = {
     ...BaseWithContext.flags,

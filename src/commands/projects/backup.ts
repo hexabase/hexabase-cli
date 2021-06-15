@@ -29,6 +29,7 @@ export default class ProjectsBackup extends BaseWithContext {
   ]
 
   static description = 'download template file'
+  static aliases = ['pj:backup']
 
   static flags = {
     ...BaseWithContext.flags,
