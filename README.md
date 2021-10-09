@@ -55,6 +55,7 @@ USAGE
 * [`hx projects:get`](#hx-projectsget)
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx projects:roles:get PROJECT_ID`](#hx-projectsrolesget-project_id)
+* [`hx projects:save [FILE]`](#hx-projectssave-file)
 * [`hx statuses:get [DATASTORE_ID]`](#hx-statusesget-datastore_id)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
@@ -630,6 +631,22 @@ OPTIONS
 ```
 
 _See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/roles/get.ts)_
+
+## `hx projects:save [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ hx projects:save [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/projects/save.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/save.ts)_
 
 ## `hx statuses:get [DATASTORE_ID]`
 
