@@ -116,26 +116,24 @@ export default class ProjectsSave extends BaseWithContext {
       return queueTask.status.id < 2
     }
     const {data} = await poller.poll(fn, retryCondition, 1000)
+    cli.action.stop()
     const queueTask = data[Object.keys(data)[0]]
 
     let taskStatusMessage = ''
     switch (queueTask?.status?.id) {
     case 2:
-      taskStatusMessage = 'Template successfully created'
+      taskStatusMessage = `Template with tp_id ${chalk.cyan(template.tp_id)} successfully created`
       break
     case 3:
     case 4:
-      taskStatusMessage = 'Template creation unsuccessful'
-      break
+      throw new Error('Template creation unsuccessful')
     default:
       taskStatusMessage = 'Could not determine task status'
     }
-
-    cli.action.stop()
     this.log(taskStatusMessage)
 
+    // download from apicore
     if (flags.download) {
-      // download from apicore
       cli.action.start(`Downloading template with tp_id ${chalk.cyan(template.tp_id)}`)
       url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
       const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
