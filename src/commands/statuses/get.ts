@@ -24,6 +24,7 @@ export default class StatusesGet extends BaseWithContext {
   ]
 
   static description = 'get statuses in a datastore'
+
   static aliases = ['st', 'status']
 
   static flags = {
@@ -57,7 +58,7 @@ export default class StatusesGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      
+
       url = `/api/v0/applications/${project_id}/datastores`
       const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {

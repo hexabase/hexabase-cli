@@ -96,6 +96,7 @@
   },
   "repository": "b-eee/hexabase-cli",
   "scripts": {
+    "format": "eslint . --ext .ts --config .eslintrc --fix",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
