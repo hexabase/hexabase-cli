@@ -135,7 +135,7 @@ export default class ProjectsSave extends BaseWithContext {
     // download from apicore
     if (flags.download) {
       cli.action.start(`Downloading template with tp_id ${chalk.cyan(template.tp_id)}`)
-      url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
+      url = `${this.context.server}/api/v0/templates/${template.tp_id}/download`
       const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
       const downloadOptions = {
         mode: '666',
