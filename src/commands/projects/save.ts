@@ -2,6 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import cli from 'cli-ux'
+import download from 'download'
 import BaseWithContext from '../../base-with-context'
 import {Poller} from '../../helpers/poller'
 import {GetCurrentWorkspaceResponse} from '../../api/models/workspaces'
@@ -47,6 +48,10 @@ export default class ProjectsSave extends BaseWithContext {
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
+    download: flags.string({
+      char: 'd',
+      description: 'downloaded output file (e.g. my_template.zip)',
+    }),
   }
 
   static args = [
@@ -57,7 +62,7 @@ export default class ProjectsSave extends BaseWithContext {
   ]
 
   async run() {
-    const {args} = this.parse(ProjectsSave)
+    const {args, flags} = this.parse(ProjectsSave)
 
     if (!args.project_id) {
       let url = '/api/v0/workspacecurrent'
@@ -116,17 +121,34 @@ export default class ProjectsSave extends BaseWithContext {
     let taskStatusMessage = ''
     switch (queueTask?.status?.id) {
     case 2:
-      taskStatusMessage = 'Project template successfully created'
+      taskStatusMessage = 'Template successfully created'
       break
     case 3:
     case 4:
-      taskStatusMessage = 'Project template creation unsuccessful'
+      taskStatusMessage = 'Template creation unsuccessful'
       break
     default:
       taskStatusMessage = 'Could not determine task status'
     }
 
-    cli.action.stop('')
+    cli.action.stop()
     this.log(taskStatusMessage)
+
+    if (flags.download) {
+      // download from apicore
+      cli.action.start(`Downloading template with tp_id ${chalk.cyan(template.tp_id)}`)
+      url = `${this.context.server}/api/v0/templates/${args.template_id}/download`
+      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+      const downloadOptions = {
+        mode: '666',
+        filename: flags.download,
+        headers: {
+          accept: 'application/zip',
+          authorization: `Bearer ${token}`,
+        },
+      }
+      await download(url, './', downloadOptions)
+      cli.action.stop()
+    }
   }
 }
