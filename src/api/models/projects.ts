@@ -28,6 +28,7 @@ export interface CreateNewProjectTemplateData{
 
 export interface CreateNewProjectTemplateResponse {
   stream_id: string;
+  tp_id: string;
 }
 
 export interface TemplateForm{
