@@ -50,7 +50,7 @@ export default class ProjectsSave extends BaseWithContext {
     help: flags.help({char: 'h'}),
     download: flags.string({
       char: 'd',
-      description: 'downloaded output file (e.g. my_template.zip)',
+      description: 'download output file (e.g. my_template.zip)',
     }),
   }
 

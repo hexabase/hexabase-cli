@@ -645,7 +645,7 @@ ARGUMENTS
 
 OPTIONS
   -c, --context=context    use provided context instead of currently set context
-  -d, --download=download  downloaded output file (e.g. my_template.zip)
+  -d, --download=download  download output file (e.g. my_template.zip)
   -h, --help               show CLI help
 ```
 
