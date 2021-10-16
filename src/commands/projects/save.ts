@@ -6,7 +6,7 @@ import BaseWithContext from '../../base-with-context'
 import {Poller} from '../../helpers/poller'
 import {GetCurrentWorkspaceResponse} from '../../api/models/workspaces'
 import {GetProjectsElemResponse, CreateNewProjectTemplateData, CreateNewProjectTemplateResponse, TemplateForm} from '../../api/models/projects'
-import {TasksObject} from '../../api/models/queue'
+import {TasksObject} from '../../api/models/tasks'
 
 export default class ProjectsSave extends BaseWithContext {
   private questions = [
