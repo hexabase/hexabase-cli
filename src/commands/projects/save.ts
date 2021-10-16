@@ -1,9 +1,12 @@
 import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
+import cli from 'cli-ux'
 import BaseWithContext from '../../base-with-context'
+import {Poller} from '../../helpers/poller'
 import {GetCurrentWorkspaceResponse} from '../../api/models/workspaces'
 import {GetProjectsElemResponse, CreateNewProjectTemplateData, CreateNewProjectTemplateResponse, TemplateForm} from '../../api/models/projects'
+import {TasksObject} from '../../api/models/queue'
 
 export default class ProjectsSave extends BaseWithContext {
   private questions = [
@@ -89,14 +92,41 @@ export default class ProjectsSave extends BaseWithContext {
     }
     const {includeHistories}: {includeHistories: boolean} = await prompt(this.questions[2])
 
-    const data: CreateNewProjectTemplateData = {
+    const newProjectReq: CreateNewProjectTemplateData = {
       project_id: args.project_id,
       include_histories: includeHistories,
       ...templateForm,
     }
-    const url = '/api/v0/templates'
-    const {data: template} = await this.hexaapi.post<CreateNewProjectTemplateResponse>(url, data)
+    let url = '/api/v0/templates'
+    const {data: template} = await this.hexaapi.post<CreateNewProjectTemplateResponse>(url, newProjectReq)
 
-    this.log(`Task successfully queued. stream_id is: ${chalk.cyan(template.stream_id)}`)
+    cli.action.start('Task successfully queued')
+
+    const poller = new Poller(-1) // wait until we get a response
+    url = `/api/v0/tasks?category=SAVETEMPLATE&all=true&stream_id=${template.stream_id}`
+    const fn = () => this.hexaapi.get<TasksObject>(url)
+    const retryCondition = ({data}: {data: TasksObject}) => {
+      const queueTask = data[Object.keys(data)[0]]
+      // StatusQueued: 0, StatusProgress: 1, StatusDone: 2, StatusError: 3, StatusDead: 4
+      return queueTask.status.id < 2
+    }
+    const {data} = await poller.poll(fn, retryCondition, 1000)
+    const queueTask = data[Object.keys(data)[0]]
+
+    let taskStatusMessage = ''
+    switch (queueTask?.status?.id) {
+    case 2:
+      taskStatusMessage = 'Project template successfully created'
+      break
+    case 3:
+    case 4:
+      taskStatusMessage = 'Project template creation unsuccessful'
+      break
+    default:
+      taskStatusMessage = 'Could not determine task status'
+    }
+
+    cli.action.stop('')
+    this.log(taskStatusMessage)
   }
 }
