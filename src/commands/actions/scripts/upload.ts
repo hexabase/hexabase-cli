@@ -59,7 +59,7 @@ export default class ActionsScriptsUpload extends BaseWithContext {
     }
 
     if (shouldProceed) {
-      cli.action.start(`uploading ${flags.type}-script from file ${chalk.cyan(args.file)}`)
+      cli.action.start(`Uploading ${flags.type}-script from file ${chalk.cyan(args.file)}`)
       const url = `/api/v0/actions/${args.action_id}/actionscripts/upload`
       const form = new FormData()
       form.append('file', fs.createReadStream(args.file))
@@ -75,7 +75,7 @@ export default class ActionsScriptsUpload extends BaseWithContext {
       await this.hexaapi.post(url, form, requestConfig)
       cli.action.stop()
     } else {
-      this.log(chalk.red('uploading aborted'))
+      this.log(chalk.red('Uploading aborted'))
     }
   }
 }

@@ -24,7 +24,7 @@ export default class ContextsSet extends Command {
   async run() {
     const {args, flags} = this.parse(ContextsSet)
     if (Object.keys(flags).length === 0 && typeof flags === 'object') {
-      throw new Error('at least one flag needed')
+      throw new Error('At least one flag needed')
     }
     Object.entries(flags).forEach(entry => {
       this.hexaconfig.set(`contexts.${args.context}.${entry[0]}`, entry[1])
