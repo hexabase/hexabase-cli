@@ -49,7 +49,7 @@ export default class ActionsDelete extends BaseWithContext {
       await this.hexaapi.delete<void>(url)
       this.log('Action successfully deleted')
     } else {
-      this.log(chalk.red('deletion  aborted'))
+      this.log(chalk.red('Deletion  aborted'))
     }
   }
 }

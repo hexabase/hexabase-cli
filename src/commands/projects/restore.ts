@@ -28,6 +28,7 @@ export default class ProjectsRestore extends BaseWithContext {
   ]
 
   static description = 'restore a project from a template file'
+  static aliases = ['pj:restore']
 
   static flags = {
     ...BaseWithContext.flags,
@@ -70,7 +71,7 @@ export default class ProjectsRestore extends BaseWithContext {
       }
 
       if (shouldProceed) {
-        cli.action.start(`restoring template from file ${chalk.cyan(args.file)}`)
+        cli.action.start(`Restoring template from file ${chalk.cyan(args.file)}`)
         const url = '/api/v0/templates/upload'
         const form = new FormData()
         form.append('file', fs.createReadStream(args.file))
@@ -86,7 +87,7 @@ export default class ProjectsRestore extends BaseWithContext {
         await this.hexaapi.post(url, form, requestConfig)
         cli.action.stop()
       } else {
-        this.log(chalk.red('restoring aborted'))
+        this.log(chalk.red('Restoring aborted'))
       }
     } finally {
       if (noNameFlag) {

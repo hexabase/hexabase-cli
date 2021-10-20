@@ -22,9 +22,11 @@ export default class FieldsGet extends BaseWithContext {
       choices: [],
     },
   ]
-  
+
   static description = 'get fields in a datastore'
+
   static aliases = ['fd', 'fields']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -56,7 +58,7 @@ export default class FieldsGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      
+
       url = `/api/v0/applications/${project_id}/datastores`
       const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {

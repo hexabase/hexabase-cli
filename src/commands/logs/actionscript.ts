@@ -25,7 +25,7 @@ export default class LogsActionscript extends BaseWithContext {
     this.hexasse.connect(`/sse?channel=${channel}`)
 
     if (!this.hexasse.source) {
-      throw new Error('could not establish connection')
+      throw new Error('Could not establish connection')
     }
 
     this.log(`Listening for logs on ${chalk.cyan(this.hexasse.baseUrl)}...`)

@@ -19,7 +19,7 @@ $ npm install -g hexabase-cli
 $ hx COMMAND
 running command...
 $ hx (-v|--version|version)
-hexabase-cli/0.2.0 darwin-x64 node-v14.15.4
+hexabase-cli/0.2.2 darwin-x64 node-v14.16.0
 $ hx --help [COMMAND]
 USAGE
   $ hx COMMAND
@@ -30,7 +30,7 @@ USAGE
 <!-- commands -->
 * [`hx actions:create DATASTORE_ID`](#hx-actionscreate-datastore_id)
 * [`hx actions:delete DATASTORE_ID ACTION_ID`](#hx-actionsdelete-datastore_id-action_id)
-* [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
+* [`hx actions:get [DATASTORE_ID] [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
 * [`hx actions:scripts:download ACTION_ID`](#hx-actionsscriptsdownload-action_id)
 * [`hx actions:scripts:upload ACTION_ID FILE`](#hx-actionsscriptsupload-action_id-file)
 * [`hx actions:show DATASTORE_ID ACTION_ID`](#hx-actionsshow-datastore_id-action_id)
@@ -45,7 +45,7 @@ USAGE
 * [`hx datastores:get [PROJECT_ID]`](#hx-datastoresget-project_id)
 * [`hx fields:create DATASTORE_ID`](#hx-fieldscreate-datastore_id)
 * [`hx fields:delete DATASTORE_ID FIELD_ID`](#hx-fieldsdelete-datastore_id-field_id)
-* [`hx fields:get DATASTORE_ID`](#hx-fieldsget-datastore_id)
+* [`hx fields:get [DATASTORE_ID]`](#hx-fieldsget-datastore_id)
 * [`hx fields:show DATASTORE_ID FIELD_ID`](#hx-fieldsshow-datastore_id-field_id)
 * [`hx fields:update DATASTORE_ID FIELD_ID`](#hx-fieldsupdate-datastore_id-field_id)
 * [`hx help [COMMAND]`](#hx-help-command)
@@ -55,27 +55,10 @@ USAGE
 * [`hx projects:get`](#hx-projectsget)
 * [`hx projects:restore FILE`](#hx-projectsrestore-file)
 * [`hx projects:roles:get PROJECT_ID`](#hx-projectsrolesget-project_id)
-* [`hx statuses:get DATASTORE_ID`](#hx-statusesget-datastore_id)
+* [`hx projects:save [PROJECT_ID]`](#hx-projectssave-project_id)
+* [`hx statuses:get [DATASTORE_ID]`](#hx-statusesget-datastore_id)
 * [`hx workspaces:get`](#hx-workspacesget)
 * [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
-
-# Commands Aliases
-
-* hx env : [`hx contexts:get`](#hx-contextsget)
-* hx use : [`hx contexts:use [CONTEXT]`](#hx-contextsuse-context)
-* hx login : [`hx contexts:login`](#hx-contextslogin)
-* hx ws : [`hx workspaces:get`](#hx-workspacesget)
-* hx select : [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
-* hx sel : [`hx workspaces:use [WORKSPACE_ID]`](#hx-workspacesuse-workspace_id)
-* hx pj : [`hx projects:get`](#hx-projectsget)
-* hx ds : [`hx datastores:get [PROJECT_ID]`](#hx-datastoresget-project_id)
-* hx fd : [`hx fields:get DATASTORE_ID`](#hx-fieldsget-datastore_id)
-* hx ac : [`hx actions:get DATASTORE_ID [STATUS_ID]`](#hx-actionsget-datastore_id-status_id)
-* hx st : [`hx statuses:get DATASTORE_ID`](#hx-statusesget-datastore_id)
-* hx as:get : [`hx actions:scripts:download ACTION_ID`](#hx-actionsscriptsdownload-action_id)
-* hx as:put : [`hx actions:scripts:upload ACTION_ID FILE`](#hx-actionsscriptsupload-action_id-file)
-
-# Commands Details
 
 ## `hx actions:create DATASTORE_ID`
 
@@ -93,7 +76,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/create.ts)_
+_See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/create.ts)_
 
 ## `hx actions:delete DATASTORE_ID ACTION_ID`
 
@@ -113,15 +96,15 @@ OPTIONS
   -y, --yes              skip confirmation
 ```
 
-_See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/delete.ts)_
+_See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/delete.ts)_
 
-## `hx actions:get DATASTORE_ID [STATUS_ID]`
+## `hx actions:get [DATASTORE_ID] [STATUS_ID]`
 
 get actions in a datastore
 
 ```
 USAGE
-  $ hx actions:get DATASTORE_ID [STATUS_ID]
+  $ hx actions:get [DATASTORE_ID] [STATUS_ID]
 
 ARGUMENTS
   DATASTORE_ID  datastore_id from hexabase
@@ -138,9 +121,12 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx ac
 ```
 
-_See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/get.ts)_
+_See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/get.ts)_
 
 ## `hx actions:scripts:download ACTION_ID`
 
@@ -161,9 +147,10 @@ OPTIONS
 
 ALIASES
   $ hx scripts:download
+  $ hx as:get
 ```
 
-_See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/scripts/download.ts)_
+_See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/scripts/download.ts)_
 
 ## `hx actions:scripts:upload ACTION_ID FILE`
 
@@ -185,9 +172,10 @@ OPTIONS
 
 ALIASES
   $ hx scripts:upload
+  $ hx as:put
 ```
 
-_See code: [src/commands/actions/scripts/upload.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/scripts/upload.ts)_
+_See code: [src/commands/actions/scripts/upload.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/scripts/upload.ts)_
 
 ## `hx actions:show DATASTORE_ID ACTION_ID`
 
@@ -206,7 +194,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/show.ts)_
+_See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/show.ts)_
 
 ## `hx actions:update DATASTORE_ID ACTION_ID`
 
@@ -225,7 +213,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/actions/update.ts)_
+_See code: [src/commands/actions/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/update.ts)_
 
 ## `hx apps:create`
 
@@ -240,7 +228,7 @@ OPTIONS
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/apps/create.ts)_
+_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/apps/create.ts)_
 
 ## `hx apps:init`
 
@@ -259,7 +247,7 @@ ALIASES
   $ hx init
 ```
 
-_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/apps/init.ts)_
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/apps/init.ts)_
 
 ## `hx autocomplete [SHELL]`
 
@@ -302,9 +290,12 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx env
 ```
 
-_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/contexts/get.ts)_
+_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/contexts/get.ts)_
 
 ## `hx contexts:login`
 
@@ -322,7 +313,7 @@ ALIASES
   $ hx login
 ```
 
-_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/contexts/login.ts)_
+_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/contexts/login.ts)_
 
 ## `hx contexts:set CONTEXT`
 
@@ -341,7 +332,7 @@ OPTIONS
   --sse=sse        SSE server, e.g. https://sse.hexabase.com
 ```
 
-_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/contexts/set.ts)_
+_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/contexts/set.ts)_
 
 ## `hx contexts:use [CONTEXT]`
 
@@ -356,9 +347,12 @@ ARGUMENTS
 
 OPTIONS
   -h, --help  show CLI help
+
+ALIASES
+  $ hx use
 ```
 
-_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/contexts/use.ts)_
+_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/contexts/use.ts)_
 
 ## `hx datastores:get [PROJECT_ID]`
 
@@ -382,9 +376,13 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx ds
+  $ hx datastores
 ```
 
-_See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/datastores/get.ts)_
+_See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/datastores/get.ts)_
 
 ## `hx fields:create DATASTORE_ID`
 
@@ -402,7 +400,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/fields/create.ts)_
+_See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/fields/create.ts)_
 
 ## `hx fields:delete DATASTORE_ID FIELD_ID`
 
@@ -422,15 +420,15 @@ OPTIONS
   -y, --yes              skip confirmation
 ```
 
-_See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/fields/delete.ts)_
+_See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/fields/delete.ts)_
 
-## `hx fields:get DATASTORE_ID`
+## `hx fields:get [DATASTORE_ID]`
 
 get fields in a datastore
 
 ```
 USAGE
-  $ hx fields:get DATASTORE_ID
+  $ hx fields:get [DATASTORE_ID]
 
 ARGUMENTS
   DATASTORE_ID  datastore_id from hexabase
@@ -446,9 +444,13 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx fd
+  $ hx fields
 ```
 
-_See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/fields/get.ts)_
+_See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/fields/get.ts)_
 
 ## `hx fields:show DATASTORE_ID FIELD_ID`
 
@@ -467,7 +469,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/fields/show.ts)_
+_See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/fields/show.ts)_
 
 ## `hx fields:update DATASTORE_ID FIELD_ID`
 
@@ -486,7 +488,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/fields/update.ts)_
+_See code: [src/commands/fields/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/fields/update.ts)_
 
 ## `hx help [COMMAND]`
 
@@ -521,7 +523,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/logs/actionscript.ts)_
+_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/logs/actionscript.ts)_
 
 ## `hx projects:backup [TEMPLATE_ID]`
 
@@ -540,7 +542,7 @@ OPTIONS
   -o, --output=output    output file
 ```
 
-_See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/projects/backup.ts)_
+_See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/backup.ts)_
 
 ## `hx projects:create`
 
@@ -555,7 +557,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/projects/create.ts)_
+_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/create.ts)_
 
 ## `hx projects:get`
 
@@ -576,9 +578,13 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx pj
+  $ hx projects
 ```
 
-_See code: [src/commands/projects/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/projects/get.ts)_
+_See code: [src/commands/projects/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/get.ts)_
 
 ## `hx projects:restore FILE`
 
@@ -598,7 +604,7 @@ OPTIONS
   -y, --yes              skip confirmation
 ```
 
-_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/projects/restore.ts)_
+_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/restore.ts)_
 
 ## `hx projects:roles:get PROJECT_ID`
 
@@ -624,15 +630,34 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/projects/roles/get.ts)_
+_See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/roles/get.ts)_
 
-## `hx statuses:get DATASTORE_ID`
+## `hx projects:save [PROJECT_ID]`
+
+save template from a project
+
+```
+USAGE
+  $ hx projects:save [PROJECT_ID]
+
+ARGUMENTS
+  PROJECT_ID  project_id from hexabase
+
+OPTIONS
+  -c, --context=context    use provided context instead of currently set context
+  -d, --download=download  download output file (e.g. my_template.zip)
+  -h, --help               show CLI help
+```
+
+_See code: [src/commands/projects/save.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/save.ts)_
+
+## `hx statuses:get [DATASTORE_ID]`
 
 get statuses in a datastore
 
 ```
 USAGE
-  $ hx statuses:get DATASTORE_ID
+  $ hx statuses:get [DATASTORE_ID]
 
 ARGUMENTS
   DATASTORE_ID  datastore_id from hexabase
@@ -648,9 +673,13 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx st
+  $ hx status
 ```
 
-_See code: [src/commands/statuses/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/statuses/get.ts)_
+_See code: [src/commands/statuses/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/statuses/get.ts)_
 
 ## `hx workspaces:get`
 
@@ -671,9 +700,13 @@ OPTIONS
   --no-truncate           do not truncate output to fit screen
   --output=csv|json|yaml  output in a more machine friendly format
   --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ hx ws
+  $ hx workspaces
 ```
 
-_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/workspaces/get.ts)_
+_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/workspaces/get.ts)_
 
 ## `hx workspaces:use [WORKSPACE_ID]`
 
@@ -689,7 +722,11 @@ ARGUMENTS
 OPTIONS
   -c, --context=context  use provided context instead of currently set context
   -h, --help             show CLI help
+
+ALIASES
+  $ hx select
+  $ hx sel
 ```
 
-_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.0/src/commands/workspaces/use.ts)_
+_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/workspaces/use.ts)_
 <!-- commandsstop -->
