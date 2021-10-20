@@ -15,7 +15,9 @@ export default class WorkspacesUse extends BaseWithContext {
   ]
 
   static description = 'set current workspace in hexabase'
+
   static aliases = ['select', 'sel']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),

@@ -49,7 +49,7 @@ export default class FieldsDelete extends BaseWithContext {
       await this.hexaapi.delete<void>(url)
       this.log('Field successfully deleted')
     } else {
-      this.log(chalk.red('deletion  aborted'))
+      this.log(chalk.red('Deletion  aborted'))
     }
   }
 }

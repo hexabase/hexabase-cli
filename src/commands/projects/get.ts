@@ -6,7 +6,9 @@ import {GetProjectsElemResponse} from '../../api/models/projects'
 
 export default class ProjectsGet extends BaseWithContext {
   static description = 'get projects in current workspace'
+
   static aliases = ['pj', 'projects']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),

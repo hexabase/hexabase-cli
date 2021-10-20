@@ -31,7 +31,9 @@ export default class ActionsGet extends BaseWithContext {
   ]
 
   static description = 'get actions in a datastore'
+
   static aliases = ['ac']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -67,7 +69,7 @@ export default class ActionsGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      
+
       url = `/api/v0/applications/${project_id}/datastores`
       const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {
@@ -91,7 +93,6 @@ export default class ActionsGet extends BaseWithContext {
       }) as never[]
       const {status: status_id}: {status: string} = await prompt(this.questions[2])
       args.status_id = status_id
-
     }
 
     let url = `/api/v0/datastores/${args.datastore_id}/actions`

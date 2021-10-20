@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {PostLoginResponse} from '../../api/models/auth'
+import {GetUserInfoResponse, PostLoginResponse} from '../../api/models/auth'
 
 export default class ContextsLogin extends BaseWithContext {
   private questions = [
@@ -42,14 +42,20 @@ export default class ContextsLogin extends BaseWithContext {
     }
 
     const data = {email, password}
-    const url = '/api/v0/login'
+
+    let url = '/api/v0/login'
     try{
       const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
       this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
       this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
+
+      url = '/api/v0/userinfo'
+      const {data: {u_id}} = await this.hexaapi.get<GetUserInfoResponse>(url)
+      this.hexaconfig.set(`hexabase.${this.currentContext}.user_id`, u_id)
+
       this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
-    }catch{
-      this.log(`login ${chalk.red('failed')} for ${chalk.cyan(email)}`)
+    }catch(e){
+      this.log(`login ${chalk.red('failed')} for ${chalk.cyan(email)} ${e}`)
     }
 
   }
