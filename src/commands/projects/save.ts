@@ -44,6 +44,7 @@ export default class ProjectsSave extends BaseWithContext {
   ]
 
   static description = 'save template from a project'
+
   static aliases = ['pj:save']
 
   static flags = {
