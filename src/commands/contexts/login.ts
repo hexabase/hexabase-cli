@@ -30,21 +30,20 @@ export default class ContextsLogin extends BaseWithContext {
   }
 
   async run() {
-    const {args, flags} = this.parse(ContextsLogin)
+    const {flags} = this.parse(ContextsLogin)
     let {email, password} = flags
 
     if (!flags.email) {
-      email = await prompt(this.questions[0])
+      ({email} = await prompt(this.questions[0]))
     }
     if (!flags.password) {
-      const p:{password: string} = await prompt(this.questions[1])
-      password = p.password
+      ({password} = await prompt(this.questions[1]))
     }
 
     const data = {email, password}
 
-    let url = '/api/v0/login'
-    try{
+    try {
+      let url = '/api/v0/login'
       const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
       this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
       this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
@@ -54,9 +53,10 @@ export default class ContextsLogin extends BaseWithContext {
       this.hexaconfig.set(`hexabase.${this.currentContext}.user_id`, u_id)
 
       this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
-    }catch(e){
-      this.log(`login ${chalk.red('failed')} for ${chalk.cyan(email)} ${e}`)
+    } catch (error) {
+      this.log(`Login ${chalk.red('failed')} for ${chalk.cyan(email)}`)
+      this.debug(error)
+      throw error
     }
-
   }
 }

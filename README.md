@@ -148,6 +148,7 @@ OPTIONS
 ALIASES
   $ hx scripts:download
   $ hx as:get
+  $ hx as
 ```
 
 _See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/actions/scripts/download.ts)_
@@ -306,8 +307,10 @@ USAGE
   $ hx contexts:login
 
 OPTIONS
-  -c, --context=context  use provided context instead of currently set context
-  -h, --help             show CLI help
+  -c, --context=context    use provided context instead of currently set context
+  -h, --help               show CLI help
+  -p, --password=password  login password
+  -u, --email=email        user email address to login
 
 ALIASES
   $ hx login
@@ -540,6 +543,9 @@ OPTIONS
   -c, --context=context  use provided context instead of currently set context
   -h, --help             show CLI help
   -o, --output=output    output file
+
+ALIASES
+  $ hx pj:backup
 ```
 
 _See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/backup.ts)_
@@ -602,6 +608,9 @@ OPTIONS
   -h, --help             show CLI help
   -n, --name=name        name of the project to be restored
   -y, --yes              skip confirmation
+
+ALIASES
+  $ hx pj:restore
 ```
 
 _See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/restore.ts)_
@@ -647,6 +656,9 @@ OPTIONS
   -c, --context=context    use provided context instead of currently set context
   -d, --download=download  download output file (e.g. my_template.zip)
   -h, --help               show CLI help
+
+ALIASES
+  $ hx pj:save
 ```
 
 _See code: [src/commands/projects/save.ts](https://github.com/b-eee/hexabase-cli/blob/v0.2.2/src/commands/projects/save.ts)_
