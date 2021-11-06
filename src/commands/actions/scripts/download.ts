@@ -59,7 +59,7 @@ export default class ActionsScriptDownload extends BaseWithContext {
       // download from apicore
       cli.action.start(`Downloading ${flags.type}-script with action_id ${chalk.cyan(args.action_id)}`)
       const url = `${this.context.server}/api/v0/actions/${args.action_id}/actionscripts/download?script_type=${flags.type}`
-      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+      const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
       const downloadOptions = {
         mode: '666',
         filename: flags.output,

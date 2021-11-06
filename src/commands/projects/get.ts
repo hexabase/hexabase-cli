@@ -19,10 +19,10 @@ export default class ProjectsGet extends BaseWithContext {
     const {flags} = this.parse(ProjectsGet)
 
     let url = '/api/v0/workspacecurrent'
-    const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+    const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
     url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-    const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+    const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
 
     const columns = {
       application_id: {

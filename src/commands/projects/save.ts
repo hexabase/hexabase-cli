@@ -68,10 +68,10 @@ export default class ProjectsSave extends BaseWithContext {
 
     if (!args.project_id) {
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
 
       if (projects.length === 0) {
         return this.log(chalk.red('No project found'))
@@ -105,13 +105,13 @@ export default class ProjectsSave extends BaseWithContext {
       ...templateForm,
     }
     let url = '/api/v0/templates'
-    const {data: template} = await this.hexaapi.post<CreateNewProjectTemplateResponse>(url, newProjectReq)
+    const {data: template} = await this.hexaAPI.post<CreateNewProjectTemplateResponse>(url, newProjectReq)
 
     cli.action.start('Task successfully queued')
 
     const poller = new Poller(-1) // wait until we get a response
     url = `/api/v0/tasks?category=SAVETEMPLATE&all=true&stream_id=${template.stream_id}`
-    const fn = () => this.hexaapi.get<TasksObject>(url)
+    const fn = () => this.hexaAPI.get<TasksObject>(url)
     const retryCondition = ({data}: {data: TasksObject}) => {
       const queueTask = data[Object.keys(data)[0]]
       // StatusQueued: 0, StatusProgress: 1, StatusDone: 2, StatusError: 3, StatusDead: 4
@@ -138,7 +138,7 @@ export default class ProjectsSave extends BaseWithContext {
     if (flags.download) {
       cli.action.start(`Downloading template with tp_id ${chalk.cyan(template.tp_id)}`)
       url = `${this.context.server}/api/v0/templates/${template.tp_id}/download`
-      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+      const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
       const downloadOptions = {
         mode: '666',
         filename: flags.download,

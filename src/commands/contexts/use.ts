@@ -28,12 +28,12 @@ export default class ContextsUse extends Command {
     },
   ]
 
-  hexaconfig = new Conf()
+  hexaConfig = new Conf()
 
   async run() {
     const {args} = this.parse(ContextsUse)
 
-    const contexts = this.hexaconfig.get('contexts')
+    const contexts = this.hexaConfig.get('contexts')
     if (!contexts) {
       return this.log('No context found')
     }
@@ -48,7 +48,7 @@ export default class ContextsUse extends Command {
       throw new Error('No such context')
     }
 
-    this.hexaconfig.set('current-context', args.context)
+    this.hexaConfig.set('current-context', args.context)
     this.log(`Current-context successfully set to: ${chalk.cyan(args.context)}`)
   }
 }

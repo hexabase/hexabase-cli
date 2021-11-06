@@ -1,10 +1,6 @@
-/* eslint-disable no-await-in-loop */
-function wait(ms: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms)
-  })
-}
+import {wait} from './wait'
 
+/* eslint-disable no-await-in-loop */
 export class Poller {
   private _attempts: number
 

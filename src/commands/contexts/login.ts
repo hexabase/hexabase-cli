@@ -44,13 +44,14 @@ export default class ContextsLogin extends BaseWithContext {
 
     try {
       let url = '/api/v0/login'
-      const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
-      this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
-      this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
+      const {data: {token}} = await this.hexaAPI.post<PostLoginResponse>(url, data)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.email`, email)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.token`, token)
+      this.configureHexaAPI()
 
       url = '/api/v0/userinfo'
-      const {data: {u_id}} = await this.hexaapi.get<GetUserInfoResponse>(url)
-      this.hexaconfig.set(`hexabase.${this.currentContext}.user_id`, u_id)
+      const {data: {u_id}} = await this.hexaAPI.get<GetUserInfoResponse>(url)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.user_id`, u_id)
 
       this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
     } catch (error) {

@@ -56,7 +56,7 @@ export default class ProjectsRestore extends BaseWithContext {
       }
 
       const url = '/api/v0/workspaces'
-      const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
+      const {data: workspaceResponse} = await this.hexaAPI.get<GetWorkspacesResponse>(url)
       const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
         return ws.workspace_id === workspaceResponse.current_workspace_id
       })
@@ -78,14 +78,14 @@ export default class ProjectsRestore extends BaseWithContext {
         form.append('file', fs.createReadStream(args.file))
         form.append('name', flags.name)
 
-        const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+        const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
         const requestConfig = {
           headers: {
             authorization: `Bearer ${token}`,
             ...form.getHeaders(),
           },
         }
-        await this.hexaapi.post(url, form, requestConfig)
+        await this.hexaAPI.post(url, form, requestConfig)
         cli.action.stop()
       } else {
         this.log(chalk.red('Restoring aborted'))
