@@ -38,10 +38,10 @@ export default class DatastoresGet extends BaseWithContext {
 
     if (!args.project_id) {
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
       this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
@@ -54,7 +54,7 @@ export default class DatastoresGet extends BaseWithContext {
     }
 
     const url = `/api/v0/applications/${args.project_id}/datastores`
-    const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
+    const {data: datastores} =  await this.hexaAPI.get<GetDatastoresElemResponse[]>(url)
 
     const columns = {
       datastore_id: {

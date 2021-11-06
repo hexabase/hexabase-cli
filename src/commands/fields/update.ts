@@ -81,7 +81,7 @@ export default class FieldsUpdate extends BaseWithContext {
     const {args} = this.parse(FieldsUpdate)
 
     const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
-    const {data: fieldSettings} = await this.hexaapi.get<GetFieldSettingsResponse>(url)
+    const {data: fieldSettings} = await this.hexaAPI.get<GetFieldSettingsResponse>(url)
 
     this.questions[0].initial = fieldSettings.roles.filter(role => role.can_use).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
@@ -100,7 +100,7 @@ export default class FieldsUpdate extends BaseWithContext {
       roles: roles,
     }
 
-    await this.hexaapi.patch<void>(url, data)
+    await this.hexaAPI.patch<void>(url, data)
     this.log('Field successfully updated')
   }
 }

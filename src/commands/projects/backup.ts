@@ -52,7 +52,7 @@ export default class ProjectsBackup extends BaseWithContext {
     try {
       if (!args.template_id) {
         const url = '/api/v0/templates'
-        const {data: templates} = await this.hexaapi.get<GetTemplatesCategoryResponse>(url)
+        const {data: templates} = await this.hexaAPI.get<GetTemplatesCategoryResponse>(url)
 
         if (templates.categories.length === 0) {
           return this.log(chalk.red('No template found'))

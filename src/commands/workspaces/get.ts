@@ -19,7 +19,7 @@ export default class WorkspacesGet extends BaseWithContext {
     const {flags} = this.parse(WorkspacesGet)
 
     const url = '/api/v0/workspaces'
-    const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
+    const {data: workspaceResponse} = await this.hexaAPI.get<GetWorkspacesResponse>(url)
     const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
       return ws.workspace_id === workspaceResponse.current_workspace_id
     })

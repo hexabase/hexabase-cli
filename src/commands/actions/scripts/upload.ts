@@ -72,7 +72,7 @@ export default class ActionsScriptsUpload extends BaseWithContext {
           ...form.getHeaders(),
         },
       }
-      await this.hexaapi.post(url, form, requestConfig)
+      await this.hexaAPI.post(url, form, requestConfig)
       cli.action.stop()
     } else {
       this.log(chalk.red('Uploading aborted'))

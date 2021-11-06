@@ -46,10 +46,10 @@ export default class StatusesGet extends BaseWithContext {
 
     if (!args.datastore_id) {
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
       this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
@@ -60,7 +60,7 @@ export default class StatusesGet extends BaseWithContext {
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
 
       url = `/api/v0/applications/${project_id}/datastores`
-      const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
+      const {data: datastores} =  await this.hexaAPI.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {
         return {
           name: ds.datastore_id,
@@ -73,7 +73,7 @@ export default class StatusesGet extends BaseWithContext {
     }
 
     const url = `/api/v0/datastores/${args.datastore_id}/statuses`
-    const {data: statuses} = await this.hexaapi.get<GetStatusesElemResponse[]>(url)
+    const {data: statuses} = await this.hexaAPI.get<GetStatusesElemResponse[]>(url)
 
     const columns = {
       status_id: {
