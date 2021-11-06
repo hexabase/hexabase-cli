@@ -35,7 +35,7 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
   ]
   static description = 'download all actionscript file'
 
-  static aliases = ['scripts:download_all', 'as:getall', 'asall']
+  static aliases = ['scripts:download-all', 'as:getall', 'asall']
 
   static flags = {
     ...BaseWithContext.flags,
