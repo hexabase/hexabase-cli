@@ -35,6 +35,8 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
   ]
   static description = 'download all actionscript file'
 
+  static aliases = ['scripts:download_all', 'as:getall', 'asall']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -52,13 +54,13 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
     const types = ['post', 'pre']
     const {args, flags} = this.parse(ActionsScriptDownloadsAll)
     const noOutputFolder = typeof flags.output === 'undefined'
-    const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+    const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
     try {
       //get all application
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
       this.questions[1].choices = projects.map( pj => {
         return {
           name: pj.application_id,
@@ -81,11 +83,11 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
 
       // start process get download: get datastore->action
       let urlDl = `/api/v0/applications/${args.project_id}/datastores`
-      const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(urlDl)
+      const {data: datastores} =  await this.hexaAPI.get<GetDatastoresElemResponse[]>(urlDl)
       for(let datastore of datastores){
         const disDs = datastore.display_id ? datastore.display_id : datastore.datastore_id
         urlDl = `/api/v0/datastores/${datastore.datastore_id}/actions`
-        const {data: actions} = await this.hexaapi.get<GetActionsElemResponse[]>(urlDl)
+        const {data: actions} = await this.hexaAPI.get<GetActionsElemResponse[]>(urlDl)
         for(let action of actions) {
           const disAc = action.display_id ? action.display_id : action.action_id
           let dir = `./${dirPath}/${disApp}/${disDs}`
@@ -125,7 +127,7 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
 
   // function download actionscript
   async downloadScript(url: string, dir: string, filename: string){
-    const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+    const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
     const downloadOptions = {
       mode: '666',
       filename: `${filename}.js`,
