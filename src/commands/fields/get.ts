@@ -22,9 +22,11 @@ export default class FieldsGet extends BaseWithContext {
       choices: [],
     },
   ]
-  
+
   static description = 'get fields in a datastore'
+
   static aliases = ['fd', 'fields']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -44,10 +46,10 @@ export default class FieldsGet extends BaseWithContext {
 
     if (!args.datastore_id) {
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
       this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
@@ -56,9 +58,9 @@ export default class FieldsGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      
+
       url = `/api/v0/applications/${project_id}/datastores`
-      const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
+      const {data: datastores} =  await this.hexaAPI.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {
         return {
           name: ds.datastore_id,
@@ -71,7 +73,7 @@ export default class FieldsGet extends BaseWithContext {
     }
 
     const url = `/api/v0/datastores/${args.datastore_id}/fields`
-    const {data: fieldsResponse} = await this.hexaapi.get<GetFieldsResponse>(url)
+    const {data: fieldsResponse} = await this.hexaAPI.get<GetFieldsResponse>(url)
     let fields: GetFieldsElemResponse[] = []
     if (fieldsResponse.fields) {
       // fieldsResponse is returned as an object -> convert to sorted array

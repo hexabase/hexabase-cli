@@ -17,3 +17,22 @@ export interface GetProjectsElemResponse {
   name: string;
   display_id: string;
 }
+
+export interface CreateNewProjectTemplateData{
+  project_id: string;
+  name: string;
+  category: string;
+  description: string;
+  include_histories: boolean;
+}
+
+export interface CreateNewProjectTemplateResponse {
+  stream_id: string;
+  tp_id: string;
+}
+
+export interface TemplateForm{
+  name: string;
+  category: string;
+  description: string;
+}

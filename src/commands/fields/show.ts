@@ -27,7 +27,7 @@ export default class FieldsShow extends BaseWithContext {
     const {args} = this.parse(FieldsShow)
 
     const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
-    const {data: fieldSettings} = await this.hexaapi.get<GetFieldSettingsResponse>(url)
+    const {data: fieldSettings} = await this.hexaAPI.get<GetFieldSettingsResponse>(url)
 
     this.log(JSON.stringify(fieldSettings, undefined, 2))
   }

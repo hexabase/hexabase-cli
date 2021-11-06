@@ -46,10 +46,10 @@ export default class FieldsDelete extends BaseWithContext {
 
     if (shouldProceed) {
       const url = `/api/v0/datastores/${args.datastore_id}/fields/${args.field_id}`
-      await this.hexaapi.delete<void>(url)
+      await this.hexaAPI.delete<void>(url)
       this.log('Field successfully deleted')
     } else {
-      this.log(chalk.red('deletion  aborted'))
+      this.log(chalk.red('Deletion  aborted'))
     }
   }
 }

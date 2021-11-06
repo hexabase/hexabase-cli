@@ -31,7 +31,9 @@ export default class ActionsGet extends BaseWithContext {
   ]
 
   static description = 'get actions in a datastore'
+
   static aliases = ['ac']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -55,10 +57,10 @@ export default class ActionsGet extends BaseWithContext {
 
     if (!args.datastore_id) {
       let url = '/api/v0/workspacecurrent'
-      const {data: currentWorkspace} = await this.hexaapi.get<GetCurrentWorkspaceResponse>(url)
+      const {data: currentWorkspace} = await this.hexaAPI.get<GetCurrentWorkspaceResponse>(url)
 
       url = `/api/v0/workspaces/${currentWorkspace.workspace_id}/applications`
-      const {data: projects} = await this.hexaapi.get<GetProjectsElemResponse[]>(url)
+      const {data: projects} = await this.hexaAPI.get<GetProjectsElemResponse[]>(url)
       this.questions[0].choices = projects.map(pj => {
         return {
           name: pj.application_id,
@@ -67,9 +69,9 @@ export default class ActionsGet extends BaseWithContext {
         }
       }) as never[]
       const {project: project_id}: {project: string} = await prompt(this.questions[0])
-      
+
       url = `/api/v0/applications/${project_id}/datastores`
-      const {data: datastores} =  await this.hexaapi.get<GetDatastoresElemResponse[]>(url)
+      const {data: datastores} =  await this.hexaAPI.get<GetDatastoresElemResponse[]>(url)
       this.questions[1].choices = datastores.map(ds => {
         return {
           name: ds.datastore_id,
@@ -81,7 +83,7 @@ export default class ActionsGet extends BaseWithContext {
       args.datastore_id = datastore_id
 
       url = `/api/v0/datastores/${args.datastore_id}/statuses`
-      const {data: statuses} = await this.hexaapi.get<GetStatusesElemResponse[]>(url)
+      const {data: statuses} = await this.hexaAPI.get<GetStatusesElemResponse[]>(url)
       this.questions[2].choices = statuses.map(st => {
         return {
           name: st.status_id,
@@ -91,14 +93,13 @@ export default class ActionsGet extends BaseWithContext {
       }) as never[]
       const {status: status_id}: {status: string} = await prompt(this.questions[2])
       args.status_id = status_id
-
     }
 
     let url = `/api/v0/datastores/${args.datastore_id}/actions`
     if (args.status_id) {
       url = `${url}?status_id=${args.status_id}`
     }
-    const {data: actions} = await this.hexaapi.get<GetActionsElemResponse[]>(url)
+    const {data: actions} = await this.hexaAPI.get<GetActionsElemResponse[]>(url)
 
     const columns = {
       action_id: {

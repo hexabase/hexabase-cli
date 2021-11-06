@@ -24,7 +24,7 @@ export default class ProjectsRolesGet extends BaseWithContext {
     const {args, flags} = this.parse(ProjectsRolesGet)
 
     const url = `/api/v0/applications/${args.project_id}/roles`
-    const {data: roles} = await this.hexaapi.get<GetProjectRolesElemResponse[]>(url)
+    const {data: roles} = await this.hexaAPI.get<GetProjectRolesElemResponse[]>(url)
 
     const columns = {
       role_id: {

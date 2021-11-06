@@ -27,7 +27,7 @@ export default class ActionsShow extends BaseWithContext {
     const {args} = this.parse(ActionsShow)
 
     const url = `/api/v0/datastores/${args.datastore_id}/actions/${args.action_id}`
-    const {data: actionSettings} = await this.hexaapi.get<GetActionSettingsResponse>(url)
+    const {data: actionSettings} = await this.hexaAPI.get<GetActionSettingsResponse>(url)
 
     this.log(JSON.stringify(actionSettings, undefined, 2))
   }

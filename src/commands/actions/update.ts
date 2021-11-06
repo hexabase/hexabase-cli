@@ -81,7 +81,7 @@ export default class ActionsUpdate extends BaseWithContext {
     const {args} = this.parse(ActionsUpdate)
 
     const url = `/api/v0/datastores/${args.datastore_id}/actions/${args.action_id}`
-    const {data: actionSettings} = await this.hexaapi.get<GetActionSettingsResponse>(url)
+    const {data: actionSettings} = await this.hexaAPI.get<GetActionSettingsResponse>(url)
 
     this.questions[0].initial = actionSettings.roles.filter(role => role.can_execute).map(role => role.role_id).join(', ')
     const {roles}: {roles: string[]} = await prompt(this.questions[0])
@@ -99,7 +99,7 @@ export default class ActionsUpdate extends BaseWithContext {
       roles: roles,
     }
 
-    await this.hexaapi.patch<void>(url, data)
+    await this.hexaAPI.patch<void>(url, data)
     this.log('Action successfully updated')
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "devops@b-eee.com",
   "bin": {
     "hx": "./bin/run"
@@ -96,6 +96,9 @@
   },
   "repository": "b-eee/hexabase-cli",
   "scripts": {
+    "format": "eslint . --ext .ts --config .eslintrc --fix",
+    "compile": "tsc",
+    "oclif:readme": "oclif-dev readme",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",

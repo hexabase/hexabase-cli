@@ -59,23 +59,23 @@ export default class ActionsScriptsUpload extends BaseWithContext {
     }
 
     if (shouldProceed) {
-      cli.action.start(`uploading ${flags.type}-script from file ${chalk.cyan(args.file)}`)
+      cli.action.start(`Uploading ${flags.type}-script from file ${chalk.cyan(args.file)}`)
       const url = `/api/v0/actions/${args.action_id}/actionscripts/upload`
       const form = new FormData()
       form.append('file', fs.createReadStream(args.file))
       form.append('script_type', flags.type)
 
-      const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+      const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
       const requestConfig = {
         headers: {
           authorization: `Bearer ${token}`,
           ...form.getHeaders(),
         },
       }
-      await this.hexaapi.post(url, form, requestConfig)
+      await this.hexaAPI.post(url, form, requestConfig)
       cli.action.stop()
     } else {
-      this.log(chalk.red('uploading aborted'))
+      this.log(chalk.red('Uploading aborted'))
     }
   }
 }

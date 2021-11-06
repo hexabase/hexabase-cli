@@ -5,19 +5,21 @@ import Conf from 'conf'
 
 export default class ContextsGet extends Command {
   static description = 'get contexts'
+
   static aliases = ['env']
+
   static flags = {
     help: flags.help({char: 'h'}),
     ...cli.table.flags(),
   }
 
-  hexaconfig = new Conf()
+  hexaConfig = new Conf()
 
   async run() {
     const {flags} = this.parse(ContextsGet)
 
-    const currentContext = this.hexaconfig.get('current-context')
-    const contexts = this.hexaconfig.get('contexts') as {[key: string]: any}
+    const currentContext = this.hexaConfig.get('current-context')
+    const contexts = this.hexaConfig.get('contexts') as {[key: string]: any}
 
     if (!contexts) {
       return this.log('No context found')
