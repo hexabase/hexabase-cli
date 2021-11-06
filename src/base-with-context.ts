@@ -19,7 +19,7 @@ export default abstract class BaseWithContext extends Command {
 
   private _hexaSSE!: SSEClient
 
-  hexaconfig = new Conf()
+  hexaConfig = new Conf()
 
   context!: Context
 
@@ -35,7 +35,7 @@ export default abstract class BaseWithContext extends Command {
 
   configureHexaAPI(): void {
     let authConfig = {}
-    const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+    const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
     if (token) {
       authConfig = {
         headers: {
@@ -56,13 +56,13 @@ export default abstract class BaseWithContext extends Command {
     if (flags.context) {
       this.currentContext = flags.context
     } else {
-      this.currentContext = this.hexaconfig.get('current-context') as string
+      this.currentContext = this.hexaConfig.get('current-context') as string
       if (!this.currentContext) {
         throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
       }
     }
 
-    const context = this.hexaconfig.get(`contexts.${this.currentContext}`)
+    const context = this.hexaConfig.get(`contexts.${this.currentContext}`)
     if (!context) {
       throw new Error(`No such context: ${chalk.red(flags.context)}`)
     }
