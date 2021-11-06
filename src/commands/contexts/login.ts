@@ -47,6 +47,7 @@ export default class ContextsLogin extends BaseWithContext {
       const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
       this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
       this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
+      this.configureHexaAPI()
 
       url = '/api/v0/userinfo'
       const {data: {u_id}} = await this.hexaapi.get<GetUserInfoResponse>(url)
