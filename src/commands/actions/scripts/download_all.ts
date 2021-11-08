@@ -91,7 +91,7 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
         for(let action of actions) {
           const disAc = action.display_id ? action.display_id : action.action_id
           let dir = `./${dirPath}/${disApp}/${disDs}`
-          
+
           // download with type [post or pre]
           for (const type of types) {
             urlDl = `${this.context.server}/api/v0/actions/${action.action_id}/actionscripts/download?script_type=${type}`
@@ -99,7 +99,7 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
               await this.downloadScript(urlDl, dir, `${disAc}-${type}`)
               console.log(`Download success ${disAc}`)
             } catch(e) {
-              console.log(`Error download with action:${disAc}-${type}`)
+
             }
           }
         }
@@ -116,7 +116,7 @@ export default class ActionsScriptDownloadsAll extends BaseWithContext{
         )
     }
   }
-  
+
   // function get display id of application
   async getDisplayApp(checkValue: string, arrayCheck: any){
     const data = arrayCheck.find( (app:any) => {
