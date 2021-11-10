@@ -26,6 +26,9 @@ export interface CreateActionResponse {
 }
 
 export interface GetActionsElemResponse {
+  workspace_id?: string;
+  project_id?: string;
+  datastore_id?: string;
   action_id: string;
   name: string;
   display_id: string;
