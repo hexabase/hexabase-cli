@@ -1,3 +1,4 @@
+import { Datastores } from './datastores'
 export interface CreateProjectData{
   name: ProjectName;
   tp_id?: string;
@@ -35,4 +36,12 @@ export interface TemplateForm{
   name: string;
   category: string;
   description: string;
+}
+
+export interface ProjectSettings {
+  application_id: string;
+  name: string | ProjectName;
+  display_id: string;
+  roles?: {[key: string]: string | boolean}[];
+  datastores?: [Datastores];
 }
