@@ -4,10 +4,7 @@ import cli from 'cli-ux'
 import chalk from 'chalk'
 import download from 'download'
 import BaseWithContext from "../../../base-with-context";
-import { GetWorkspacesResponse } from '../../../api/models/workspaces';
-import { GetDatastoresInWorkSpaceResponse } from '../../../api/models/datastores';
-import {ItemDetailResponse} from '../../../api/models/items';
-import {GetCurrentWorkspaceResponse} from '../../../api/models/workspaces'
+import {GetDatastoreSetting} from '../../../api/models/datastores'
 import {ProjectSettings} from '../../../api/models/projects'
 import {GetDatastoresElemResponse} from '../../../api/models/datastores'
 import {GetActionSettingsResponse} from '../../../api/models/actions'
@@ -68,6 +65,7 @@ export default class DownloadSettings extends BaseWithContext{
       description: 'Action id from hexabase',
     },
   ]
+
   async saveFile(path:string, nameFile: string, data:any){
     fs.mkdirSync(path, { recursive: true });
     fs.writeFile (`${path}/${nameFile}.json`, JSON.stringify(data, null, 2), function(err) {
@@ -75,6 +73,7 @@ export default class DownloadSettings extends BaseWithContext{
       console.log('complete');
     });
   }
+
   async saveSetting(path:string, nameFile: string, data: any) {
     if (!fs.existsSync(`${path}/${nameFile}.json`)){
       await this.saveFile(path, nameFile, data)
@@ -100,32 +99,43 @@ export default class DownloadSettings extends BaseWithContext{
   async getDataAppSetting(projectid: string){
     let url = `/api/v0/applications/${projectid}/settings`
     const {data: projects} = await this.hexaAPI.get<ProjectSettings>(url)
-    const displayApp = projects.display_id ? projects.display_id : projectid
-    return {displayApp, projects}
+    try {
+      const displayApp = projects.display_id ? projects.display_id : projectid
+      return {displayApp, projects}
+    }catch (e) {
+      throw e;
+    }
   }
 
   async getNameDatastore(projectid: string, datastoreid: string){
     let url = `/api/v0/applications/${projectid}/datastores`
     const {data: datastores} = await this.hexaAPI.get<[GetDatastoresElemResponse]>(url)
-    for(let datastore of datastores){
-      if(datastore.datastore_id === datastoreid){
-        return datastore.display_id ? datastore.display_id : datastoreid
+    try {
+      for(let datastore of datastores){
+        if(datastore.datastore_id === datastoreid){
+          return datastore.display_id ? datastore.display_id : datastoreid
+        }
       }
+      return datastoreid
+    }catch (e) {
+      throw e;
     }
-    return datastoreid
   }
 
   async run() {
     const {args, flags} = this.parse(DownloadSettings)
     const noOutputFolder = typeof flags.output === 'undefined'
-    const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
     if (Object.keys(flags).length === 0 && typeof flags === 'object') {
       throw new Error('At least one flag needed, (special -t)')
     }
     if (Object.keys(args).length === 0 ) {
       throw new Error('At least one arg needed')
     }
-
+    const typeDownload = flags.type
+    console.log('flags', typeDownload)
+    if (!['application', 'datastore', 'action'].includes(typeDownload)) {
+      throw new Error('Flag -t is one of application, datastore, action ')
+    }
     const {project_id, datastore_id, action_id} = args
     try {
       if (noOutputFolder) {
@@ -133,12 +143,21 @@ export default class DownloadSettings extends BaseWithContext{
         flags.output = await prompt(this.questions[0]).then(({output}: any) => output)
       }
       let url = ''
-      if(project_id && !action_id && !datastore_id){
+      if (typeDownload === 'application' && project_id) {
+        console.log('downloading application setting...')
         const {displayApp, projects} = await this.getDataAppSetting(project_id);
-        console.log(displayApp, projects)
         this.saveSetting(`${flags.output}/${displayApp}`, displayApp, projects)
       }
-      if(datastore_id && action_id){
+      else if (typeDownload === 'datastore' && datastore_id) {
+        console.log('downloading datastore setting...')
+        url = `/api/v0/datastores/${datastore_id}/setting`
+        const {data: datastoreSetting} = await this.hexaAPI.get<GetDatastoreSetting>(url)
+        const {displayApp} = await this.getDataAppSetting(datastoreSetting.p_id);
+        const distinationPath = datastoreSetting.display_id ? datastoreSetting.display_id : datastore_id
+        this.saveSetting(`${flags.output}/${displayApp}/${distinationPath}`, distinationPath, datastoreSetting)
+      }
+      else if (typeDownload === 'action' && datastore_id && action_id) {
+        console.log('downloading action setting...')
         url = `/api/v0/datastores/${datastore_id}/actions/${action_id}`
         const {data: actionSetting} = await this.hexaAPI.get<GetActionSettingsResponse>(url)
         const {project_id} = actionSetting
@@ -151,7 +170,11 @@ export default class DownloadSettings extends BaseWithContext{
           this.saveSetting(`${flags.output}/${displayApp}/${nameDatastore}/${distinationPath}`, distinationPath, actionSetting)
         }
       }
-
+      else {
+        throw new Error(` with application: -t=application project_id.
+        with datastore: -t=datastore null datastore_id.
+        with action: -t=action null datastore_id action_id`)
+      }
       cli.action.stop()
     }
     catch (e) {

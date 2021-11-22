@@ -12,3 +12,9 @@ export interface GetStatusesElemResponse {
   x: number;
   y: number;
 }
+
+export interface StatusSetting {
+  id: string;
+  display_id: string;
+  name: StatusName
+}

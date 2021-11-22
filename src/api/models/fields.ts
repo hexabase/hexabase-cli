@@ -59,3 +59,29 @@ export interface GetFieldSettingsResponse {
   calc_info?: {[key: string]: string | string[] | boolean};
   file_info?: {[key: string]: boolean};
 }
+
+export interface FieldDatastoreSetting {
+  id: string,
+  display_name: string,
+  display_id: string,
+  name: FieldName,
+  dataType: string,
+  search: boolean,
+  show_list: boolean,
+  as_title: boolean,
+  status: boolean,
+  fieldIndex?: number,
+  title_order?: number,
+  full_text?: boolean,
+  unique?: boolean,
+  min_value?: string,
+  max_value?: string,
+}
+export interface FieldLayoutDatastoreSetting {
+  id: string,
+  display_id: string,
+  col: number,
+  row: number,
+  sizeX: number,
+  sizeY: number,
+}
