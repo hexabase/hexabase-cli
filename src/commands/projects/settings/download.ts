@@ -45,7 +45,7 @@ export default class DownloadSettings extends BaseWithContext{
     output: flags.string({ char: 'o', description: 'output folder'}),
     type: flags.string({
       char: 't',
-      description: 'type download setting: application - datastore - action',
+      description: 'type download setting is one of the following options: [application, datastore, action] ',
       options: ['application', 'datastore', 'action'],
       required: true,
     }),
@@ -97,7 +97,7 @@ export default class DownloadSettings extends BaseWithContext{
   }
 
   async getDataAppSetting(projectid: string){
-    let url = `/api/v0/applications/${projectid}/settings`
+    let url = `/api/v0/applications/${projectid}/setting`
     const {data: projects} = await this.hexaAPI.get<ProjectSettings>(url)
     try {
       const displayApp = projects.display_id ? projects.display_id : projectid
