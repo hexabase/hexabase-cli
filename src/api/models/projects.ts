@@ -1,4 +1,4 @@
-import { Datastores } from './datastores'
+import { Datastores, Datastore } from './datastores'
 export interface CreateProjectData{
   name: ProjectName;
   tp_id?: string;
@@ -44,4 +44,17 @@ export interface ProjectSettings {
   display_id: string;
   roles?: {[key: string]: string | boolean}[];
   datastores?: [Datastores];
+}
+
+export interface ProjectInfo {
+  p_id: string;
+  workspace_id: string;
+  name: string | ProjectName;
+  display_id: string;
+  template_id: string;
+  display_order: number;
+}
+export interface ProjectDatastoreInfo {
+  project: ProjectInfo;
+  datastore: Datastore;
 }

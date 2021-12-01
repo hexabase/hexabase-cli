@@ -32,3 +32,34 @@ export interface GetDatastoreSetting {
   roles?: [GetRoleDatastoreSetting];
   statuses?: [StatusSetting];
 }
+
+
+export interface Datastore {
+  d_id: string;
+  p_id: string;
+  w_id: string;
+  ws_name: string;
+  name: string;
+  uploading: boolean;
+  imported: boolean;
+  no_status: boolean;
+  show_in_menu: boolean;
+  deleted: boolean;
+  display_order: number;
+  display_id: boolean;
+  show_only_dev_mode: boolean;
+  use_qr_download: boolean;
+  use_csv_update: boolean;
+  use_external_sync: boolean;
+  use_replace_upload: boolean;
+  unread: number;
+  invisible: boolean;
+  use_grid_view: boolean;
+  use_grid_view_by_default: boolean;
+  use_board_view: boolean;
+  data_source: string;
+  is_external_service: boolean;
+  external_service_data: any;
+  show_display_id_to_list: boolean;
+  show_info_to_list: boolean;
+}
