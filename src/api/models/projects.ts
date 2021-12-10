@@ -40,7 +40,8 @@ export interface TemplateForm{
 
 export interface ProjectSettings {
   application_id: string;
-  name: string | ProjectName;
+  name?: string;
+  names?: ProjectName;
   display_id: string;
   roles?: {[key: string]: string | boolean}[];
   datastores?: [Datastores];

@@ -11,3 +11,16 @@ export interface GetRoleDatastoreSetting {
   name:       string;
   display_id: string;
 }
+
+export interface Role {
+  _key: string;
+  id:    string;
+  name:       string;
+  project_id: string;
+  display_id: string;
+  r_id: string;
+  type: string;
+  access_key: string;
+  canExecute: boolean;
+  created_at: string;
+}

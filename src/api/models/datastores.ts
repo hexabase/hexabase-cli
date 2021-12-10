@@ -25,7 +25,7 @@ export interface GetDatastoreSetting {
   id: string;
   w_id: string;
   p_id: string;
-  name: string;
+  names: string;
   display_id: string;
   fields?: [FieldDatastoreSetting];
   field_layout?: [FieldLayoutDatastoreSetting];

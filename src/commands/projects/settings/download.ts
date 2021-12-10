@@ -5,6 +5,7 @@ import chalk from 'chalk'
 import download from 'download'
 import BaseWithContext from "../../../base-with-context";
 import {GetDatastoreSetting} from '../../../api/models/datastores'
+import {ActionSettings} from '../../../api/models/actions'
 import {ProjectSettings, ProjectInfo, ProjectDatastoreInfo} from '../../../api/models/projects'
 import fs = require('fs')
 
@@ -69,7 +70,7 @@ export default class DownloadSettings extends BaseWithContext{
     fs.mkdirSync(path, { recursive: true });
     fs.writeFile (`${path}/${nameFile}.json`, JSON.stringify(data, null, 2), function(err) {
       if (err) throw err;
-      console.log('complete');
+      console.log(`completed save file: ${path}/${nameFile}.json`);
     });
   }
 
@@ -78,19 +79,23 @@ export default class DownloadSettings extends BaseWithContext{
     if (!fs.existsSync(`${path}/${nameFile}.json`)){
       await this.saveFile(path, nameFile, data)
     } else {
-      this.questions[1].message = `specified project already in your folder "${nameFile}". overwrite? :  Y/n`
-      const {isoverride: isoverride}: {isoverride: string} = await prompt(this.questions[1])
-      if(isoverride === 'y' || isoverride === 'Y') {
+      this.questions[1].message = `specified name file already in your folder "${nameFile}". overwrite? :  Y/n`
+      let keyPress:string = ''
+      while (!['y','Y','n','N'].includes(keyPress)){
+        const {isoverride: isoverride}: {isoverride: string} = await prompt(this.questions[1])
+        keyPress = isoverride
+        console.log("Your key: ", keyPress)
+      }
+      if(keyPress === 'y' || keyPress === 'Y') {
         try {
           fs.writeFileSync(`${path}/${nameFile}.json`, JSON.stringify(data, null, 2),{encoding:'utf8',flag:'w'})
-          console.log('Complete save file override')
+          console.log(`Complete save file override: ${path}/${nameFile}.json!`)
         } catch {
           console.log(this.error)
         }
 
-      }else if(isoverride === 'n' || isoverride === 'N'){
+      }else if(keyPress === 'n' || keyPress === 'N'){
         const {newnamefile: newnamefile}: {newnamefile: string} = await prompt(this.questions[2])
-        console.log('newnamefile', newnamefile)
         await this.saveFile(path, newnamefile, data)
       }
     }
@@ -171,7 +176,7 @@ export default class DownloadSettings extends BaseWithContext{
       else if (typeDownload === 'action' && datastore_id) {
         console.log('downloading action setting...')
         url = `/api/v0/datastores/${datastore_id}/action/setting`
-        const {data: actionSetting} = await this.hexaAPI.get<any>(url)
+        const {data: actionSetting} = await this.hexaAPI.get<ActionSettings>(url)
         const {displayApp, displayDatastore} = await this.getAppAndDatastore(datastore_id);
         this.saveSetting(`${flags.output}/${displayApp}/${displayDatastore}`, "action-settings", actionSetting)
       }

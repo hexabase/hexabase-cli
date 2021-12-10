@@ -1,3 +1,4 @@
+import {Action} from './actions'
 export interface StatusName {
   en: string;
   ja: string;
@@ -16,5 +17,12 @@ export interface GetStatusesElemResponse {
 export interface StatusSetting {
   id: string;
   display_id: string;
-  name: StatusName
+  names: StatusName
+}
+
+export interface Status {
+  id: string;
+  display_id: string;
+  names: StatusName;
+  status_actions: [Action];
 }
