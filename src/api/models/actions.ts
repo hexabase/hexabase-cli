@@ -1,3 +1,7 @@
+import {ActionFieldSetting} from './fields'
+import {Role} from './roles'
+import {Status} from './statuses'
+
 export enum ActionOperation {
   new,
 	update,
@@ -52,4 +56,19 @@ export interface GetActionSettingsResponse {
   set_status:       string;
   name:             ActionName;
   roles: {[key: string]: string | boolean}[];
+}
+
+export interface Action {
+  id: string;
+  display_id: string;
+  names: ActionName;
+  display_order: string;
+  crud_type: string;
+  roles: [Role];
+  action_field_settings: [ActionFieldSetting];
+}
+
+export interface ActionSettings {
+  statuses: [Status],
+  item_actions: [Action],
 }

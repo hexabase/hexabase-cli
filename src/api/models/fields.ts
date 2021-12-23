@@ -41,14 +41,14 @@ export interface GetFieldSettingsResponse {
   field_id:     string;
   name: FieldName;
   display_id: string;
-  dataType: string;
+  data_type: string;
   search: boolean;
   show_list: boolean;
   as_title: boolean;
   status: boolean;
   full_text: boolean;
   unique: boolean;
-  hideOnInput: boolean;
+  hide_on_input: boolean;
   min_value?: string;
   max_value?: string;
   roles: {[key: string]: string | boolean}[];
@@ -58,4 +58,39 @@ export interface GetFieldSettingsResponse {
   num_info?: {[key: string]: string | boolean};
   calc_info?: {[key: string]: string | string[] | boolean};
   file_info?: {[key: string]: boolean};
+}
+
+export interface FieldDatastoreSetting {
+  id: string,
+  display_name: string,
+  display_id: string,
+  name: FieldName,
+  data_type: string,
+  search: boolean,
+  show_list: boolean,
+  as_title: boolean,
+  status: boolean,
+  field_id?: number,
+  title_order?: number,
+  full_text?: boolean,
+  unique?: boolean,
+  min_value?: string,
+  max_value?: string,
+}
+export interface FieldLayoutDatastoreSetting {
+  id: string,
+  display_id: string,
+  col: number,
+  row: number,
+  size_x: number,
+  size_y: number,
+}
+
+export interface ActionFieldSetting {
+  id: string,
+  display_id: string,
+  names: FieldName,
+  show: boolean,
+  update: boolean,
+  mandatory: boolean,
 }
