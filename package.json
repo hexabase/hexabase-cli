@@ -9,7 +9,7 @@
   "bugs": "https://github.com/b-eee/hexabase-cli/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
+    "@oclif/config": "^1.18.1",
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3.2.0",
     "@types/download": "^6.2.4",
