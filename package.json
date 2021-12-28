@@ -22,6 +22,7 @@
     "eventsource": "^1.0.7",
     "form-data": "^3.0.0",
     "jsonschema": "^1.4.0",
+    "rimraf": "^3.0.2",
     "tslib": "^1.14.1",
     "yarn-or-npm": "^3.0.1"
   },
