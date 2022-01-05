@@ -73,8 +73,8 @@ export default class DownloadSettings extends BaseWithContext{
     fs.mkdirSync(path, { recursive: true });
     fs.writeFile (`${path}/${nameFile}.json`, JSON.stringify(data, null, 2), function(err) {
       if (err) throw err;
-      this.log(`completed save file: ${path}/${nameFile}.json`);
     });
+    this.log(`completed save file: ${path}/${nameFile}.json`);
   }
 
   // get name and key press
