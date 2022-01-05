@@ -73,7 +73,7 @@ export default class DownloadSettings extends BaseWithContext{
     fs.mkdirSync(path, { recursive: true });
     fs.writeFile (`${path}/${nameFile}.json`, JSON.stringify(data, null, 2), function(err) {
       if (err) throw err;
-      console.log(`completed save file: ${path}/${nameFile}.json`);
+      this.log(`completed save file: ${path}/${nameFile}.json`);
     });
   }
 
@@ -84,7 +84,7 @@ export default class DownloadSettings extends BaseWithContext{
     while (!['y','Y','n','N'].includes(keyPress)){
       const {isoverride: isoverride}: {isoverride: string} = await prompt(this.questions[1])
       keyPress = isoverride
-      console.log("Your key: ", keyPress)
+      this.log("Your key: ", keyPress)
     }
     if(keyPress === 'y' || keyPress === 'Y') {
       return {name: nameFile, key :'y'};
@@ -213,10 +213,9 @@ export default class DownloadSettings extends BaseWithContext{
           await this.saveFile(`${nameFolder}/${displayDatastore}`, "action-settings", actionSetting)
         };
       } else {
-        console.log("typeDownload",typeDownload)
         switch (typeDownload) {
           case 'application':
-            console.log("downloading application setting...")
+            this.log("downloading application setting...")
             if(id) {
               url = `/api/v0/applications/${id}/setting`
               const {data: projects} = await this.hexaAPI.get<ProjectSettings>(url)
@@ -230,7 +229,7 @@ export default class DownloadSettings extends BaseWithContext{
             }
             break
           case 'datastore':
-            console.log("downloading datastore setting...")
+            this.log("downloading datastore setting...")
             if(id) {
               url = `/api/v0/datastores/${id}/setting`
               const {data: datastoreSetting} = await this.hexaAPI.get<GetDatastoreSetting>(url)
@@ -245,7 +244,7 @@ export default class DownloadSettings extends BaseWithContext{
             }
             break
           case 'action':
-            console.log("downloading action setting...")
+            this.log("downloading action setting...")
             if(id) {
               url = `/api/v0/datastores/${id}/action/setting`
               const {data: actionSetting} = await this.hexaAPI.get<ActionSettings>(url)
