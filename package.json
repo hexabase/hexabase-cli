@@ -8,23 +8,13 @@
   },
   "bugs": "https://github.com/b-eee/hexabase-cli/issues",
   "dependencies": {
-<<<<<<< HEAD
     "@oclif/command": "^1.8.7",
     "@oclif/config": "^1.17.0",
-=======
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.18.1",
->>>>>>> 1f6746c3c2ce92b12f107ca6943827e9280b08f8
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3.2.10",
     "@types/download": "^6.2.4",
-<<<<<<< HEAD
-    "@types/eventsource": "^1.1.4",
     "axios": "^0.24.0",
-=======
     "@types/eventsource": "^1.1.7",
-    "axios": "^0.21.1",
->>>>>>> fd07b04906f5e6c46d805bd82576bdc8084f7600
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "download": "^8.0.0",
