@@ -39,6 +39,8 @@ export interface TemplateForm{
 }
 
 export interface ProjectSettings {
+  id?: string;
+  workspace_id?: string;
   application_id: string;
   name?: string;
   names?: ProjectName;
