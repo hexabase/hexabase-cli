@@ -18,8 +18,13 @@
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3.2.10",
     "@types/download": "^6.2.4",
+<<<<<<< HEAD
     "@types/eventsource": "^1.1.4",
     "axios": "^0.24.0",
+=======
+    "@types/eventsource": "^1.1.7",
+    "axios": "^0.21.1",
+>>>>>>> fd07b04906f5e6c46d805bd82576bdc8084f7600
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "download": "^8.0.0",
