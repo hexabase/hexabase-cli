@@ -15,6 +15,14 @@ Hexabase CLI
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+
+
+# Requirements
+```
+- node.js >= 12.0.0
+- npm >= 6.0.0
+```
+
 # Usage
 <!-- usage -->
 ```sh-session
