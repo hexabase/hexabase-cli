@@ -51,8 +51,7 @@ jobs:
 
       - run:
           name: Build package
-          command: npm compile
-
+          command: npm run compile
       - save_cache:
           paths:
             - node_modules
