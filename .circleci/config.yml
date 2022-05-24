@@ -39,11 +39,11 @@ jobs:
              git config --global user.name circleci
              git config --global user.email circleci@hexabase.com
 
-      - run:
-          name: Bump package version
-          command: |
-            npm version patch --preid=alpha -m "Bump version number to %s [ci skip]"
-            git push origin develop
+      #- run:
+      #    name: Bump package version
+      #    command: |
+      #      npm version patch --preid=alpha -m "Bump version number to %s [ci skip]"
+      #      git push origin develop
 
       - run:
           name: Install dep
