@@ -3,19 +3,17 @@ import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import Conf from 'conf'
 
-export default class ContextsUse extends Command {
+export default class ContextsDelete extends Command {
   private questions = [
     {
       type: 'select',
       name: 'context',
-      message: 'Select your current-context',
+      message: 'Select the context to delete',
       choices: [],
     },
   ]
 
-  static description = 'set current-context'
-
-  static aliases = ['use']
+  static description = 'delete context entries'
 
   static flags = {
     help: flags.help({char: 'h'}),
@@ -31,7 +29,7 @@ export default class ContextsUse extends Command {
   hexaConfig = new Conf()
 
   async run() {
-    const {args} = this.parse(ContextsUse)
+    const {args} = this.parse(ContextsDelete)
 
     const contexts = this.hexaConfig.get('contexts')
     if (!contexts) {
@@ -48,7 +46,7 @@ export default class ContextsUse extends Command {
       throw new Error('No such context')
     }
 
-    this.hexaConfig.set('current-context', args.context)
-    this.log(`Current-context successfully set to: ${chalk.cyan(args.context)}`)
+    this.hexaConfig.delete(`contexts.${args.context}`)
+    this.log(`Context deleted successfully: ${chalk.cyan(args.context)}`)
   }
 }

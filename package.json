@@ -1,20 +1,20 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.2.0",
-  "author": "devops@b-eee.com",
+  "version": "0.3.1",
+  "author": "devops@hexabase.com",
   "bin": {
     "hx": "./bin/run"
   },
   "bugs": "https://github.com/b-eee/hexabase-cli/issues",
   "dependencies": {
-    "@oclif/command": "^1.8.0",
+    "@oclif/command": "^1.8.7",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-autocomplete": "^0.2.0",
-    "@oclif/plugin-help": "^3.2.0",
+    "@oclif/plugin-help": "^3.2.10",
     "@types/download": "^6.2.4",
-    "@types/eventsource": "^1.1.4",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
+    "@types/eventsource": "^1.1.7",
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "download": "^8.0.0",
@@ -22,6 +22,7 @@
     "eventsource": "^1.0.7",
     "form-data": "^3.0.0",
     "jsonschema": "^1.4.0",
+    "rimraf": "^3.0.2",
     "tslib": "^1.14.1",
     "yarn-or-npm": "^3.0.1"
   },
@@ -43,7 +44,8 @@
     "typescript": "^3.9.7"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
   },
   "files": [
     "/bin",
@@ -96,6 +98,9 @@
   },
   "repository": "b-eee/hexabase-cli",
   "scripts": {
+    "format": "eslint . --ext .ts --config .eslintrc --fix",
+    "compile": "tsc",
+    "oclif:readme": "oclif-dev readme",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",

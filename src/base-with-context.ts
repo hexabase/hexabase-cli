@@ -15,22 +15,39 @@ export default abstract class BaseWithContext extends Command {
     context: flags.string({char: 'c', description: 'use provided context instead of currently set context'}),
   };
 
-  private _hexaapi!: APIClient
+  private _hexaAPI!: APIClient
 
-  private _hexasse!: SSEClient
+  private _hexaSSE!: SSEClient
 
-  hexaconfig = new Conf()
+  hexaConfig = new Conf()
 
   context!: Context
 
   currentContext!: string | flags.IOptionFlag<string|undefined>
 
-  get hexaapi(): APIClient {
-    return this._hexaapi
+  get hexaAPI(): APIClient {
+    return this._hexaAPI
   }
 
-  get hexasse(): SSEClient {
-    return this._hexasse
+  get hexaSSE(): SSEClient {
+    return this._hexaSSE
+  }
+
+  configureHexaAPI(): void {
+    let authConfig = {}
+    const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
+    if (token) {
+      authConfig = {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    }
+    this._hexaAPI = new APIClient(this.context.server, authConfig)
+  }
+
+  configureHexaSSE(): void {
+    this._hexaSSE = new SSEClient(this.context.sse)
   }
 
   async init() {
@@ -39,28 +56,19 @@ export default abstract class BaseWithContext extends Command {
     if (flags.context) {
       this.currentContext = flags.context
     } else {
-      this.currentContext = this.hexaconfig.get('current-context') as string
+      this.currentContext = this.hexaConfig.get('current-context') as string
       if (!this.currentContext) {
         throw new Error(`Missing context setting: ${chalk.red('current-context')}`)
       }
     }
 
-    const context = this.hexaconfig.get(`contexts.${this.currentContext}`)
+    const context = this.hexaConfig.get(`contexts.${this.currentContext}`)
     if (!context) {
       throw new Error(`No such context: ${chalk.red(flags.context)}`)
     }
     this.context = context as Context
 
-    let authConfig = {}
-    const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
-    if (token) {
-      authConfig = {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
-    }
-    this._hexaapi = new APIClient(this.context.server, authConfig)
-    this._hexasse = new SSEClient(this.context.sse)
+    this.configureHexaAPI()
+    this.configureHexaSSE()
   }
 }

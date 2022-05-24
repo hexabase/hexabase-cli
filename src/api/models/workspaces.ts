@@ -5,7 +5,7 @@ export interface GetWorkspacesElemResponse{
 
 export interface GetWorkspacesResponse {
   workspaces: GetWorkspacesElemResponse[];
-  current_workspace_id: string;
+  current_workspace_id?: string;
 }
 
 export interface GetCurrentWorkspaceResponse{

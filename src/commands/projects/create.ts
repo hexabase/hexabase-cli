@@ -42,7 +42,7 @@ export default class ProjectsCreate extends BaseWithContext {
     this.parse(ProjectsCreate)
 
     let url = '/api/v0/templates'
-    const {data: templates} = await this.hexaapi.get<GetTemplatesCategoryResponse>(url)
+    const {data: templates} = await this.hexaAPI.get<GetTemplatesCategoryResponse>(url)
     const initalChoice = [{
       name: 'none',
       message: 'none',
@@ -71,7 +71,7 @@ export default class ProjectsCreate extends BaseWithContext {
       data.tp_id = template_id
     }
     url = '/api/v0/applications'
-    const {data: project} = await this.hexaapi.post<CreateProjectResponse>(url, data)
+    const {data: project} = await this.hexaAPI.post<CreateProjectResponse>(url, data)
     this.log(`Task successfully queued. project_id set to: ${chalk.cyan(project.project_id)}`)
   }
 }

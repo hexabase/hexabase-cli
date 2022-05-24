@@ -63,7 +63,7 @@ export default class AppsCreate extends Command {
       const {template}: { template: string } = await prompt(this.questions[1])
 
       // download from github
-      cli.action.start(`initializing app with name ${chalk.cyan(flags.name)}`)
+      cli.action.start(`Initializing app with name ${chalk.cyan(flags.name)}`)
       const url = urlMap[template]
       const downloadOptions = {
         extract: true,
@@ -80,7 +80,7 @@ export default class AppsCreate extends Command {
       const name = flags.name as string
       const outDir = path.join(process.cwd(), name)
       process.chdir(outDir)
-      cli.action.start('installing dependencies')
+      cli.action.start('Installing dependencies')
       spawn.sync(['install'], {stdio: 'inherit'})
       cli.action.stop()
     } finally {

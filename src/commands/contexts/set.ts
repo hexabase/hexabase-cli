@@ -19,18 +19,18 @@ export default class ContextsSet extends Command {
     },
   ]
 
-  hexaconfig = new Conf()
+  hexaConfig = new Conf()
 
   async run() {
     const {args, flags} = this.parse(ContextsSet)
     if (Object.keys(flags).length === 0 && typeof flags === 'object') {
-      throw new Error('at least one flag needed')
+      throw new Error('At least one flag needed')
     }
     Object.entries(flags).forEach(entry => {
-      this.hexaconfig.set(`contexts.${args.context}.${entry[0]}`, entry[1])
+      this.hexaConfig.set(`contexts.${args.context}.${entry[0]}`, entry[1])
     })
-    if (!this.hexaconfig.get('current-context')) {
-      this.hexaconfig.set('current-context', args.context)
+    if (!this.hexaConfig.get('current-context')) {
+      this.hexaConfig.set('current-context', args.context)
       this.log(`Current-context set to: ${chalk.cyan(args.context)}`)
     }
   }

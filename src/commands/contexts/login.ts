@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {prompt} from 'enquirer'
 import chalk from 'chalk'
 import BaseWithContext from '../../base-with-context'
-import {PostLoginResponse} from '../../api/models/auth'
+import {GetUserInfoResponse, PostLoginResponse} from '../../api/models/auth'
 
 export default class ContextsLogin extends BaseWithContext {
   private questions = [
@@ -25,20 +25,39 @@ export default class ContextsLogin extends BaseWithContext {
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
+    email: flags.string({char: 'u', description: 'user email address to login'}),
+    password: flags.string({char: 'p', description: 'login password'}),
   }
 
   async run() {
-    this.parse(ContextsLogin)
+    const {flags} = this.parse(ContextsLogin)
+    let {email, password} = flags
 
-    const {email}: {email: string} = await prompt(this.questions[0])
-    const {password}: {password: string} = await prompt(this.questions[1])
+    if (!flags.email) {
+      ({email} = await prompt(this.questions[0]))
+    }
+    if (!flags.password) {
+      ({password} = await prompt(this.questions[1]))
+    }
 
     const data = {email, password}
-    const url = '/api/v0/login'
-    const {data: {token}} = await this.hexaapi.post<PostLoginResponse>(url, data)
 
-    this.hexaconfig.set(`hexabase.${this.currentContext}.email`, email)
-    this.hexaconfig.set(`hexabase.${this.currentContext}.token`, token)
-    this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
+    try {
+      let url = '/api/v0/login'
+      const {data: {token}} = await this.hexaAPI.post<PostLoginResponse>(url, data)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.email`, email)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.token`, token)
+      this.configureHexaAPI()
+
+      url = '/api/v0/userinfo'
+      const {data: {u_id}} = await this.hexaAPI.get<GetUserInfoResponse>(url)
+      this.hexaConfig.set(`hexabase.${this.currentContext}.user_id`, u_id)
+
+      this.log(`Successfully logged in as: ${chalk.cyan(email)}`)
+    } catch (error) {
+      this.log(`Login ${chalk.red('failed')} for ${chalk.cyan(email)}`)
+      this.debug(error)
+      throw error
+    }
   }
 }

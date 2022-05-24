@@ -29,6 +29,8 @@ export default class ProjectsRestore extends BaseWithContext {
 
   static description = 'restore a project from a template file'
 
+  static aliases = ['pj:restore']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -54,7 +56,7 @@ export default class ProjectsRestore extends BaseWithContext {
       }
 
       const url = '/api/v0/workspaces'
-      const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
+      const {data: workspaceResponse} = await this.hexaAPI.get<GetWorkspacesResponse>(url)
       const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
         return ws.workspace_id === workspaceResponse.current_workspace_id
       })
@@ -70,23 +72,23 @@ export default class ProjectsRestore extends BaseWithContext {
       }
 
       if (shouldProceed) {
-        cli.action.start(`restoring template from file ${chalk.cyan(args.file)}`)
+        cli.action.start(`Restoring template from file ${chalk.cyan(args.file)}`)
         const url = '/api/v0/templates/upload'
         const form = new FormData()
         form.append('file', fs.createReadStream(args.file))
         form.append('name', flags.name)
 
-        const token = this.hexaconfig.get(`hexabase.${this.currentContext}.token`)
+        const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
         const requestConfig = {
           headers: {
             authorization: `Bearer ${token}`,
             ...form.getHeaders(),
           },
         }
-        await this.hexaapi.post(url, form, requestConfig)
+        await this.hexaAPI.post(url, form, requestConfig)
         cli.action.stop()
       } else {
-        this.log(chalk.red('restoring aborted'))
+        this.log(chalk.red('Restoring aborted'))
       }
     } finally {
       if (noNameFlag) {

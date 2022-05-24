@@ -22,17 +22,17 @@ export default class LogsActionscript extends BaseWithContext {
     const {args} = this.parse(LogsActionscript)
     const {channel} = args
 
-    this.hexasse.connect(`/sse?channel=${channel}`)
+    this.hexaSSE.connect(`/sse?channel=${channel}`)
 
-    if (!this.hexasse.source) {
-      throw new Error('could not establish connection')
+    if (!this.hexaSSE.source) {
+      throw new Error('Could not establish connection')
     }
 
-    this.log(`Listening for logs on ${chalk.cyan(this.hexasse.baseUrl)}...`)
-    this.hexasse.source.addEventListener('log_actionscript', (event: Event) => {
+    this.log(`Listening for logs on ${chalk.cyan(this.hexaSSE.baseUrl)}...`)
+    this.hexaSSE.source.addEventListener('log_actionscript', (event: Event) => {
       this.log(JSON.parse((event as MessageEvent).data).message)
     })
-    this.hexasse.source.addEventListener('error', (error: Event) => {
+    this.hexaSSE.source.addEventListener('error', (error: Event) => {
       throw error
     })
   }

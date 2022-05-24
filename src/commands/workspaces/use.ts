@@ -16,6 +16,8 @@ export default class WorkspacesUse extends BaseWithContext {
 
   static description = 'set current workspace in hexabase'
 
+  static aliases = ['select', 'sel']
+
   static flags = {
     ...BaseWithContext.flags,
     help: flags.help({char: 'h'}),
@@ -32,7 +34,7 @@ export default class WorkspacesUse extends BaseWithContext {
     const {args} = this.parse(WorkspacesUse)
 
     let url = '/api/v0/workspaces'
-    const {data: workspaceResponse} = await this.hexaapi.get<GetWorkspacesResponse>(url)
+    const {data: workspaceResponse} = await this.hexaAPI.get<GetWorkspacesResponse>(url)
     if (!args.workspace_id) {
       this.questions[0].choices = workspaceResponse.workspaces.map(ws => {
         return {
@@ -46,7 +48,7 @@ export default class WorkspacesUse extends BaseWithContext {
     }
 
     url = `/api/v0/workspaces/${args.workspace_id}/select`
-    await this.hexaapi.post<void>(url)
+    await this.hexaAPI.post<void>(url)
     const currentWorkspace = workspaceResponse.workspaces.find((ws): boolean => {
       return ws.workspace_id === args.workspace_id
     })

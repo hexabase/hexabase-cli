@@ -86,7 +86,7 @@ export default class FieldsCreate extends BaseWithContext {
     }
 
     const url = `/api/v0/datastores/${args.datastore_id}/fields`
-    const {data: field} = await this.hexaapi.post<CreateFieldResponse>(url, data)
+    const {data: field} = await this.hexaAPI.post<CreateFieldResponse>(url, data)
     this.log(`Field successfully created:
 field_id: ${chalk.cyan(field.field_id)}
 display_id: ${chalk.cyan(field.display_id)}`
