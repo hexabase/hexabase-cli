@@ -1,14 +1,14 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "author": "devops@hexabase.com",
   "bin": {
     "hx": "./bin/run"
   },
   "bugs": "https://github.com/b-eee/hexabase-cli/issues",
   "dependencies": {
-    "@oclif/command": "^1.8.7",
+    "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3.2.10",
