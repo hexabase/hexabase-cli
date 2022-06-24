@@ -1,7 +1,7 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.3.10",
+  "version": "0.3.15",
   "author": "devops@hexabase.com",
   "bin": {
     "hx": "./bin/run"
@@ -101,9 +101,12 @@
     "format": "eslint . --ext .ts --config .eslintrc --fix",
     "compile": "tsc",
     "oclif:readme": "oclif-dev readme",
+    "build": "yarn run build-ts && yarn run tslint",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "build-ts": "tsc",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "npm shrinkwrap && rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "prepack": "npm shrinkwrap && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "TS_NODE_FILES=true nyc --extension .ts mocha \"test/**/*.test.ts\"",
     "test:mocha": "TS_NODE_FILES=true mocha \"test/**/*.test.ts\"",
     "test:mocha:out": "TEST_OUTPUT=1 TS_NODE_FILES=true mocha \"test/**/*.test.ts\"",
