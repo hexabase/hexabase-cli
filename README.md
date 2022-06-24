@@ -28,7 +28,7 @@ $ npm install -g hexabase-cli
 $ hx COMMAND
 running command...
 $ hx (-v|--version|version)
-hexabase-cli/0.3.10 linux-x64 node-v16.14.1
+hexabase-cli/0.3.15 linux-x64 node-v16.14.1
 $ hx --help [COMMAND]
 USAGE
   $ hx COMMAND
@@ -89,7 +89,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/create.ts)_
+_See code: [src/commands/actions/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/create.ts)_
 
 ## `hx actions:delete DATASTORE_ID ACTION_ID`
 
@@ -109,7 +109,7 @@ OPTIONS
   -y, --yes              skip confirmation
 ```
 
-_See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/delete.ts)_
+_See code: [src/commands/actions/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/delete.ts)_
 
 ## `hx actions:get [DATASTORE_ID] [STATUS_ID]`
 
@@ -139,7 +139,7 @@ ALIASES
   $ hx ac
 ```
 
-_See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/get.ts)_
+_See code: [src/commands/actions/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/get.ts)_
 
 ## `hx actions:scripts:download ACTION_ID`
 
@@ -164,7 +164,7 @@ ALIASES
   $ hx as
 ```
 
-_See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/scripts/download.ts)_
+_See code: [src/commands/actions/scripts/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/scripts/download.ts)_
 
 ## `hx actions:scripts:download_all [PROJECT_ID]`
 
@@ -188,7 +188,7 @@ ALIASES
   $ hx asall
 ```
 
-_See code: [src/commands/actions/scripts/download_all.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/scripts/download_all.ts)_
+_See code: [src/commands/actions/scripts/download_all.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/scripts/download_all.ts)_
 
 ## `hx actions:scripts:upload ACTION_ID FILE`
 
@@ -213,7 +213,7 @@ ALIASES
   $ hx as:put
 ```
 
-_See code: [src/commands/actions/scripts/upload.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/scripts/upload.ts)_
+_See code: [src/commands/actions/scripts/upload.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/scripts/upload.ts)_
 
 ## `hx actions:show DATASTORE_ID ACTION_ID`
 
@@ -232,7 +232,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/show.ts)_
+_See code: [src/commands/actions/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/show.ts)_
 
 ## `hx actions:update DATASTORE_ID ACTION_ID`
 
@@ -251,7 +251,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/actions/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/actions/update.ts)_
+_See code: [src/commands/actions/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/actions/update.ts)_
 
 ## `hx apps:create`
 
@@ -266,7 +266,7 @@ OPTIONS
   -n, --name=name  name of your app
 ```
 
-_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/apps/create.ts)_
+_See code: [src/commands/apps/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/apps/create.ts)_
 
 ## `hx apps:init`
 
@@ -285,7 +285,7 @@ ALIASES
   $ hx init
 ```
 
-_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/apps/init.ts)_
+_See code: [src/commands/apps/init.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/apps/init.ts)_
 
 ## `hx autocomplete [SHELL]`
 
@@ -325,7 +325,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/contexts/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/contexts/delete.ts)_
+_See code: [src/commands/contexts/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/contexts/delete.ts)_
 
 ## `hx contexts:get`
 
@@ -350,7 +350,7 @@ ALIASES
   $ hx env
 ```
 
-_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/contexts/get.ts)_
+_See code: [src/commands/contexts/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/contexts/get.ts)_
 
 ## `hx contexts:login`
 
@@ -370,7 +370,7 @@ ALIASES
   $ hx login
 ```
 
-_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/contexts/login.ts)_
+_See code: [src/commands/contexts/login.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/contexts/login.ts)_
 
 ## `hx contexts:set CONTEXT`
 
@@ -389,7 +389,7 @@ OPTIONS
   --sse=sse        SSE server, e.g. https://sse.hexabase.com
 ```
 
-_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/contexts/set.ts)_
+_See code: [src/commands/contexts/set.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/contexts/set.ts)_
 
 ## `hx contexts:use [CONTEXT]`
 
@@ -409,7 +409,7 @@ ALIASES
   $ hx use
 ```
 
-_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/contexts/use.ts)_
+_See code: [src/commands/contexts/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/contexts/use.ts)_
 
 ## `hx datastores:get [PROJECT_ID]`
 
@@ -439,7 +439,7 @@ ALIASES
   $ hx datastores
 ```
 
-_See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/datastores/get.ts)_
+_See code: [src/commands/datastores/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/datastores/get.ts)_
 
 ## `hx fields:create DATASTORE_ID`
 
@@ -457,7 +457,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/fields/create.ts)_
+_See code: [src/commands/fields/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/fields/create.ts)_
 
 ## `hx fields:delete DATASTORE_ID FIELD_ID`
 
@@ -477,7 +477,7 @@ OPTIONS
   -y, --yes              skip confirmation
 ```
 
-_See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/fields/delete.ts)_
+_See code: [src/commands/fields/delete.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/fields/delete.ts)_
 
 ## `hx fields:get [DATASTORE_ID]`
 
@@ -507,7 +507,7 @@ ALIASES
   $ hx fields
 ```
 
-_See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/fields/get.ts)_
+_See code: [src/commands/fields/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/fields/get.ts)_
 
 ## `hx fields:show DATASTORE_ID FIELD_ID`
 
@@ -526,7 +526,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/fields/show.ts)_
+_See code: [src/commands/fields/show.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/fields/show.ts)_
 
 ## `hx fields:update DATASTORE_ID FIELD_ID`
 
@@ -545,7 +545,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/fields/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/fields/update.ts)_
+_See code: [src/commands/fields/update.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/fields/update.ts)_
 
 ## `hx help [COMMAND]`
 
@@ -580,7 +580,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/logs/actionscript.ts)_
+_See code: [src/commands/logs/actionscript.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/logs/actionscript.ts)_
 
 ## `hx projects:backup [TEMPLATE_ID]`
 
@@ -602,7 +602,7 @@ ALIASES
   $ hx pj:backup
 ```
 
-_See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/backup.ts)_
+_See code: [src/commands/projects/backup.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/backup.ts)_
 
 ## `hx projects:create`
 
@@ -617,7 +617,7 @@ OPTIONS
   -h, --help             show CLI help
 ```
 
-_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/create.ts)_
+_See code: [src/commands/projects/create.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/create.ts)_
 
 ## `hx projects:get`
 
@@ -644,7 +644,7 @@ ALIASES
   $ hx projects
 ```
 
-_See code: [src/commands/projects/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/get.ts)_
+_See code: [src/commands/projects/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/get.ts)_
 
 ## `hx projects:restore FILE`
 
@@ -667,7 +667,7 @@ ALIASES
   $ hx pj:restore
 ```
 
-_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/restore.ts)_
+_See code: [src/commands/projects/restore.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/restore.ts)_
 
 ## `hx projects:roles:get PROJECT_ID`
 
@@ -693,7 +693,7 @@ OPTIONS
   --sort=sort             property to sort by (prepend '-' for descending)
 ```
 
-_See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/roles/get.ts)_
+_See code: [src/commands/projects/roles/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/roles/get.ts)_
 
 ## `hx projects:save [PROJECT_ID]`
 
@@ -715,7 +715,7 @@ ALIASES
   $ hx pj:save
 ```
 
-_See code: [src/commands/projects/save.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/save.ts)_
+_See code: [src/commands/projects/save.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/save.ts)_
 
 ## `hx projects:settings:download [ID]`
 
@@ -740,7 +740,7 @@ ALIASES
   $ hx pj:settings:get
 ```
 
-_See code: [src/commands/projects/settings/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/settings/download.ts)_
+_See code: [src/commands/projects/settings/download.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/settings/download.ts)_
 
 ## `hx projects:settings:download_all`
 
@@ -759,7 +759,7 @@ ALIASES
   $ hx pj:settings:getall
 ```
 
-_See code: [src/commands/projects/settings/download_all.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/projects/settings/download_all.ts)_
+_See code: [src/commands/projects/settings/download_all.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/projects/settings/download_all.ts)_
 
 ## `hx statuses:get [DATASTORE_ID]`
 
@@ -789,7 +789,7 @@ ALIASES
   $ hx status
 ```
 
-_See code: [src/commands/statuses/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/statuses/get.ts)_
+_See code: [src/commands/statuses/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/statuses/get.ts)_
 
 ## `hx workspaces:get`
 
@@ -816,7 +816,7 @@ ALIASES
   $ hx workspaces
 ```
 
-_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/workspaces/get.ts)_
+_See code: [src/commands/workspaces/get.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/workspaces/get.ts)_
 
 ## `hx workspaces:use [WORKSPACE_ID]`
 
@@ -838,7 +838,7 @@ ALIASES
   $ hx sel
 ```
 
-_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.10/src/commands/workspaces/use.ts)_
+_See code: [src/commands/workspaces/use.ts](https://github.com/b-eee/hexabase-cli/blob/v0.3.15/src/commands/workspaces/use.ts)_
 <!-- commandsstop -->
 * [`hx actions:create DATASTORE_ID`](#hx-actionscreate-datastore_id)
 * [`hx actions:delete DATASTORE_ID ACTION_ID`](#hx-actionsdelete-datastore_id-action_id)
