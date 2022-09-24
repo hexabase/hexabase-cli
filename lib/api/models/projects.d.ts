@@ -26,6 +26,9 @@ export interface CreateNewProjectTemplateResponse {
     stream_id: string;
     tp_id: string;
 }
+export interface UploadProjectTemplateResponse {
+    stream_id: string;
+}
 export interface TemplateForm {
     name: string;
     category: string;
