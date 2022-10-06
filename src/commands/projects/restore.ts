@@ -6,6 +6,9 @@ import fs from 'fs'
 import FormData from 'form-data'
 import BaseWithContext from '../../base-with-context'
 import {GetWorkspacesResponse} from '../../api/models/workspaces'
+import {UploadProjectTemplateResponse} from '../../api/models/projects'
+import {Poller} from '../../helpers/poller'
+import {TasksObject} from '../../api/models/tasks'
 
 export default class ProjectsRestore extends BaseWithContext {
   private questions = [
@@ -85,8 +88,35 @@ export default class ProjectsRestore extends BaseWithContext {
             ...form.getHeaders(),
           },
         }
-        await this.hexaAPI.post(url, form, requestConfig)
+
+        const {data: template} = await this.hexaAPI.post<UploadProjectTemplateResponse>(url, form, requestConfig)
+
+        cli.action.start('Task successfully queued')
+
+        const poller = new Poller(-1) // wait until we get a response
+        const tasksUrl = `/api/v0/tasks?category=UPLOADTEMPLATE&all=true&stream_id=${template.stream_id}`
+        const fn = () => this.hexaAPI.get<TasksObject>(tasksUrl)
+        const retryCondition = ({data}: {data: TasksObject}) => {
+          const queueTask = data[Object.keys(data)[0]]
+          // StatusQueued: 0, StatusProgress: 1, StatusDone: 2, StatusError: 3, StatusDead: 4
+          return queueTask.status.id < 2
+        }
+        const { data } = await poller.poll(fn, retryCondition, 1000)
         cli.action.stop()
+        const queueTask = data[Object.keys(data)[0]]
+
+        let taskStatusMessage = ''
+        switch (queueTask?.status?.id) {
+          case 2:
+            taskStatusMessage = `Template file successfully uploaded, project successfully restored`
+            break
+          case 3:
+          case 4:
+            throw new Error('Template uploading or project restoring unsuccessful')
+          default:
+            taskStatusMessage = 'Could not determine task status'
+        }
+        this.log(taskStatusMessage)
       } else {
         this.log(chalk.red('Restoring aborted'))
       }
