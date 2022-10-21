@@ -1,12 +1,12 @@
 {
   "name": "hexabase-cli",
   "description": "Hexabase CLI",
-  "version": "0.3.18",
+  "version": "0.3.19",
   "author": "devops@hexabase.com",
   "bin": {
     "hx": "./bin/run"
   },
-  "bugs": "https://github.com/b-eee/hexabase-cli/issues",
+  "bugs": "https://github.com/hexabase/hexabase-cli/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
@@ -53,7 +53,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/b-eee/hexabase-cli",
+  "homepage": "https://github.com/hexabase/hexabase-cli",
   "keywords": [
     "oclif"
   ],
@@ -96,7 +96,7 @@
       "@oclif/plugin-autocomplete"
     ]
   },
-  "repository": "b-eee/hexabase-cli",
+  "repository": "hexabase/hexabase-cli",
   "scripts": {
     "format": "eslint . --ext .ts --config .eslintrc --fix",
     "compile": "tsc",
