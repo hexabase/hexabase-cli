@@ -4,10 +4,12 @@ import Conf from 'conf'
 import chalk from 'chalk'
 import {APIClient} from './api/api-client'
 import {SSEClient} from './api/sse-client'
+import {ModelerClient} from './api/modeler-client'
 
 type Context = {
   server: string;
   sse: string;
+  modeler: string;
 }
 
 export default abstract class BaseWithContext extends Command {
@@ -18,6 +20,8 @@ export default abstract class BaseWithContext extends Command {
   private _hexaAPI!: APIClient
 
   private _hexaSSE!: SSEClient
+
+  private _hexaModeler!: ModelerClient
 
   hexaConfig = new Conf()
 
@@ -31,6 +35,10 @@ export default abstract class BaseWithContext extends Command {
 
   get hexaSSE(): SSEClient {
     return this._hexaSSE
+  }
+
+  get hexaModeler(): ModelerClient {
+    return this._hexaModeler
   }
 
   configureHexaAPI(): void {
@@ -48,6 +56,10 @@ export default abstract class BaseWithContext extends Command {
 
   configureHexaSSE(): void {
     this._hexaSSE = new SSEClient(this.context.sse)
+  }
+
+  configureHexaModeler(): void {
+    this._hexaModeler = new ModelerClient(this.context.modeler)
   }
 
   async init() {
@@ -70,5 +82,6 @@ export default abstract class BaseWithContext extends Command {
 
     this.configureHexaAPI()
     this.configureHexaSSE()
+    this.configureHexaModeler()
   }
 }

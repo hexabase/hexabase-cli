@@ -30,6 +30,7 @@ export default class ContextsGet extends Command {
         name: item[0],
         server: item[1].server,
         sse: item[1].sse,
+        modeler: item[1].modeler,
       }
     })
     const columns = {
@@ -41,6 +42,9 @@ export default class ContextsGet extends Command {
       },
       sse: {
         header: 'SSE',
+      },
+      modeler: {
+        header: 'AI_MODELER',
       },
     }
 

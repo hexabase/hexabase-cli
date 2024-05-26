@@ -3,12 +3,13 @@ import chalk from 'chalk'
 import Conf from 'conf'
 
 export default class ContextsSet extends Command {
-  static description = 'set context entries (server & sse)'
+  static description = 'set server envirnment entries'
 
   static flags = {
     help: flags.help({char: 'h'}),
     server: flags.string({description: 'API server, e.g. https://api.hexabase.com'}),
     sse: flags.string({description: 'SSE server, e.g. https://sse.hexabase.com'}),
+    modeler: flags.string({description: 'AI Modeler server, e.g. https://ai.hexabase.com'}),
   }
 
   static args = [
