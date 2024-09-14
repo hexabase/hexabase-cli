@@ -21,6 +21,7 @@ export interface CreateNewProjectTemplateData {
     category: string;
     description: string;
     include_histories: boolean;
+    exclude_items_data: boolean;
 }
 export interface CreateNewProjectTemplateResponse {
     stream_id: string;

@@ -37,7 +37,14 @@ export default class ProjectsSave extends BaseWithContext {
     {
       type: 'toggle',
       name: 'includeHistories',
-      message: 'Include histories',
+      message: 'Include item update histories?',
+      enabled: 'Yes',
+      disabled: 'No',
+    },
+    {
+      type: 'toggle',
+      name: 'excludeItemsData',
+      message: 'Exclude Items data?',
       enabled: 'Yes',
       disabled: 'No',
     },
@@ -98,10 +105,12 @@ export default class ProjectsSave extends BaseWithContext {
       this.log(`Description: ${chalk.cyan(templateForm.description)}`)
     }
     const {includeHistories}: {includeHistories: boolean} = await prompt(this.questions[2])
+    const {excludeItemsData}: {excludeItemsData: boolean} = await prompt(this.questions[3])
 
     const newProjectReq: CreateNewProjectTemplateData = {
       project_id: args.project_id,
       include_histories: includeHistories,
+      exclude_items_data: excludeItemsData,
       ...templateForm,
     }
     let url = '/api/v0/templates'
