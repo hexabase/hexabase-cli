@@ -82,11 +82,14 @@ export default class ProjectsRestore extends BaseWithContext {
         form.append('name', flags.name)
 
         const token = this.hexaConfig.get(`hexabase.${this.currentContext}.token`)
+
         const requestConfig = {
           headers: {
             authorization: `Bearer ${token}`,
             ...form.getHeaders(),
           },
+          maxContentLength: Infinity,   // for axios, set unlimited content length
+          BodyLength: Infinity,       // for axios, remove max body length limit
         }
 
         const {data: template} = await this.hexaAPI.post<UploadProjectTemplateResponse>(url, form, requestConfig)
